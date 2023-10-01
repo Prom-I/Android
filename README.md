@@ -8,15 +8,15 @@
 
 <br><br>
 
-## 🤙 소개
+## 🤙 Introduction
 약속 어플
 
 <br><br>
-## 🔗 서비스 아키텍처
+## 🔗 Service Architecture
 
 
 <br><br>
-## 📱 실행화면
+## 📱 Run screen
 
 
 <br><br>
