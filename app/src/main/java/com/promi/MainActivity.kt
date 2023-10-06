@@ -22,14 +22,18 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        // 상단 탭의 값을 변경하는 코드 => 나중에 쓸 일 있으면 주석 풀 것
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(
+//            setOf(
+//                R.id.navigation_calendar, R.id.navigation_promise, R.id.navigation_my_information
+//            )
+//        )
+//        setupActionBarWithNavController(navController, appBarConfiguration)
+
+
         navView.setupWithNavController(navController)
     }
 }
