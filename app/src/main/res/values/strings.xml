@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="calendar">캘린더</string>
+    <string name="promise">약속</string>
+    <string name="my_information">내정보</string>
 </resources>
