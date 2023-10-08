@@ -6,4 +6,7 @@
     <string name="calendar">캘린더</string>
     <string name="promise">약속</string>
     <string name="my_information">내정보</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="confirm">확인</string>
 </resources>

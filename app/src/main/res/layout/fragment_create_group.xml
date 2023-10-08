@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.friend.AddFriendsFragment">
+
+    <TextView
+        android:id="@+id/tv_group_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="@font/pretendard_light"
+        android:textColor="#00C1AA"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
+        app:layout_constraintTop_toTopOf="@+id/btn_confirm"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pretendard_medium"
+        android:text="그룹 생성하기"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_add_group"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        tools:listitem="@layout/item_mini_profile"
+        tools:visibility="gone"/>
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_searchbar"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/list_add_group"
+        tools:text="이자민" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintStart_toStartOf="@+id/et_search"
+        app:layout_constraintTop_toTopOf="@+id/et_search" />
+
+    <TextView
+        android:id="@+id/tv_user_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="사용자 목록"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/pretendard_medium"
+        app:layout_constraintStart_toStartOf="@+id/et_search"
+        app:layout_constraintTop_toBottomOf="@+id/et_search" />
+
+    <TextView
+        android:id="@+id/tv_user_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="7dp"
+        android:textColor="#00C1AA"
+        android:fontFamily="@font/pretendard_light"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/tv_user_list"
+        app:layout_constraintTop_toTopOf="@+id/tv_user_list"
+        tools:text="4"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_search_user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_list"
+        tools:listitem="@layout/item_group_member"/>
+
+    <ImageButton
+        android:id="@+id/btn_clear"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_clear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title" />
+
+    <TextView
+        android:id="@+id/btn_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="27dp"
+        android:text="@string/confirm"
+        android:textSize="17sp"
+        android:fontFamily="@font/pretendard_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_title"
+        tools:textColor="@color/gray"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
