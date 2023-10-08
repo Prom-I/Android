@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="50dp"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_profile"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@color/gray" />
+
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+
+        android:fontFamily="@font/pretendard_regular"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/img_profile"
+        app:layout_constraintTop_toBottomOf="@+id/img_profile"
+        tools:text="이자민" />
+
+    <ImageButton
+        android:id="@+id/btn_clear"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/img_profile"
+        app:layout_constraintTop_toTopOf="@+id/img_profile"
+        app:srcCompat="@drawable/ic_clear_filled" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
