@@ -11,4 +11,5 @@
 
     <color name="mainGreen">#00C1C1</color>
     <color name="mainGray">#838A8A</color>
+    <color name="mainLightGray">#C5CACA</color>
 </resources>
