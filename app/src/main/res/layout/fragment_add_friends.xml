@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_serach"
+        android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginStart="24dp"
@@ -42,9 +42,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:src="@drawable/ic_search"
-        app:layout_constraintBottom_toBottomOf="@+id/et_serach"
-        app:layout_constraintStart_toStartOf="@+id/et_serach"
-        app:layout_constraintTop_toTopOf="@+id/et_serach" />
+        app:layout_constraintBottom_toBottomOf="@+id/et_search"
+        app:layout_constraintStart_toStartOf="@+id/et_search"
+        app:layout_constraintTop_toTopOf="@+id/et_search" />
 
     <TextView
         android:id="@+id/tv_user_list"
@@ -55,11 +55,11 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:fontFamily="@font/pretendard_medium"
-        app:layout_constraintStart_toStartOf="@+id/et_serach"
-        app:layout_constraintTop_toBottomOf="@+id/et_serach" />
+        app:layout_constraintStart_toStartOf="@+id/et_search"
+        app:layout_constraintTop_toBottomOf="@+id/et_search" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_user_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
@@ -73,12 +73,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_search_user"
         android:layout_width="0dp"
-
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_user_list" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_user_list"
+        tools:listitem="@layout/item_friend"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
