@@ -6,4 +6,8 @@
     <string name="calendar">캘린더</string>
     <string name="promise">약속</string>
     <string name="my_information">내정보</string>
+
+    <!-- 로그인 -->
+    <string name="app_info">&#160;&#160;&#160;&#160;&#160;&#160;만에 잡는 약속, \nProm i로 간편한 일정 관리 \n지금 바로 시작하세요 !</string>
+    <string name="join_info">만에 시작하기</string>
 </resources>
