@@ -7,7 +7,12 @@
     <string name="promise">약속</string>
     <string name="my_information">내정보</string>
 
-    <!-- 로그인 -->
+    <!-- fragment_login -->
     <string name="app_info">&#160;&#160;&#160;&#160;&#160;&#160;만에 잡는 약속, \nProm i로 간편한 일정 관리 \n지금 바로 시작하세요 !</string>
     <string name="join_info">만에 시작하기</string>
+
+    <!-- fragment_group_setting -->
+    <string name="what_name">그룹 이름은 뭘로 할까요?</string>
+    <string name="len_name">0/30</string>
+    <string name="name_example">ex) 건축학개론 팀플 / 프로미초 34기 졸업생</string>
 </resources>
