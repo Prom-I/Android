@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_calendar">
+    app:startDestination="@id/navigation_calendar">
 
     <fragment
         android:id="@+id/navigation_calendar"
@@ -22,4 +22,13 @@
         android:name="com.promi.ui.myInformation.MyInformationFragment"
         android:label="@string/my_information"
         tools:layout="@layout/fragment_my_information" />
+    <fragment
+        android:id="@+id/navigation_add_friends"
+        android:name="com.promi.ui.friend.AddFriendsFragment"
+        android:label="fragment_add_friends"
+        tools:layout="@layout/fragment_add_friends" />
+    <fragment
+        android:id="@+id/navigation_create_group"
+        android:name="com.promi.ui.group.CreateGroupFragment"
+        android:label="CreateGroupFragment" />
 </navigation>
