@@ -9,4 +9,17 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm">확인</string>
+
+    <!-- fragment_login -->
+    <string name="app_info">&#160;&#160;&#160;&#160;&#160;&#160;만에 잡는 약속, \nProm i로 간편한 일정 관리 \n지금 바로 시작하세요 !</string>
+    <string name="join_info">만에 시작하기</string>
+
+    <!-- fragment_group_setting -->
+    <string name="what_group_name">그룹 이름은 뭘로 할까요?</string>
+    <string name="len_group_name">0/30</string>
+    <string name="group_name_example">ex) 건축학개론 팀플 / 프로미초 34기 졸업생</string>
+
+    <!-- fragment_promise_name -->
+    <string name="what_promise_name">약속 이름은 뭘로 할까요?</string>
+    <string name="promise_name_example">ex) 프롬이 생일파티, 1차 회의</string>
 </resources>

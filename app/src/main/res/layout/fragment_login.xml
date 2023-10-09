@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="37dp"
+        android:layout_height="37dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="84dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/img_logo" />
+
+    <TextView
+        android:id="@+id/tv_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="37dp"
+        android:fontFamily="@font/pretendard_bold"
+        android:text="@string/app_name"
+        android:textColor="@color/mainGreen"
+        android:textSize="35sp"
+        app:layout_constraintStart_toStartOf="@+id/img_logo"
+        app:layout_constraintTop_toBottomOf="@+id/img_logo" />
+
+    <TextView
+        android:id="@+id/tv_app_info1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1초"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/tv_app_info2"
+        app:layout_constraintTop_toTopOf="@+id/tv_app_info2" />
+
+    <TextView
+        android:id="@+id/tv_app_info2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="6dp"
+        android:text="@string/app_info"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/tv_app_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_app_name" />
+
+    <ImageView
+        android:id="@+id/img_bubble"
+        android:layout_width="167dp"
+        android:layout_height="65dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/img_speech_bubble" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/img_bubble"
+        app:layout_constraintStart_toStartOf="@+id/img_bubble"
+        app:layout_constraintTop_toTopOf="@+id/img_bubble">
+
+        <TextView
+            android:id="@+id/tv_bubble_info1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3초"
+            android:textColor="@color/mainGreen"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_bubble_info2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/join_info"
+            android:textColor="@color/mainGray"
+            app:layout_constraintStart_toEndOf="@+id/tv_bubble_info1"
+            app:layout_constraintTop_toTopOf="@+id/tv_bubble_info1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="150dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/btn_login_kakao"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_circle"
+            android:backgroundTint="@color/mainGreen"
+            android:src="@android:drawable/btn_star" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_login_naver"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_circle"
+            android:backgroundTint="@color/mainGreen"
+            android:src="@android:drawable/btn_star" />
+
+        <Space
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <ImageButton
+            android:id="@+id/btn_login_google"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:background="@drawable/shape_circle"
+            android:backgroundTint="@color/mainGreen"
+            android:src="@android:drawable/btn_star" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
