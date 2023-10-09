@@ -14,6 +14,9 @@
     <string name="app_info">&#160;&#160;&#160;&#160;&#160;&#160;만에 잡는 약속, \nProm i로 간편한 일정 관리 \n지금 바로 시작하세요 !</string>
     <string name="join_info">만에 시작하기</string>
 
+    <!-- fragment_main -->
+    <string name="calendar_year_month_format">yyyy년 MM월</string>
+
     <!-- fragment_group_setting -->
     <string name="what_group_name">그룹 이름은 뭘로 할까요?</string>
     <string name="len_group_name">0/30</string>
