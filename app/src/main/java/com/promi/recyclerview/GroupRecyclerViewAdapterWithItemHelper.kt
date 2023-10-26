@@ -1,4 +1,4 @@
-package com.promi.ui.group
+package com.promi.recyclerview
 
 import android.content.Context
 import android.content.DialogInterface

@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidpractice.item.Group
 import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
-import com.promi.ui.group.GroupRecyclerViewAdapterWithItemHelper
-import com.promi.ui.group.ItemTouchHelperCallback
+import com.promi.recyclerview.GroupRecyclerViewAdapterWithItemHelper
+import com.promi.recyclerview.ItemTouchHelperCallback
 
 class PromiseFragment : Fragment() {
 
@@ -43,6 +44,13 @@ class PromiseFragment : Fragment() {
         var groups = initGroupDTOArray() //더미데이터 생성
         setAdapter(groups) //어댑터 붙이기
 
+
+        //그룹 생성
+        binding.btnCreateGroup.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
+        }
+
+
         return binding.root
     }
 
@@ -67,7 +75,7 @@ class PromiseFragment : Fragment() {
     fun setAdapter(groups: MutableList<Group>){
         recyclerViewGroup.layoutManager = LinearLayoutManager(this.context)
         //어탭더 생성 => it(fragment의 context가 null이 아님을 알려줘야함)
-        recyclerViewAdapterWithItemHelper = activity?.let{GroupRecyclerViewAdapterWithItemHelper(groups, it)}!!
+        recyclerViewAdapterWithItemHelper = activity?.let{ GroupRecyclerViewAdapterWithItemHelper(groups, it) }!!
         recyclerViewGroup.adapter = recyclerViewAdapterWithItemHelper
 
         // 리스너를 구현한 Adapter 클래스를 Callback 클래스의 생성자로 지정
