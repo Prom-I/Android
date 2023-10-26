@@ -48,5 +48,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_group"/>
 
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_radius30"
+        android:backgroundTint="@color/mainGreen"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:text="그룹 생성"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

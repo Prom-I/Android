@@ -40,6 +40,10 @@ android {
 }
 
 dependencies {
+
+    //material-button
+    implementation("com.google.android.material:material:1.10.0")
+
     // viewPager2
     implementation("androidx.viewpager2:viewpager2:1.0.0")
 
