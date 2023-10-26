@@ -12,7 +12,13 @@
     <item android:state_checked="true">
         <layer-list>
             <!-- 이미지 영역 -->
-            <item android:drawable="@drawable/ic_check" android:top="4dp" android:right="4dp" android:bottom="4dp" android:left="4dp" />
+            <item
+                android:drawable="@drawable/ic_check"
+                android:top="4dp"
+                android:right="4dp"
+                android:bottom="4dp"
+                android:left="4dp"/>
+
         </layer-list>
     </item>
 </selector>

@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidpractice.item.Group
+import com.promi.recyclerview.group.Group
 import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
-import com.promi.recyclerview.GroupRecyclerViewAdapterWithItemHelper
-import com.promi.recyclerview.ItemTouchHelperCallback
+import com.promi.recyclerview.group.GroupRecyclerViewAdapterWithItemHelper
+import com.promi.recyclerview.group.ItemTouchHelperCallback
 
 class PromiseFragment : Fragment() {
 
@@ -62,11 +62,6 @@ class PromiseFragment : Fragment() {
             Group("안드로이드 스터디",3),
             Group("안드로이드 스터디",3),
             Group("설계패턴 스터디",3),
-            Group("운영체제 스터디",3),
-            Group("멋쟁이 사자처럼",40),
-            Group("UMC",45),
-            Group("UMC",45),
-            Group("UMC",45),
         )
 
     }

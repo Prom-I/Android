@@ -1,4 +1,4 @@
-package com.promi.recyclerview
+package com.promi.recyclerview.group
 
 import android.util.Log
 import androidx.recyclerview.widget.ItemTouchHelper

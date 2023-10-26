@@ -1,4 +1,4 @@
-package com.promi.recyclerview
+package com.promi.recyclerview.group
 
 import android.content.Context
 import android.content.DialogInterface
@@ -10,7 +10,6 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidpractice.item.Group
 import com.promi.R
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
