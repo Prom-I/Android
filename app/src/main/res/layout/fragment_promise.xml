@@ -36,6 +36,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginRight="20dp"/>
 
+        <View
+            android:background="@color/gray"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
