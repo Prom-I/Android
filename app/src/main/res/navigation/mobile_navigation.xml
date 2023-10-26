@@ -9,13 +9,21 @@
         android:id="@+id/navigation_calendar"
         android:name="com.promi.ui.main.MainFragment"
         android:label="@string/calendar"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_navigation_calendar_to_navigation_add_friends"
+            app:destination="@id/navigation_add_friends" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_promise"
         android:name="com.promi.ui.promise.PromiseFragment"
         android:label="@string/promise"
-        tools:layout="@layout/fragment_promise" />
+        tools:layout="@layout/fragment_promise" >
+        <action
+            android:id="@+id/action_navigation_promise_to_navigation_create_group"
+            app:destination="@id/navigation_create_group" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_my_information"

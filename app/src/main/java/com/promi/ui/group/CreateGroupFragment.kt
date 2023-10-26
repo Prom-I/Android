@@ -22,10 +22,9 @@ class CreateGroupFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(MyInformationViewModel::class.java)
-
         _binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
+
+
 
         return binding.root
     }
