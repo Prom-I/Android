@@ -13,6 +13,7 @@ import com.promi.databinding.FragmentAddFriendsBinding
 import com.promi.databinding.FragmentCreateGroupBinding
 import com.promi.recyclerview.friend.Friend
 import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
+import com.promi.recyclerview.friend.FriendViewModel
 import com.promi.recyclerview.miniProfile.MiniProfile
 import com.promi.recyclerview.miniProfile.MiniProfileRecyclerViewAdapter
 import com.promi.ui.myInformation.MyInformationViewModel
@@ -38,6 +39,10 @@ class CreateGroupFragment : Fragment(){
     //선택된 친구 리사이클러뷰 어댑터
     private lateinit var recyclerViewSelectedFriendAdapter: MiniProfileRecyclerViewAdapter
 
+
+    //친구 데이터의 변화를 뷰 모델에서 관리
+    private lateinit var friendViewModel: FriendViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -45,15 +50,34 @@ class CreateGroupFragment : Fragment(){
     ): View {
         _binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
 
-        recyclerViewFriend = binding.recyclerviewSearchUser //친구 목록
-        var friendArray = initFriendDTOArray() //더미데이터 생성
+        //친구데이터에 대한 뷰 모델
+        friendViewModel = ViewModelProvider(requireActivity()).get(FriendViewModel::class.java)
 
-        //선택된 친구 목록
-        recyclerViewSelectedFriend = binding.recyclerviewSelectedUser //선택된 친구들
-        var selectedFriendArray = initSelectedFriendDTOArray() //더미데이터 생성
+
+
+        // 뷰 모델에서 친구 리스트 관찰
+        friendViewModel.friends.observe(viewLifecycleOwner) { newFriends ->
+            // 어댑터에 데이터 업데이트
+            recyclerViewFriendAdapter.updateData(newFriends)
+        }
+
+        //친구 목록 어댑터
+        recyclerViewFriend = binding.recyclerviewSearchUser
+        recyclerViewFriend.layoutManager = LinearLayoutManager(context) //레이아웃 매니저 설정
+        //친구 어댑터 초기화 및 부착
+        recyclerViewFriendAdapter = FriendRecyclerViewAdapter(friendViewModel.friends.value ?: emptyList())
+        recyclerViewFriend.adapter = recyclerViewFriendAdapter
+
+
+
+//        var friendArray = initFriendDTOArray() //더미데이터 생성
+//
+//        //선택된 친구 목록
+//        recyclerViewSelectedFriend = binding.recyclerviewSelectedUser //선택된 친구들
+//        var selectedFriendArray = initSelectedFriendDTOArray() //더미데이터 생성
 
         //어댑터 부착
-        setAdapter(friendArray,selectedFriendArray)
+        //setAdapter(friendArray,selectedFriendArray)
 
         //뒤로가기 버튼
         binding.btnClear.setOnClickListener {
@@ -65,12 +89,7 @@ class CreateGroupFragment : Fragment(){
 
     private fun initFriendDTOArray(): Array<Friend> {
         return arrayOf(
-            Friend("친구1",123),
-            Friend("친구2",123),
-            Friend("친구3",123),
-            Friend("친구4",123),
-            Friend("친구5",123),
-            Friend("친구6",123),
+
         )
     }
 
@@ -87,17 +106,18 @@ class CreateGroupFragment : Fragment(){
 
 
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
-    private fun setAdapter(friends: Array<Friend>,selectedFriends: Array<MiniProfile>){
-        recyclerViewFriend.layoutManager = LinearLayoutManager(this.context)
-        //친구 목록 어탭더 생성
-        //it(fragment의 context)이 null일수도 있음 => 검사 필요
-        recyclerViewFriendAdapter = activity?.let { FriendRecyclerViewAdapter(friends, it) }!!
-        recyclerViewFriend.adapter = recyclerViewFriendAdapter
+//    private fun setAdapter(friends: Array<Friend>, selectedFriends: Array<MiniProfile>) {
+//        recyclerViewFriend.layoutManager = LinearLayoutManager(context)
+//
+//        // 친구 목록 어댑터 생성
+//        recyclerViewFriendAdapter = FriendRecyclerViewAdapter(friends)
+//        recyclerViewFriend.adapter = recyclerViewFriendAdapter
+//
+//        // 선택된 친구 목록 어댑터
+//        recyclerViewSelectedFriendAdapter = MiniProfileRecyclerViewAdapter(selectedFriends, requireContext())
+//        recyclerViewSelectedFriend.adapter = recyclerViewSelectedFriendAdapter
+//    }
 
-        //선택된 친구 목록 어댑터
-        recyclerViewSelectedFriendAdapter = activity?.let{ MiniProfileRecyclerViewAdapter(selectedFriends,it)}!!
-        recyclerViewSelectedFriend.adapter = recyclerViewSelectedFriendAdapter // 어댑터 부착
-    }
 
 
 
