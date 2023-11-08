@@ -1,9 +1,11 @@
 package com.promi.recyclerview.friend
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,15 +23,20 @@ class FriendRecyclerViewAdapter(var friendItems: Array<Friend>, var context: Con
         var friendProfileImage : ImageView // 친구의 프로필 이미지
         var friendName : TextView // 친구 이름
         var friendCode : TextView // 친구 코드
+        var checkBox : CheckBox //체크 박스
         init { //innerClass의 생성자에 해당 => 뷰의 레이아웃 가져오기 => 화면에 붙이기 위한 하나의 뷰를 만드는 과정에 해당
             friendProfileImage = itemView.findViewById(R.id.iv_profile)
             friendName = itemView.findViewById(R.id.tv_id)
             friendCode = itemView.findViewById(R.id.tv_code)
-
+            checkBox = itemView.findViewById(R.id.btn_check)
             //아이템 클릭에 대한 이벤트 정의
 //            itemView.setOnClickListener {
 //                }
 //            }
+            checkBox.setOnCheckedChangeListener { compoundButton, b ->
+                //adapterPosition.
+                Log.d("checkTest","checked")
+            }
         }
     }
 

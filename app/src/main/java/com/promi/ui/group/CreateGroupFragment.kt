@@ -14,6 +14,8 @@ import com.promi.recyclerview.friend.Friend
 import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
 import com.promi.ui.myInformation.MyInformationViewModel
 
+
+//친구 생성과 관련된 그룹
 class CreateGroupFragment : Fragment(){
     private var _binding: FragmentCreateGroupBinding? = null
 
@@ -26,6 +28,12 @@ class CreateGroupFragment : Fragment(){
 
     //recycler view adapter
     private lateinit var recyclerViewFriendAdapter : FriendRecyclerViewAdapter
+
+    //선택된 친구들에 대한 리사이클러뷰
+    private lateinit var recyclerViewSelectedFriend: RecyclerView
+
+    //선택된 친구 리사이클러뷰 어댑터
+    //private lateinit var recyclerViewSelectedFriendAdapter =
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +67,7 @@ class CreateGroupFragment : Fragment(){
         //it(fragment의 context)이 null일수도 있음 => 검사 필요
         recyclerViewFriendAdapter = activity?.let { FriendRecyclerViewAdapter(groups, it) }!!
         recyclerViewFriend.adapter = recyclerViewFriendAdapter
+
     }
 
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="50dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_profile"
@@ -14,7 +14,7 @@
         tools:src="@color/gray" />
 
     <TextView
-        android:id="@+id/tv_id"
+        android:id="@+id/tv_name"
         android:layout_width="45dp"
         android:layout_height="wrap_content"
 
