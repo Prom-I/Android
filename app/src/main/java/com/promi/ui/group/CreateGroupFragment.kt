@@ -50,31 +50,12 @@ class CreateGroupFragment : Fragment(){
         //친구데이터에 대한 뷰 모델
         friendViewModel = ViewModelProvider(requireActivity()).get(FriendViewModel::class.java)
 
+        //어뎁터 생성
+        recyclerViewFriendAdapter = FriendRecyclerViewAdapter(emptyList())
+        recyclerViewSelectedFriendAdapter = MiniProfileRecyclerViewAdapter(emptyList())
 
-
-        // 뷰 모델에서 친구 리스트 관찰
-        friendViewModel.friends.observe(viewLifecycleOwner) { newFriends ->
-            // 어댑터에 데이터 업데이트
-            recyclerViewFriendAdapter.updateData(newFriends)
-        }
-
-        //친구 목록 어댑터
-        recyclerViewFriend = binding.recyclerviewSearchUser
-        recyclerViewFriend.layoutManager = LinearLayoutManager(context) //레이아웃 매니저 설정
-        //친구 어댑터 초기화 및 부착
-        recyclerViewFriendAdapter = FriendRecyclerViewAdapter(friendViewModel.friends.value ?: emptyList())
-        recyclerViewFriend.adapter = recyclerViewFriendAdapter
-
-
-
-//        var friendArray = initFriendDTOArray() //더미데이터 생성
-//
-//        //선택된 친구 목록
-//        recyclerViewSelectedFriend = binding.recyclerviewSelectedUser //선택된 친구들
-//        var selectedFriendArray = initSelectedFriendDTOArray() //더미데이터 생성
-
-        //어댑터 부착
-        //setAdapter(friendArray,selectedFriendArray)
+        setupRecyclerView() // 친구 리스트와 선택된 친구 리스트에 대한 리사이클러뷰 부착
+        setupObservers() //뷰 모델의 친구 리스트와 선택된 친구 리스트에 대한 옵서버 설정
 
         //뒤로가기 버튼
         binding.btnClear.setOnClickListener {
@@ -84,21 +65,31 @@ class CreateGroupFragment : Fragment(){
         return binding.root
     }
 
-    private fun initFriendDTOArray(): Array<Friend> {
-        return arrayOf(
 
-        )
+    private fun setupObservers() {
+        // 뷰 모델에서 친구 리스트 관찰
+        friendViewModel.friends.observe(viewLifecycleOwner) { newFriends ->
+            recyclerViewFriendAdapter.updateData(newFriends)
+        }
+
+        // 뷰 모델에서 선택된 친구 리스트 관찰
+        friendViewModel.selectedFriends.observe(viewLifecycleOwner) { newSelectedFriends ->
+            recyclerViewSelectedFriendAdapter.updateData(newSelectedFriends)
+        }
     }
 
-    //선택된 친구들
-    private fun initSelectedFriendDTOArray():Array<MiniProfile>{
-        return arrayOf(
-            MiniProfile("test","테스트1"),
-            MiniProfile("test","테스트2"),
-            MiniProfile("test","테스트3"),
-            MiniProfile("test","테스트4"),
-            MiniProfile("test","테스트5")
-        )
+    private fun setupRecyclerView() {
+        // 친구 목록 RecyclerView 설정
+        recyclerViewFriend = binding.recyclerviewSearchUser.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = FriendRecyclerViewAdapter(friendViewModel.friends.value ?: emptyList())
+        }
+
+        // 선택된 친구 목록 RecyclerView 설정
+        recyclerViewSelectedFriend = binding.recyclerviewSelectedUser.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = MiniProfileRecyclerViewAdapter(friendViewModel.selectedFriends.value ?: emptyList())
+        }
     }
 
     override fun onDestroyView() {
