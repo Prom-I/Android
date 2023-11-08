@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.databinding.FragmentAddFriendsBinding
@@ -53,6 +54,11 @@ class CreateGroupFragment : Fragment(){
 
         //어댑터 부착
         setAdapter(friendArray,selectedFriendArray)
+
+        //뒤로가기 버튼
+        binding.btnClear.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }
