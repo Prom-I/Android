@@ -11,7 +11,7 @@
         android:layout_height="45dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@color/gray" />
+        android:src="@drawable/image_group_default_image"/>
 
     <TextView
         android:id="@+id/tv_name"

@@ -12,6 +12,8 @@ import com.promi.databinding.FragmentAddFriendsBinding
 import com.promi.databinding.FragmentCreateGroupBinding
 import com.promi.recyclerview.friend.Friend
 import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
+import com.promi.recyclerview.miniProfile.MiniProfile
+import com.promi.recyclerview.miniProfile.MiniProfileRecyclerViewAdapter
 import com.promi.ui.myInformation.MyInformationViewModel
 
 
@@ -33,7 +35,7 @@ class CreateGroupFragment : Fragment(){
     private lateinit var recyclerViewSelectedFriend: RecyclerView
 
     //선택된 친구 리사이클러뷰 어댑터
-    //private lateinit var recyclerViewSelectedFriendAdapter =
+    private lateinit var recyclerViewSelectedFriendAdapter: MiniProfileRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +46,13 @@ class CreateGroupFragment : Fragment(){
 
         recyclerViewFriend = binding.recyclerviewSearchUser //친구 목록
         var friendArray = initFriendDTOArray() //더미데이터 생성
-        setAdapter(friendArray) //어댑터 붙이기
+
+        //선택된 친구 목록
+        recyclerViewSelectedFriend = binding.recyclerviewSelectedUser //선택된 친구들
+        var selectedFriendArray = initSelectedFriendDTOArray() //더미데이터 생성
+
+        //어댑터 부착
+        setAdapter(friendArray,selectedFriendArray)
 
         return binding.root
     }
@@ -60,14 +68,29 @@ class CreateGroupFragment : Fragment(){
         )
     }
 
+    //선택된 친구들
+    private fun initSelectedFriendDTOArray():Array<MiniProfile>{
+        return arrayOf(
+            MiniProfile("test","테스트1"),
+            MiniProfile("test","테스트2"),
+            MiniProfile("test","테스트3"),
+            MiniProfile("test","테스트4"),
+            MiniProfile("test","테스트5")
+        )
+    }
+
+
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
-    private fun setAdapter(groups: Array<Friend>){
+    private fun setAdapter(friends: Array<Friend>,selectedFriends: Array<MiniProfile>){
         recyclerViewFriend.layoutManager = LinearLayoutManager(this.context)
-        //어탭더 생성
+        //친구 목록 어탭더 생성
         //it(fragment의 context)이 null일수도 있음 => 검사 필요
-        recyclerViewFriendAdapter = activity?.let { FriendRecyclerViewAdapter(groups, it) }!!
+        recyclerViewFriendAdapter = activity?.let { FriendRecyclerViewAdapter(friends, it) }!!
         recyclerViewFriend.adapter = recyclerViewFriendAdapter
 
+        //선택된 친구 목록 어댑터
+        recyclerViewSelectedFriendAdapter = activity?.let{ MiniProfileRecyclerViewAdapter(selectedFriends,it)}!!
+        recyclerViewSelectedFriend.adapter = recyclerViewSelectedFriendAdapter // 어댑터 부착
     }
 
 
