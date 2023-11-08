@@ -9,14 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.promi.databinding.FragmentAddFriendsBinding
 import com.promi.databinding.FragmentCreateGroupBinding
 import com.promi.recyclerview.friend.Friend
 import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
-import com.promi.recyclerview.friend.FriendViewModel
 import com.promi.recyclerview.miniProfile.MiniProfile
 import com.promi.recyclerview.miniProfile.MiniProfileRecyclerViewAdapter
-import com.promi.ui.myInformation.MyInformationViewModel
 
 
 //친구 생성과 관련된 그룹
@@ -103,23 +100,6 @@ class CreateGroupFragment : Fragment(){
             MiniProfile("test","테스트5")
         )
     }
-
-
-    //리사이클러뷰에 리사이클러뷰 어댑터 부착
-//    private fun setAdapter(friends: Array<Friend>, selectedFriends: Array<MiniProfile>) {
-//        recyclerViewFriend.layoutManager = LinearLayoutManager(context)
-//
-//        // 친구 목록 어댑터 생성
-//        recyclerViewFriendAdapter = FriendRecyclerViewAdapter(friends)
-//        recyclerViewFriend.adapter = recyclerViewFriendAdapter
-//
-//        // 선택된 친구 목록 어댑터
-//        recyclerViewSelectedFriendAdapter = MiniProfileRecyclerViewAdapter(selectedFriends, requireContext())
-//        recyclerViewSelectedFriend.adapter = recyclerViewSelectedFriendAdapter
-//    }
-
-
-
 
     override fun onDestroyView() {
         super.onDestroyView()

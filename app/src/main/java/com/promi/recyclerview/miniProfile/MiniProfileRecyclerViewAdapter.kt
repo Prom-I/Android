@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 
 // 4.아이템을 유지/관리하는 Adapter
-class MiniProfileRecyclerViewAdapter(var miniProfileItems: Array<MiniProfile>, var context: Context) : //화면에 데이터를 붙이기 위해 context가 필요함
+class MiniProfileRecyclerViewAdapter(var miniProfileItems: List<MiniProfile>) : //화면에 데이터를 붙이기 위해 context가 필요함
     RecyclerView.Adapter<MiniProfileRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
@@ -50,5 +50,10 @@ class MiniProfileRecyclerViewAdapter(var miniProfileItems: Array<MiniProfile>, v
     //리사이클러뷰의 아이템의 개수가 총 몇개인지를 리턴
     override fun getItemCount(): Int {
         return miniProfileItems.size
+    }
+
+    fun updateData(newMiniProfiles: List<MiniProfile>) {
+        miniProfileItems = newMiniProfiles
+        notifyDataSetChanged()
     }
 }
