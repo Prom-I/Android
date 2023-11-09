@@ -31,7 +31,7 @@ class CreateGroupFragment : Fragment(){
 
         // 빈 배열로 어댑터 초기화
         val friendsAdapter = FriendRecyclerViewAdapter(emptyList(), friendViewModel)
-        val selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList())
+        val selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList(), friendViewModel)
 
         binding.recyclerviewSearchUser.apply {
             layoutManager = LinearLayoutManager(context)

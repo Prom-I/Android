@@ -5,27 +5,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.ui.group.FriendViewModel
 
 // 4.아이템을 유지/관리하는 Adapter
-class MiniProfileRecyclerViewAdapter(var miniProfileItems: List<MiniProfile>) : //화면에 데이터를 붙이기 위해 context가 필요함
+class MiniProfileRecyclerViewAdapter(
+    var miniProfileItems: List<MiniProfile>,
+    var viewModel: FriendViewModel) ://친구,선택된 친구를 관리하기위한 친구 리스트를 받아온다.
     RecyclerView.Adapter<MiniProfileRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
     //=> itemView는 onCreateViewHolder에서 전달받은 아이템 뷰의 레이아웃에 해당
     //=> onBindViewHolder에서 view에 groups의 값을 할당함
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        var miniProfileImage : ImageView // 미니 프로필 이미지
-        var name : TextView // 이름
-        init { //innerClass의 생성자에 해당 => 뷰의 레이아웃 가져오기 => 화면에 붙이기 위한 하나의 뷰를 만드는 과정에 해당
-            miniProfileImage = itemView.findViewById(R.id.img_profile)
-            name = itemView.findViewById(R.id.tv_name)
-
-        }
+        // 재사용할 뷰의 정보
+        var miniProfileImage:ImageView = itemView.findViewById(R.id.img_profile)
+        var name : TextView = itemView.findViewById(R.id.tv_name) // 이름
+        var eraseBtn : ImageButton = itemView.findViewById(R.id.btn_clear) //삭제 버튼 x
     }
 
     //아이템 뷰의 레이아웃을 가져와서 화면에 붙임 (1)
@@ -45,6 +45,13 @@ class MiniProfileRecyclerViewAdapter(var miniProfileItems: List<MiniProfile>) : 
         val profile : MiniProfile = miniProfileItems[position]
         //holder.miniProfileImage = profile.profileImage 이미지 변경
         holder.name.text = profile.name // 이름
+
+        //오른쪽 위의 삭제버튼 클릭시 배열에서 지워지도록
+        holder.eraseBtn.setOnClickListener {
+            //삭제 버튼 클릭시 라이브데이터에서 지우기
+            viewModel.removeSelectedFriend(profile.id); // 일치하는 아이디를 쓰는 유저 지우기
+        }
+
     }
 
 

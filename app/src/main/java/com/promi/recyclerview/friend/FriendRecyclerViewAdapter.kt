@@ -45,7 +45,7 @@ class FriendRecyclerViewAdapter(
                 Log.d("체크박스","선택됨")
                 viewModel.addSelectedFriend(friend)
             } else { //뷰 모델에 선택된 친구 제거
-                viewModel.removeSelectedFriend(friend)
+                viewModel.removeSelectedFriend(friend.friendCode) //코드를 매개변수로 넘겨서 일치하는 친구 제거
                 Log.d("체크박스","선택취소")
             }
             notifyDataSetChanged() //변경사실 알리기

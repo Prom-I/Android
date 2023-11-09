@@ -18,19 +18,18 @@ class FriendViewModel : ViewModel() {
     init {
         // 초기 친구 목록 설정(더미 데이터)
         _friends.value = listOf(
-            Friend("친구1", 123),
-            Friend("친구2",123),
-            Friend("친구3",123),
-            Friend("친구4",123),
-            Friend("친구5",123),
-            Friend("친구6",123),
+            Friend("친구1", 111),
+            Friend("친구2",222),
+            Friend("친구3",333),
+            Friend("친구4",444),
+            Friend("친구5",555),
+            Friend("친구6",666),
         )
 
         // 초기 선택된 친구 목록 설정
         _selectedFriends.value = listOf(
             // 초기 선택된 친구 데이터
-            MiniProfile("test","테스트1"),
-            MiniProfile("test","테스트2"),
+            MiniProfile("test","친구1",111),
         )
     }
 
@@ -49,13 +48,15 @@ class FriendViewModel : ViewModel() {
     fun addSelectedFriend(friend: Friend) {
         Log.d("체크박스",": 친구 추가 메소드 호출됨")
         val currentList = _selectedFriends.value ?: emptyList()
-        _selectedFriends.value = currentList + MiniProfile("test", friend.friendName)
+        _selectedFriends.value = currentList + MiniProfile("test", friend.friendName,friend.friendCode)
     }
 
-    // 선택된 친구 제거
-    fun removeSelectedFriend(friend: Friend) {
+    // 선택된 친구 제거 => 현재는 이름을 통해 탐색하도록 변경
+    fun removeSelectedFriend(id: Int) {
         Log.d("체크박스",": 친구 삭제 메소드 호출됨")
         val currentList = _selectedFriends.value ?: emptyList()
-        _selectedFriends.value = currentList.filter { it.name != friend.friendName }
+        _selectedFriends.value = currentList.filter { it.id != id } //아이디와 일치하는 유저 제외
     }
+
+
 }
