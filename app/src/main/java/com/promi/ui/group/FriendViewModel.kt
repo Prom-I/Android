@@ -31,9 +31,6 @@ class FriendViewModel : ViewModel() {
             // 초기 선택된 친구 데이터
             MiniProfile("test","테스트1"),
             MiniProfile("test","테스트2"),
-            MiniProfile("test","테스트3"),
-            MiniProfile("test","테스트4"),
-            MiniProfile("test","테스트5")
         )
     }
 

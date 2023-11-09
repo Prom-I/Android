@@ -21,12 +21,6 @@ class FriendRecyclerViewAdapter(
         val friendName: TextView = itemView.findViewById(R.id.tv_id)
         val friendCode: TextView = itemView.findViewById(R.id.tv_code)
         val checkBox: CheckBox = itemView.findViewById(R.id.btn_check)
-
-        init {
-            checkBox.setOnCheckedChangeListener { _, isChecked ->
-                // Handle check box change
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
