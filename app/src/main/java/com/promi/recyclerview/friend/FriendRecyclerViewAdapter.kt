@@ -1,5 +1,6 @@
 package com.promi.recyclerview.friend
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,8 +9,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.ui.group.FriendViewModel
 
-class FriendRecyclerViewAdapter(private var friendItems: List<Friend>) :
+class FriendRecyclerViewAdapter(
+    private var friendItems: List<Friend>,
+    private val viewModel: FriendViewModel) :
     RecyclerView.Adapter<FriendRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,7 +38,24 @@ class FriendRecyclerViewAdapter(private var friendItems: List<Friend>) :
         val friend: Friend = friendItems[position]
         holder.friendName.text = friend.friendName
         holder.friendCode.text = friend.friendCode.toString()
-        // Set the state of the check box if needed
+
+        // 리스너를 제거
+        holder.checkBox.setOnCheckedChangeListener(null)
+
+        // 체크박스 상태 복원 또는 설정
+        holder.checkBox.isChecked = viewModel.selectedFriends.value?.any { it.name == friend.friendName } == true
+
+        // 체크박스 클릭 리스너 설정
+        holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) { //뷰모델에 선택된 친구 추가
+                Log.d("체크박스","선택됨")
+                viewModel.addSelectedFriend(friend)
+            } else { //뷰 모델에 선택된 친구 제거
+                viewModel.removeSelectedFriend(friend)
+                Log.d("체크박스","선택취소")
+            }
+            notifyDataSetChanged() //변경사실 알리기
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,6 +1,7 @@
 package com.promi.recyclerview.miniProfile
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,12 @@ class MiniProfileRecyclerViewAdapter(var miniProfileItems: List<MiniProfile>) : 
     }
 
     fun updateData(newMiniProfiles: List<MiniProfile>) {
+        Log.d("체크", "업데이트 전 선택된 친구: $miniProfileItems")
+        Log.d("체크", "업데이트 후 선택된 친구: $newMiniProfiles")
         miniProfileItems = newMiniProfiles
-        notifyDataSetChanged()
+        notifyDataSetChanged() // 데이터가 변경되었음을 알립니다.
     }
+
+
+
 }

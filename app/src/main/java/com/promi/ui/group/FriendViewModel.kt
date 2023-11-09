@@ -1,5 +1,6 @@
 package com.promi.ui.group
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -44,5 +45,20 @@ class FriendViewModel : ViewModel() {
     // 선택된 친구 목록 업데이트 메소드
     fun updateSelectedFriends(newSelectedFriends: List<MiniProfile>) {
         _selectedFriends.value = newSelectedFriends
+    }
+
+
+    // 선택된 친구 추가
+    fun addSelectedFriend(friend: Friend) {
+        Log.d("체크박스",": 친구 추가 메소드 호출됨")
+        val currentList = _selectedFriends.value ?: emptyList()
+        _selectedFriends.value = currentList + MiniProfile("test", friend.friendName)
+    }
+
+    // 선택된 친구 제거
+    fun removeSelectedFriend(friend: Friend) {
+        Log.d("체크박스",": 친구 삭제 메소드 호출됨")
+        val currentList = _selectedFriends.value ?: emptyList()
+        _selectedFriends.value = currentList.filter { it.name != friend.friendName }
     }
 }
