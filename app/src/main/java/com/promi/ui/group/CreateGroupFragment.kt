@@ -1,6 +1,8 @@
 package com.promi.ui.group
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +33,7 @@ class CreateGroupFragment : Fragment(){
 
         // 빈 배열로 어댑터 초기화
         val friendsAdapter = FriendRecyclerViewAdapter(emptyList(), friendViewModel)
-        val selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList(), friendViewModel)
+        val selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList(), friendViewModel,friendsAdapter)
 
         binding.recyclerviewSearchUser.apply {
             layoutManager = LinearLayoutManager(context)
@@ -58,6 +60,34 @@ class CreateGroupFragment : Fragment(){
         binding.btnClear.setOnClickListener {
             findNavController().popBackStack()
         }
+
+
+        //검색창 변화 이벤트
+        binding.etSearch.addTextChangedListener(object : TextWatcher {
+            // 텍스트가 변경되기 전에 호출됨
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            // 텍스트가 변경될 때 호출됨
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s != null) {
+                    if (s.toString().isEmpty()) {
+                        // 검색어가 없는 경우, 모든 친구 목록을 표시
+                        friendViewModel.setFriendsListToAllFriendList()
+                    } else {
+                        // 사용자가 입력한 검색어로 친구 목록 검색
+                        friendViewModel.searchFriend(s.toString())
+                    }
+                }
+            }
+
+            // 텍스트가 변경된 후에 호출됨
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        })
+
 
         return binding.root
     }

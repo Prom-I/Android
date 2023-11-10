@@ -10,12 +10,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
 import com.promi.ui.group.FriendViewModel
 
 // 4.아이템을 유지/관리하는 Adapter
 class MiniProfileRecyclerViewAdapter(
     var miniProfileItems: List<MiniProfile>,
-    var viewModel: FriendViewModel) ://친구,선택된 친구를 관리하기위한 친구 리스트를 받아온다.
+    var viewModel: FriendViewModel,
+    var friendsAdapter: FriendRecyclerViewAdapter
+) ://친구,선택된 친구를 관리하기위한 친구 리스트를 받아온다.
     RecyclerView.Adapter<MiniProfileRecyclerViewAdapter.ViewHolder>() { //리사이클러뷰 어댑터를 상속, Generic 값으로 innerClass인 ViewHolder를 넣어줘야함
 
     //(2) ViewHolder패턴 => View를 Holder에 넣어두었다가 재사용을 하기 위함
@@ -50,6 +53,7 @@ class MiniProfileRecyclerViewAdapter(
         holder.eraseBtn.setOnClickListener {
             //삭제 버튼 클릭시 라이브데이터에서 지우기
             viewModel.removeSelectedFriend(profile.id); // 일치하는 아이디를 쓰는 유저 지우기
+            friendsAdapter.toggleFriendSelection(profile.id) //선택해제된 친구의 토글 상태 업데이트
         }
 
     }
