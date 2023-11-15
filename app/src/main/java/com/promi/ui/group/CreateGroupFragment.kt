@@ -15,7 +15,8 @@ import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
 import com.promi.recyclerview.miniProfile.MiniProfileRecyclerViewAdapter
 
 
-//친구 생성과 관련된 그룹
+//그룹 생성과 관련된 프래그먼트
+//사용자로부터 그룹에 추가할 친구를 선택받고, 그 친구들을 바탕으로 그룹을 만든다.
 class CreateGroupFragment : Fragment(){
     private var _binding: FragmentCreateGroupBinding? = null
     private val binding get() = _binding!!
