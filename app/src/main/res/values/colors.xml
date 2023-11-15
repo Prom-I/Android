@@ -11,9 +11,10 @@
 
     <color name="transparent">#00FFFF00</color>
     <color name="translucence">#65000000</color>
+    <color name="mainRed">#FF6746</color>
     <color name="mainGreen">#00C1C1</color>
     <color name="mainGray">#838A8A</color>
-    <color name="mainLightGray">#C5CACA</color>
+    <color name="mainLightGray">#f5f5f5</color>
 
 
     <color name="calendarTodoText">#49454F</color>

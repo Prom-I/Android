@@ -14,6 +14,8 @@ class TodoDialog(private val year: String, private val month: String, private va
     override fun initAfterBinding() {
         super.initAfterBinding()
 
-
+        binding.btnAddTodo.setOnClickListener {
+            CategoryDialog().show(parentFragmentManager, "CategoryDialog")
+        }
     }
 }
