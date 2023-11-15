@@ -22,6 +22,8 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
 
     // CalendarDate를 이용하여 날짜 리스트 세팅
     var dateCalendar: DateCalendar = DateCalendar(date)
+    lateinit var year: String
+    lateinit var month: String
     var dateData: ArrayList<Int> = arrayListOf()
 
     // 할 일 데이터
@@ -29,11 +31,14 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
     
     init {
         dateCalendar.initBaseCalendar()
+        year = dateCalendar.year
+        month = dateCalendar.month
         dateData = dateCalendar.dateList
     }
 
     inner class CalendarItemHolder (itemBinding: ItemCalendarDateBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
+        var layoutCalendarDate: View = itemBinding.layoutCalendarDate
         var itemCalendarDateText: TextView = itemBinding.itemCalendarDateText
         var listCalendarTodo: ListView = itemBinding.listCalendarTodo
 
@@ -45,7 +50,7 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
             itemCalendarDateText.text = data.toString()
 
             // 오늘 날짜 처리
-            var dateString: String = SimpleDateFormat("dd", Locale.KOREA).format(date)
+            var dateString = SimpleDateFormat("dd", Locale.KOREA).format(date)
             var dateInt = dateString.toInt()
 
             // 현재 월의 1일 이전, 현재 월의 마지막일 이후 값의 텍스트를 회색처리
@@ -96,7 +101,7 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
         holder?.bind(dateData[position], position)
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
-        holder.itemView.setOnClickListener {
+        holder.layoutCalendarDate.setOnClickListener {
             itemClickListener?.onClick(it, position)
         }
     }

@@ -17,6 +17,10 @@
     <!-- fragment_main -->
     <string name="calendar_year_month_format">yyyy년 MM월</string>
 
+    <!-- dialog todo -->
+    <string name="todo_month_date_format">%s월 %s일 (%s)</string>
+    <string name="todo_time_format">%s • %s</string>
+
     <!-- fragment_group_setting -->
     <string name="what_group_name">그룹 이름은 뭘로 할까요?</string>
     <string name="len_group_name">0/30</string>

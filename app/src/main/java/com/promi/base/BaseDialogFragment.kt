@@ -18,6 +18,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.promi.R
 
 abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
     DialogFragment() {
@@ -38,7 +39,7 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
         setHasOptionsMenu(true)
 
         // false : 화면 밖 터치 혹은 뒤로가기 버튼 누를 시 dismiss 안됨
-        isCancelable = false
+        isCancelable = true
     }
 
     override fun onCreateView(
@@ -67,10 +68,7 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
     override fun onResume() {
         super.onResume()
 
-        // dialog full Screen code
-        dialog?.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog?.window?.clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        dialog?.window?.setDimAmount(0.7F)
     }
 
     // 다이얼로그 크기

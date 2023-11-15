@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentCalendarBinding
+import com.promi.ui.main.TodoDialog
 import java.util.*
 
 class CalendarFragment(index: Int): BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar){
@@ -49,7 +50,10 @@ class CalendarFragment(index: Int): BaseFragment<FragmentCalendarBinding>(R.layo
         calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
             override fun onClick(v: View, position: Int) {
                 // val todoData = calendarAdapter.itemList[position]
-                // PostDialog(userEmail, post).show(parentFragmentManager,"PostDialog")
+                val year = calendarAdapter.year
+                val month = calendarAdapter.month
+                val date = calendarAdapter.dateData[position].toString()
+                TodoDialog(year, month, date).show(parentFragmentManager,"TodoDialog")
             }
         })
     }
