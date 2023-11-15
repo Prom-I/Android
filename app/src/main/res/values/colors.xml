@@ -13,4 +13,18 @@
     <color name="mainGreen">#00C1C1</color>
     <color name="mainGray">#838A8A</color>
     <color name="mainLightGray">#C5CACA</color>
+
+    <color name="calendarTodoText">#49454F</color>
+
+    <!-- 카테고리 기본 색상 -->
+    <color name="categoryColor1">#DE9BAC</color>
+    <color name="categoryColor2">#A0A3F2</color>
+    <color name="categoryColor3">#A7C9F7</color>
+    <color name="categoryColor4">#F6D68C</color>
+    <color name="categoryColor5">#E8C1C1</color>
+    <color name="categoryColor6">#C9BAF3</color>
+    <color name="categoryColor7">#C5CACA</color>
+    <color name="categoryColor8">#9E9EA3</color>
+    <color name="categoryColor9">#B5E1B2</color>
+    <color name="categoryColor10">#FFB877</color>
 </resources>
