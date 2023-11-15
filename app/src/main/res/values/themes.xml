@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Promi" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="Theme.Promi" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorAccent">@color/mainGreen</item>
         <item name="android:timePickerStyle">@style/MyTimePickerTheme</item>
@@ -13,6 +13,8 @@
         <!-- white status bar -->
         <item name="android:statusBarColor">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
+
+        <item name="colorPrimary">@color/mainGreen</item>
     </style>
 
     <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">

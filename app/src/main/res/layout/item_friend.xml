@@ -5,18 +5,45 @@
     android:layout_width="match_parent"
     android:layout_height="74dp">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_profile"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        app:civ_border_color="@color/black"
-        app:civ_border_overlay="false"
+<!--    <de.hdodenhof.circleimageview.CircleImageView-->
+<!--        android:id="@+id/img_profile"-->
+<!--        android:layout_width="48dp"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_marginStart="24dp"-->
+<!--        android:layout_marginTop="8dp"-->
+<!--        app:civ_border_color="@color/black"-->
+<!--        app:civ_border_overlay="false"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        tools:src="@color/gray" />-->
+
+
+    <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_friend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:cardCornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@color/gray" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/image_group_default_image" />
+
+    </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tv_id"
@@ -27,8 +54,8 @@
         android:fontFamily="@font/pretendard_regular"
         android:textColor="@color/black"
         android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/img_profile"
-        app:layout_constraintTop_toTopOf="@+id/img_profile"
+        app:layout_constraintStart_toEndOf="@+id/cardview_friend"
+        app:layout_constraintTop_toTopOf="@+id/cardview_friend"
         tools:text="이자민" />
 
     <TextView
@@ -42,6 +69,17 @@
         app:layout_constraintStart_toStartOf="@+id/tv_id"
         app:layout_constraintTop_toBottomOf="@+id/tv_id"
         tools:text="#1234" />
+
+    <CheckBox
+        android:id="@+id/btn_check"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_check_btn"
+        android:button="@null"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
