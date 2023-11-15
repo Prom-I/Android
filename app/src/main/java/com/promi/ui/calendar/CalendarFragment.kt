@@ -1,5 +1,7 @@
 package com.promi.ui.calendar
 
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.promi.R
@@ -33,14 +35,22 @@ class CalendarFragment(index: Int): BaseFragment<FragmentCalendarBinding>(R.layo
             add(Calendar.MONTH, pageIndex)
             time
         }
+        Log.d("poss",pageIndex.toString())
         currentDate = date
     }
     private fun initCalendar() {
-        val calendarAdapter = CalendarAdapter(requireContext(), binding.calendarLayout, currentDate, thisMonth)
-        binding.calendarView.apply {
+        val calendarAdapter = CalendarAdapter(binding.calendarLayout, currentDate, thisMonth)
+        binding.listCalendarDate.apply {
             adapter = calendarAdapter
             layoutManager = GridLayoutManager(requireContext(), 7, GridLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
         }
+
+        calendarAdapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener {
+            override fun onClick(v: View, position: Int) {
+                // val todoData = calendarAdapter.itemList[position]
+                // PostDialog(userEmail, post).show(parentFragmentManager,"PostDialog")
+            }
+        })
     }
 }
