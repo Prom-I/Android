@@ -13,4 +13,9 @@
     <color name="mainGreen">#00C1C1</color>
     <color name="mainGray">#838A8A</color>
     <color name="mainLightGray">#C5CACA</color>
+    <color name="white2">#F5F5F5</color>
+
+
+    <color name="red">#F44336</color>
+
 </resources>
