@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.promi.R
 import com.promi.databinding.FragmentMyFriendListBinding
 
@@ -23,7 +24,13 @@ class MyFriendListFragment : Fragment() {
     ): View? {
         binding = FragmentMyFriendListBinding.inflate(layoutInflater)
 
-        // Inflate the layout for this fragment
+        // 뒤로 가기
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+
+
         return binding.root
     }
 

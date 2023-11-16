@@ -55,7 +55,7 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-성
+
     <EditText
         android:id="@+id/et_search"
         android:layout_width="0dp"
@@ -99,11 +99,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:textColor="#00C1AA"
-        android:fontFamily="@font/pretendard_light"
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/tv_my_friend_list"
-        app:layout_constraintTop_toTopOf="@+id/tv_my_friend_list"
-        tools:text="4"/>
+        app:layout_constraintStart_toEndOf="@id/tv_my_friend_list"
+        app:layout_constraintTop_toTopOf="@id/tv_my_friend_list"
+        android:text="4"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview_my_friend_list"
