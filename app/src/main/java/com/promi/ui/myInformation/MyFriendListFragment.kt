@@ -1,4 +1,4 @@
-package com.promi.ui.friend
+package com.promi.ui.myInformation
 
 import android.os.Bundle
 import android.text.Editable
@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.databinding.FragmentMyFriendListBinding
 import com.promi.recyclerview.friend.MyFriendListRecyclerViewAdapter
-import com.promi.ui.myInformation.MyInformationViewModel
 
 class MyFriendListFragment : Fragment() {
 

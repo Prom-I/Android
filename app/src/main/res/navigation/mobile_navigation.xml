@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_navigation_my_information_to_myFriendListFragment"
             app:destination="@id/myFriendListFragment" />
+        <action
+            android:id="@+id/action_navigation_my_information_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_add_friends"
@@ -45,7 +48,12 @@
         android:label="CreateGroupFragment" />
     <fragment
         android:id="@+id/myFriendListFragment"
-        android:name="com.promi.ui.friend.MyFriendListFragment"
+        android:name="com.promi.ui.myInformation.MyFriendListFragment"
         android:label="fragment_my_friend_list"
         tools:layout="@layout/fragment_my_friend_list" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.promi.ui.myInformation.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
 </navigation>

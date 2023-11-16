@@ -26,8 +26,13 @@ class MyInformationFragment : Fragment() {
 
 
         // 친구 목록 클릭시
-        binding.linearLayoutUserInfoButton.setOnClickListener {
+        binding.constraintBtnFriendList.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_my_information_to_myFriendListFragment)
+        }
+
+        // 프로필 수정 클릭시
+        binding.btnEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_information_to_editProfileFragment)
         }
 
 

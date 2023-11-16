@@ -157,6 +157,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_btn_pen_list"
                 android:layout_width="160dp"
                 android:layout_height="64dp"
                 android:background="@drawable/shape_round_btn_stroke"
