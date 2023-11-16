@@ -106,7 +106,7 @@
             app:layout_constraintTop_toBottomOf="@id/btn_edit_profile"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="25dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:weightSum="100">
@@ -211,7 +211,7 @@
             app:layout_constraintTop_toBottomOf="@id/linearLayout_user_info_button"
             app:layout_constraintStart_toStartOf="parent"
             android:textSize="13dp"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="40dp"/>
 
         <TextView
             android:id="@+id/tv_log_out"

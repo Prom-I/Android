@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.promi.databinding.FragmentMyInformationBinding
@@ -12,9 +11,6 @@ import com.promi.databinding.FragmentMyInformationBinding
 class MyInformationFragment : Fragment() {
 
     private var _binding: FragmentMyInformationBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,13 +18,11 @@ class MyInformationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(MyInformationViewModel::class.java)
-
+        val MyInformationViewModel =
+            ViewModelProvider(this)[MyInformationViewModel::class.java]
         _binding = FragmentMyInformationBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

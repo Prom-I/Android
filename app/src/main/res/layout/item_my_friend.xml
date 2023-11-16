@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_profile"
+            android:id="@+id/iv_friend_profile"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
@@ -43,7 +43,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_id"
+            android:id="@+id/tv_friend_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
@@ -52,7 +52,7 @@
             tools:text="이자민" />
 
         <TextView
-            android:id="@+id/tv_code"
+            android:id="@+id/tv_friend_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/pretendard_regular"
