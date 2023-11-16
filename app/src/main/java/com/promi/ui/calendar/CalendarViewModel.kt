@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class CalendarViewModel : ViewModel() {
-        private val _positionLiveData: MutableLiveData<Int> = MutableLiveData()
+        private val _positionLiveData: MutableLiveData<Int> = MutableLiveData(0)
         val positionLiveData: LiveData<Int>
             get() = _positionLiveData
 
@@ -15,7 +15,7 @@ class CalendarViewModel : ViewModel() {
             get() = _yearMonthLiveData
 
         fun setPosition(index:Int){
-            Log.d("posLiveDataa", "$index MyViewModel")
+            Log.d("poss_LiveData", "$index MyViewModel")
             _positionLiveData.postValue(index)
         }
     }

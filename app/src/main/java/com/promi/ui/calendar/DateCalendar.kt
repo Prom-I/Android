@@ -15,6 +15,8 @@ class DateCalendar(date: Date) {
     var nextHead = 0
     var currentMaxDate = 0
 
+    lateinit var year: String
+    lateinit var month: String
     var dateList = arrayListOf<Int>()
 
     init {
@@ -49,6 +51,8 @@ class DateCalendar(date: Date) {
     }
 
     private fun makeCurrentMonth(calendar: Calendar) {
+        year = calendar.get(Calendar.YEAR).toString()
+        month = (calendar.get(Calendar.MONTH)+1).toString()
         for (i in 1..calendar.getActualMaximum(Calendar.DATE)) dateList.add(i)
     }
 
