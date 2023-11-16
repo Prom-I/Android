@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.databinding.FragmentMyFriendListBinding
 import com.promi.recyclerview.friend.MyFriendListRecyclerViewAdapter
@@ -29,7 +31,9 @@ class MyFriendListFragment : Fragment() {
     ): View? {
         binding = FragmentMyFriendListBinding.inflate(layoutInflater)
 
-        val MyInformationViewModel =
+        myFriendRecyclerView = binding.recyclerviewMyFriendList
+
+        val myInformationViewModel =
             ViewModelProvider(this)[MyInformationViewModel::class.java]
 
         // 뒤로 가기
@@ -37,7 +41,16 @@ class MyFriendListFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        // 리사이클러뷰 어댑터 설정
+
+        // 친구 리스트 리사이클러뷰 설정
+        myFriendRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        myFriendRecyclerViewAdapter = MyFriendListRecyclerViewAdapter() // 어댑터 생성
+        myFriendRecyclerView.adapter = myFriendRecyclerViewAdapter
+        // LiveData Observer 설정 => 변화 발생시 반영
+        myInformationViewModel.myFriends.observe(viewLifecycleOwner, Observer { items ->
+            myFriendRecyclerViewAdapter.setItemList(items)
+        })
+
 
 
 
