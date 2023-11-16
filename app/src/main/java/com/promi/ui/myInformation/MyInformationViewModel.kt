@@ -39,5 +39,9 @@ class MyInformationViewModel : ViewModel() {
         }
     }
 
+    fun listInit(){
+        _myFriends.value = allMyFriendsList
+    }
+
 
 }
