@@ -4,17 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.promi.R
 import com.promi.databinding.FragmentMyInformationBinding
 
 class MyInformationFragment : Fragment() {
 
     private var _binding: FragmentMyInformationBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,17 +20,24 @@ class MyInformationFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(MyInformationViewModel::class.java)
-
+        val MyInformationViewModel =
+            ViewModelProvider(this)[MyInformationViewModel::class.java]
         _binding = FragmentMyInformationBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+
+        // 친구 목록 클릭시
+        binding.constraintBtnFriendList.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_information_to_myFriendListFragment)
         }
-        return root
+
+        // 프로필 수정 클릭시
+        binding.btnEditProfile.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_information_to_editProfileFragment)
+        }
+
+
+
+        return binding.root
     }
 
     override fun onDestroyView() {

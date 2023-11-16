@@ -14,9 +14,9 @@
     <color name="mainRed">#FF6746</color>
     <color name="mainGreen">#00C1C1</color>
     <color name="mainGray">#838A8A</color>
+    <color name="white2">#F5F5F5</color>
+    <color name="red">#F44336</color>
     <color name="mainLightGray">#f5f5f5</color>
-
-
     <color name="calendarTodoText">#49454F</color>
 
     <!-- 카테고리 기본 색상 -->
