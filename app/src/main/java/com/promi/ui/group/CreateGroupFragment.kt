@@ -92,7 +92,9 @@ class CreateGroupFragment : Fragment(){
 
         // 확인(그룹 생성 버튼 클릭시)
         // 필요한 로직 => 그룹에 포함된 친구가 한명도 없을 경우에도 그룹 생성 허용?
-        binding.btnConfirm
+        binding.btnConfirm.setOnClickListener {
+            //그룹 설정 화면으로 이동
+        }
 
 
         return binding.root

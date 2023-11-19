@@ -17,13 +17,13 @@
 
     <ImageButton
         android:id="@+id/btn_set_group_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginStart="85dp"
         android:layout_marginTop="85dp"
         android:background="@drawable/shape_circle"
         android:backgroundTint="#D9D9D9"
-        android:src="@android:drawable/btn_star"
+        android:src="@drawable/ic_camera"
         app:layout_constraintStart_toStartOf="@+id/img_group"
         app:layout_constraintTop_toTopOf="@+id/img_group" />
 
@@ -63,7 +63,6 @@
         android:text="@string/len_group_name"
         android:textColor="@color/mainLightGray"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etv_group_name"
-        app:layout_constraintEnd_toEndOf="@+id/etv_group_name"
-        app:layout_constraintTop_toTopOf="@+id/etv_group_name" />
+        app:layout_constraintEnd_toEndOf="@id/etv_group_name"
+        app:layout_constraintBottom_toBottomOf="@id/tv_group_name_example"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
