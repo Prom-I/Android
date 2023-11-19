@@ -45,7 +45,11 @@
     <fragment
         android:id="@+id/navigation_create_group"
         android:name="com.promi.ui.group.CreateGroupFragment"
-        android:label="CreateGroupFragment" />
+        android:label="CreateGroupFragment" >
+        <action
+            android:id="@+id/action_navigation_create_group_to_groupSettingFragment"
+            app:destination="@id/groupSettingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myFriendListFragment"
         android:name="com.promi.ui.myInformation.MyFriendListFragment"
@@ -56,4 +60,8 @@
         android:name="com.promi.ui.myInformation.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/groupSettingFragment"
+        android:name="com.promi.ui.group.GroupSettingFragment"
+        android:label="GroupSettingFragment" />
 </navigation>
