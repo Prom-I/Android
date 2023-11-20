@@ -3,6 +3,7 @@ package com.promi.ui.main
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.promi.R
 import com.promi.base.BaseFragment
@@ -30,6 +31,11 @@ class MainFragment : BaseFragment<FragmentMainBinding> (R.layout.fragment_main) 
         super.initDataBinding()
 
         setCalendar()
+
+        binding.icNotificaiton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_calendar_to_navigation_notification)
+        }
+
     }
 
     private fun setCalendar(){

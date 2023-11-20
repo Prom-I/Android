@@ -8,30 +8,31 @@
     <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginLeft="15dp"
         android:layout_marginBottom="10dp"
-        app:cardCornerRadius="30dp"
+        app:cardCornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardElevation = "0dp" >
 
         <ImageView
-            android:id="@+id/iv_profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:id="@+id/iv_notificaition_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/image_group_default_image" />
+            app:srcCompat="@drawable/ic_notification_circle" />
 
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/tv_content"
+        android:id="@+id/tv_notification_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -44,19 +45,19 @@
         tools:text="이자민님이 친구 신청을 보냈습니다." />
 
     <TextView
-        android:id="@+id/tv_time"
+        android:id="@+id/tv_notification_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:fontFamily="@font/pretendard_regular"
         android:textColor="@color/black"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_content"
+        app:layout_constraintStart_toStartOf="@+id/tv_notification_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_notification_content"
         tools:text="1분 전" />
 
     <Button
-        android:id="@+id/btn_confirm"
+        android:id="@+id/btn_notification_confirm"
         android:layout_width="70dp"
         android:layout_height="38dp"
         android:layout_marginTop="11dp"
