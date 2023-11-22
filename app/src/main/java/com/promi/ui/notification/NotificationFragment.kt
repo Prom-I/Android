@@ -15,6 +15,7 @@ import com.promi.databinding.FragmentMainBinding
 import com.promi.databinding.FragmentNotificationBinding
 import com.promi.recyclerview.notification.NotificationAdapter
 
+// 알림 화면
 class NotificationFragment:BaseFragment<FragmentNotificationBinding> (R.layout.fragment_notification){
 
     private val viewModel by viewModels<NotificationViewModel>()
@@ -24,7 +25,7 @@ class NotificationFragment:BaseFragment<FragmentNotificationBinding> (R.layout.f
         super.initStartView()
 
         notificationAdapter = NotificationAdapter(
-            notificationDeleteEvent = { notification -> viewModel.deleteNotification(notification) }
+            notificationDeleteEvent = { notification -> viewModel.deleteNotification(notification) } // viewModel의 삭제 함수를 어뎁터로 전달
         )
 
         with(binding.recyclerviewNotification){
@@ -41,8 +42,7 @@ class NotificationFragment:BaseFragment<FragmentNotificationBinding> (R.layout.f
         super.initDataBinding()
 
         viewModel.notificationLiveData.observe(this){ itemList ->
-            Log.d("test", itemList.toString())
-            notificationAdapter?.submitList(itemList.toMutableList())
+            notificationAdapter?.submitList(itemList.toMutableList()) // 변경된 리스트를 어뎁터에 전달
         }
     }
 
