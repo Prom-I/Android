@@ -84,7 +84,7 @@
         android:name="com.promi.ui.promise.CreatePromiseFragment"
         android:label="fragment_create_promise"
         tools:layout="@layout/fragment_create_promise" />
-    <fragment>
+    <fragment
         android:id="@+id/navigation_notification"
         android:name="com.promi.ui.notification.NotificationFragment"
         android:label="fragment_notification"
