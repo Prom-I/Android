@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.promi.R
-import com.promi.databinding.FragmentCreatePromiseBinding
-import com.promi.databinding.FragmentSelectPromiseDateBinding
+import com.promi.databinding.FragmentPromiseSettingBinding
 
-
-// 사용자에게 달력을 보여주고, 사용자로부터 원하는 기간의 날짜를 선택받는 로직 작성 필요
-class SelectPromiseDateFragment : Fragment() {
-
-    private lateinit var binding: FragmentSelectPromiseDateBinding
+class PromiseSettingFragment : Fragment() {
+    private lateinit var binding : FragmentPromiseSettingBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -22,11 +18,9 @@ class SelectPromiseDateFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSelectPromiseDateBinding.inflate(layoutInflater)
+        binding = FragmentPromiseSettingBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
-
 
         return binding.root
     }
-
 }
