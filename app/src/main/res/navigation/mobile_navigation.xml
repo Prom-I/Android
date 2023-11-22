@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_navigation_promise_to_navigation_create_group"
             app:destination="@id/navigation_create_group" />
+        <action
+            android:id="@+id/action_navigation_promise_to_groupFragment"
+            app:destination="@id/groupFragment" />
     </fragment>
 
     <fragment
@@ -64,4 +67,9 @@
         android:id="@+id/groupSettingFragment"
         android:name="com.promi.ui.group.GroupSettingFragment"
         android:label="GroupSettingFragment" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.promi.ui.group.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" />
 </navigation>
