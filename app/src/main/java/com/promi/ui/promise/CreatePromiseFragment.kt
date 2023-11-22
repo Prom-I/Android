@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.promi.R
 import com.promi.databinding.FragmentCreatePromiseBinding
@@ -15,6 +16,8 @@ class CreatePromiseFragment : Fragment() {
     private lateinit var binding : FragmentCreatePromiseBinding
 
     private lateinit var frameContainer : FrameLayout
+
+    private lateinit var toolBarTitle : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +30,8 @@ class CreatePromiseFragment : Fragment() {
         binding = FragmentCreatePromiseBinding.inflate(layoutInflater)
         // Inflate the layout for this fragment
         frameContainer = binding.frameLayoutCreatePromise
+
+        toolBarTitle = binding.tvCreatePromise
 
         //Fragment의 초기 설정 화면은 달력 화면
         childFragmentManager.beginTransaction().apply {
@@ -48,6 +53,7 @@ class CreatePromiseFragment : Fragment() {
                 }
             } else { // 1 이상이라면, 현재 약속 상세 설정 화면인 것임
                 // 약속 최종 설정(이미지, 그룹 사진 설정 화면으로 이동)
+                toolBarTitle.text = "약속 설정"
                 childFragmentManager.beginTransaction().apply {
                     replace(R.id.frameLayout_create_promise,PromiseFinalSettingFragment())
                     addToBackStack(null) //스택에 팝
@@ -62,9 +68,11 @@ class CreatePromiseFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             if (childFragmentManager.backStackEntryCount > 0) {
                 // 백 스택에 항목이 있는 경우, 즉 PromiseSettingFragment가 표시되고 있는 경우
+                toolBarTitle.text = "약속 생성"
                 childFragmentManager.popBackStack()
             } else {
                 // 백 스택이 비어있는 경우, 즉 SelectPromiseDateFragment가 표시되고 있는 경우
+                //toolBarTitle.text = "약속 생성"
                 findNavController().popBackStack()
             }
         }
