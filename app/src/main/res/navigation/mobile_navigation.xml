@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_calendar_to_navigation_add_friends"
             app:destination="@id/navigation_add_friends" />
+        <action
+            android:id="@+id/action_navigation_calendar_to_navigation_notification"
+            app:destination="@id/navigation_notification" />
     </fragment>
 
     <fragment
@@ -56,4 +59,9 @@
         android:name="com.promi.ui.myInformation.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
+    <fragment
+        android:id="@+id/navigation_notification"
+        android:name="com.promi.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

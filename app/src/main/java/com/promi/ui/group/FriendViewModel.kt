@@ -38,6 +38,12 @@ class FriendViewModel : ViewModel() {
             Friend("최강",555),
             Friend("남윤형",666),
             Friend("김지원",777),
+            Friend("최강",555),
+            Friend("남윤형",666),
+            Friend("김지원",777),
+            Friend("최강",555),
+            Friend("남윤형",666),
+            Friend("김지원",777)
         )
 
         _friends.value = initialList //친구데이터의 MutableLiveData에 친구 정보 기입
