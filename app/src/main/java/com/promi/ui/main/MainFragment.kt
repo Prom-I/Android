@@ -1,15 +1,19 @@
 package com.promi.ui.main
 
 import android.util.Log
+import android.widget.LinearLayout
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentMainBinding
 import com.promi.ui.calendar.CalendarViewModel
 import com.promi.ui.calendar.FragmentStateAdapter
+import com.promi.ui.group.FriendViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -18,6 +22,9 @@ import java.util.Locale
 class MainFragment : BaseFragment<FragmentMainBinding> (R.layout.fragment_main) {
     private lateinit var currentDate: Date
     private var pageIndex=0
+    private var myFriendListMiniProfileAdapter : MyFriendListMiniProfileAdapter? = null
+
+    private val friendViewModel by viewModels<FriendViewModel>()
 
     private val viewModel by lazy {
         ViewModelProvider(this)[MainViewModel::class.java]
@@ -27,14 +34,34 @@ class MainFragment : BaseFragment<FragmentMainBinding> (R.layout.fragment_main) 
         ViewModelProvider(requireParentFragment())[CalendarViewModel::class.java]
     }
 
+    override fun initStartView() {
+        super.initStartView()
+
+        binding.icNotification.setOnClickListener{
+            navController.navigate(R.id.action_navigation_calendar_to_navigation_notification)
+        }
+
+        binding.icAddFriend.setOnClickListener{
+            navController.navigate(R.id.action_navigation_calendar_to_navigation_add_friends)
+        }
+
+        myFriendListMiniProfileAdapter = MyFriendListMiniProfileAdapter()
+
+        with(binding.recyclerviewMyFriendListMiniProfile){ // 메인 화면의 친구 목록 어댑터
+            setHasFixedSize(true)
+            adapter = myFriendListMiniProfileAdapter
+            layoutManager = LinearLayoutManager(this@MainFragment.context, LinearLayoutManager.HORIZONTAL, true)
+        }
+    }
     override fun initDataBinding() {
         super.initDataBinding()
 
         setCalendar()
 
-        binding.icNotificaiton.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_calendar_to_navigation_notification)
+        friendViewModel.friends.observe(this){itemList->
+            myFriendListMiniProfileAdapter?.submitList(itemList.toMutableList())
         }
+
 
     }
 
