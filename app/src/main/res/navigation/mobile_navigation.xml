@@ -71,5 +71,14 @@
         android:id="@+id/groupFragment"
         android:name="com.promi.ui.group.GroupFragment"
         android:label="fragment_group"
-        tools:layout="@layout/fragment_group" />
+        tools:layout="@layout/fragment_group" >
+        <action
+            android:id="@+id/action_groupFragment_to_createPromiseFragment"
+            app:destination="@id/createPromiseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPromiseFragment"
+        android:name="com.promi.ui.promise.CreatePromiseFragment"
+        android:label="fragment_create_promise"
+        tools:layout="@layout/fragment_create_promise" />
 </navigation>
