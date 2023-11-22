@@ -1,14 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.promise.PromiseSettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tv_select_promise_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/announce"
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"/>
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/et_selected_time"
+        android:layout_width="110dp"
+        android:layout_height="70dp"
+        android:background="@drawable/shape_select_promise_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_select_promise_time"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="30dp"
+        android:text="3"
+        android:paddingLeft="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시간"
+        app:layout_constraintTop_toTopOf="@id/et_selected_time"
+        app:layout_constraintBottom_toBottomOf="@id/et_selected_time"
+        app:layout_constraintStart_toEndOf="@id/et_selected_time"
+        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:textSize="17sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_select_promise_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선호 요일을\n선택해주세요 :)"
+        android:textColor="@color/black"
+        android:textSize="17sp"
+        app:layout_constraintTop_toBottomOf="@id/et_selected_time"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="60dp"/>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout_select_day"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tv_select_promise_day"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:weightSum="100">
+        
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_weekday"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_select_weekday"
+            app:backgroundTint="@color/mainLightGray"
+            android:text="평일"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_weight="33"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_weekend"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_select_weekend"
+            android:text="주말"
+            android:textStyle="bold"
+            android:layout_weight="33"
+            android:layout_marginHorizontal="15dp"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_day_select"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_select_day"
+            app:backgroundTint="@color/white2"
+            android:text="직접선택"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:layout_weight="33"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_select_promise_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="약속장소를\n적어주세요 :)"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout_select_day"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="17sp"
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/shape_edit_select_promise_place"
+        app:layout_constraintTop_toBottomOf="@id/tv_select_promise_place"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="구체적인 약속장소를 입력해주세요"
+        android:textSize="15dp"
+        android:paddingLeft="15dp"
+        android:layout_marginTop="20dp"/>
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
