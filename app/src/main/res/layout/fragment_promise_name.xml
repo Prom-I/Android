@@ -17,15 +17,13 @@
 
     <EditText
         android:id="@+id/etv_promise_name"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
         android:layout_marginTop="59dp"
-        android:layout_marginEnd="24dp"
         android:ems="30"
         android:inputType="text"
-        android:text="@string/what_promise_name"
-        android:textColor="@color/mainLightGray"
+        android:hint="@string/what_promise_name"
+        android:textColor="@color/gray"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,9 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="5dp"
         android:text="@string/len_group_name"
-        android:textColor="@color/mainLightGray"
+        android:textColor="@color/gray"
         android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/etv_promise_name"
-        app:layout_constraintEnd_toEndOf="@+id/etv_promise_name"
-        app:layout_constraintTop_toTopOf="@+id/etv_promise_name" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_promise_name_example"
+        app:layout_constraintEnd_toEndOf="@+id/etv_promise_name" />
 </androidx.constraintlayout.widget.ConstraintLayout>

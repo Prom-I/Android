@@ -1,19 +1,19 @@
 package com.promi.recyclerview.group
 
 import android.content.Context
-import android.content.DialogInterface
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
-class GroupRecyclerViewAdapterWithItemHelper(var groups: MutableList<Group>, var context: Context):
+class GroupRecyclerViewAdapterWithItemHelper(
+    var navController: NavController,
+    var groups: MutableList<Group>):
     RecyclerView.Adapter<GroupRecyclerViewAdapterWithItemHelper.ViewHolder>(),
     ItemTouchHelperListener {
 
@@ -24,20 +24,6 @@ class GroupRecyclerViewAdapterWithItemHelper(var groups: MutableList<Group>, var
         init { //innerClass의 생성자에 해당 => 뷰의 레이아웃 가져오기 => 화면에 붙이기 위한 하나의 뷰를 만드는 과정에 해당
             tv_group_name = itemView.findViewById(R.id.tv_group_name)
             tv_group_member_count = itemView.findViewById(R.id.tv_group_count)
-
-            //아이템 클릭에 대한 이벤트 정의
-            itemView.setOnClickListener {
-                AlertDialog.Builder(context).apply {
-                    var position = adapterPosition // 클릭한 값이 몇번째에 위치한 값인지
-                    var group = groups[position] // 클릭한 그룹 정보 받아오기
-                    setTitle(group.groupName)
-                    setMessage(group.groupMemberCount.toString())
-                    setPositiveButton("OK", DialogInterface.OnClickListener { dialog, which ->
-                        Toast.makeText(context, "OK Button Clicked : GroupRecyclerViewAdapterWithItemHelper", Toast.LENGTH_SHORT).show()
-                    })
-                    show()
-                }
-            }
         }
     }
 
@@ -58,6 +44,12 @@ class GroupRecyclerViewAdapterWithItemHelper(var groups: MutableList<Group>, var
         val group: Group = groups[position]
         holder.tv_group_name.text = group.groupName
         holder.tv_group_member_count.text = group.groupMemberCount.toString()
+
+        //아이템 클릭 이벤트 작성
+        holder.itemView.setOnClickListener {
+            // 그룹 화면으로 이동
+            navController.navigate(R.id.action_navigation_promise_to_groupFragment)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_navigation_promise_to_navigation_create_group"
             app:destination="@id/navigation_create_group" />
+        <action
+            android:id="@+id/action_navigation_promise_to_groupFragment"
+            app:destination="@id/groupFragment" />
     </fragment>
 
     <fragment
@@ -48,7 +51,11 @@
     <fragment
         android:id="@+id/navigation_create_group"
         android:name="com.promi.ui.group.CreateGroupFragment"
-        android:label="CreateGroupFragment" />
+        android:label="CreateGroupFragment" >
+        <action
+            android:id="@+id/action_navigation_create_group_to_groupSettingFragment"
+            app:destination="@id/groupSettingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/myFriendListFragment"
         android:name="com.promi.ui.myInformation.MyFriendListFragment"
@@ -60,6 +67,24 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
+        android:id="@+id/groupSettingFragment"
+        android:name="com.promi.ui.group.GroupSettingFragment"
+        android:label="GroupSettingFragment" />
+    <fragment
+        android:id="@+id/groupFragment"
+        android:name="com.promi.ui.group.GroupFragment"
+        android:label="fragment_group"
+        tools:layout="@layout/fragment_group" >
+        <action
+            android:id="@+id/action_groupFragment_to_createPromiseFragment"
+            app:destination="@id/createPromiseFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createPromiseFragment"
+        android:name="com.promi.ui.promise.CreatePromiseFragment"
+        android:label="fragment_create_promise"
+        tools:layout="@layout/fragment_create_promise" />
+    <fragment>
         android:id="@+id/navigation_notification"
         android:name="com.promi.ui.notification.NotificationFragment"
         android:label="fragment_notification"
