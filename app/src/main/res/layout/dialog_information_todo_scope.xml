@@ -10,7 +10,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="417dp"
+            android:layout_height="393dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -18,12 +18,12 @@
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="43dp"
                 android:fontFamily="@font/pretendard_regular_400"
                 android:gravity="center"
-                android:text="카테고리 선택"
+                android:text="@string/todo_cope_title"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -37,33 +37,61 @@
                 android:fontFamily="@font/pretendard_regular_400"
                 android:letterSpacing="0"
                 android:paddingRight="24dp"
-                android:text="편집"
+                android:text="@string/confirm"
                 android:textAlignment="textEnd"
-                android:textColor="@color/mainRed"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <RadioGroup
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="22dp"
                 android:layout_marginEnd="24dp"
-                android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/list_category"
+                <RadioButton
+                    android:id="@+id/btn_scope_entire"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:itemCount="8"
-                    tools:listitem="@layout/item_category" />
-            </LinearLayout>
+                    android:layout_height="28dp"
+                    android:layout_marginBottom="16dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableRight="@drawable/bg_check_btn"
+                    android:text="전체공개"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/btn_scope_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_marginBottom="16dp"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableRight="@drawable/bg_check_btn"
+                    android:text="친구공개"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <RadioButton
+                    android:id="@+id/btn_scope_private"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableRight="@drawable/bg_check_btn"
+                    android:text="비공개"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </RadioGroup>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

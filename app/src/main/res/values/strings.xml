@@ -9,6 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="confirm">확인</string>
+    <string name="popup_title">알림</string>
     <string name="cancel">취소</string>
 
     <!-- fragment_login -->
@@ -27,11 +28,20 @@
     <string name="len_group_name">0/30</string>
     <string name="group_name_example">ex) 건축학개론 팀플 / 프로미초 34기 졸업생</string>
 
+    <!-- dialog_exit_group -->
+    <string name="is_exit_group">&#160;그룹을 정말 나가시겠습니까?</string>
+    <string name="exit_yes">나가기</string>
+    <string name="exit_no">취소</string>
+
     <!-- fragment_promise_name -->
     <string name="what_promise_name">약속 이름은 뭘로 할까요?</string>
     <string name="promise_name_example">ex) 프롬이 생일파티, 1차 회의</string>
+
+    <!-- dialog_information_todo_scope -->
+    <string name="todo_cope_title">일정 공개 범위 설정</string>
     <string name="announce">약속 소요시간을\n선택해주세요 :)</string>
 
     <!-- fragment_add_friend -->
     <string name="add_friend">친구 신청</string>
+
 </resources>
