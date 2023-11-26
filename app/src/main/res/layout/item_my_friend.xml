@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="74dp">
 
+
     <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardview_friend"
@@ -19,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_profile"
+            android:id="@+id/iv_friend_profile"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop"
@@ -31,41 +32,38 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:id="@+id/tv_id"
+    <LinearLayout
+        android:id="@+id/linearLayout_profile_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:fontFamily="@font/pretendard_regular_400"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        app:layout_constraintStart_toEndOf="@+id/cardview_friend"
-        app:layout_constraintTop_toTopOf="@+id/cardview_friend"
-        tools:text="이자민" />
+        app:layout_constraintTop_toTopOf="@id/cardview_friend"
+        app:layout_constraintBottom_toBottomOf="@id/cardview_friend"
+        app:layout_constraintStart_toEndOf="@id/cardview_friend"
+        android:layout_marginStart="15dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_code"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:fontFamily="@font/pretendard_regular_400"
-        android:textColor="@color/black"
-        android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_id"
-        app:layout_constraintTop_toBottomOf="@+id/tv_id"
-        tools:text="#1234" />
+        <TextView
+            android:id="@+id/tv_friend_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            tools:text="이자민" />
 
-    <CheckBox
-        android:id="@+id/btn_check"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_check_btn"
-        android:button="@null"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/tv_friend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_regular"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            tools:text="#1234" />
+
+    </LinearLayout>
+
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

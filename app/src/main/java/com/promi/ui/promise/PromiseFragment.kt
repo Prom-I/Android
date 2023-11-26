@@ -69,8 +69,7 @@ class PromiseFragment : Fragment() {
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
     fun setAdapter(groups: MutableList<Group>){
         recyclerViewGroup.layoutManager = LinearLayoutManager(this.context)
-        //어탭더 생성 => it(fragment의 context가 null이 아님을 알려줘야함)
-        recyclerViewAdapterWithItemHelper = activity?.let{ GroupRecyclerViewAdapterWithItemHelper(groups, it) }!!
+        recyclerViewAdapterWithItemHelper = GroupRecyclerViewAdapterWithItemHelper(findNavController(),groups)
         recyclerViewGroup.adapter = recyclerViewAdapterWithItemHelper
 
         // 리스너를 구현한 Adapter 클래스를 Callback 클래스의 생성자로 지정

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="74dp">
+    android:layout_height="90dp">
 
     <!--    이미지의 테두리를 둥글게 적용시키기 위해 cardview를 사용하였음-->
     <androidx.cardview.widget.CardView
@@ -12,9 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         app:cardCornerRadius="30dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -37,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="5dp"
-        android:fontFamily="@font/pretendard_regular_400"
+        android:fontFamily="@font/pretendard_regular"
         android:textColor="@color/black"
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/cardview_friend"
@@ -49,23 +47,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:fontFamily="@font/pretendard_regular_400"
+        android:fontFamily="@font/pretendard_regular"
         android:textColor="@color/black"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/tv_id"
         app:layout_constraintTop_toBottomOf="@+id/tv_id"
         tools:text="#1234" />
 
-    <CheckBox
-        android:id="@+id/btn_check"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/bg_check_btn"
-        android:button="@null"
+    <Button
+        android:id="@+id/btn_friend_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/pretendard_semibold"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        tools:text="@string/add_friend" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

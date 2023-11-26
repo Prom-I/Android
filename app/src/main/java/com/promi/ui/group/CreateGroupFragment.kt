@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.promi.R
 import com.promi.databinding.FragmentCreateGroupBinding
 import com.promi.recyclerview.friend.FriendRecyclerViewAdapter
 import com.promi.recyclerview.miniProfile.MiniProfileRecyclerViewAdapter
@@ -56,6 +57,7 @@ class CreateGroupFragment : Fragment(){
             selectedFriendsAdapter.updateData(selectedFriends)
             //친구 추가 선택시, 스크롤을 가장 왼쪽으로 이동
             binding.recyclerviewSelectedUser.scrollToPosition(selectedFriendsAdapter.itemCount - 1)
+            binding.tvGroupCount.text = selectedFriends.size.toString() //선택된 친구 수 만큼 화면에 보여주기 위함
         }
 
         binding.btnClear.setOnClickListener {
@@ -88,6 +90,13 @@ class CreateGroupFragment : Fragment(){
 
             }
         })
+
+        // 확인(그룹 생성 버튼 클릭시)
+        // 필요한 로직 => 그룹에 포함된 친구가 한명도 없을 경우에도 그룹 생성 허용?
+        binding.btnConfirm.setOnClickListener {
+            //그룹 설정 화면으로 이동
+            findNavController().navigate(R.id.action_navigation_create_group_to_groupSettingFragment)
+        }
 
 
         return binding.root
