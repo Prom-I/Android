@@ -58,28 +58,33 @@
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="49dp"
+            android:background="@color/mainLightGray"
+            android:divider="@drawable/shape_divider"
+            android:dividerPadding="1dp"
             android:orientation="horizontal"
+            android:paddingTop="1dp"
+            android:showDividers="middle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btn_exit_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent"
+                android:background="@color/white"
                 android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/exit_yes"
                 android:textColor="@color/mainRed"
                 android:textSize="15sp" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btn_exit_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/transparent"
+                android:background="@color/white"
                 android:fontFamily="@font/pretendard_semibold"
                 android:text="@string/exit_no"
                 android:textColor="@color/black"
