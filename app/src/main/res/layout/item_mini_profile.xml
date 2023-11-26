@@ -18,7 +18,7 @@
         android:layout_width="45dp"
         android:layout_height="wrap_content"
 
-        android:fontFamily="@font/pretendard_regular"
+        android:fontFamily="@font/pretendard_regular_400"
         android:gravity="center"
         android:textColor="@color/black"
         android:textSize="12sp"

@@ -11,7 +11,7 @@
         android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_medium_500"
         android:text="친구 추가"
         android:textColor="@color/black"
         android:textSize="17sp"
@@ -54,7 +54,7 @@
         android:text="사용자 목록"
         android:textColor="@color/black"
         android:textSize="18sp"
-        android:fontFamily="@font/pretendard_medium"
+        android:fontFamily="@font/pretendard_medium_500"
         app:layout_constraintStart_toStartOf="@+id/et_search"
         app:layout_constraintTop_toBottomOf="@+id/et_search" />
 
@@ -64,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="7dp"
         android:textColor="#00C1AA"
-        android:fontFamily="@font/pretendard_light"
+        android:fontFamily="@font/pretendard_light_300"
         android:textSize="18sp"
         app:layout_constraintStart_toEndOf="@+id/tv_user_list"
         app:layout_constraintTop_toTopOf="@+id/tv_user_list"

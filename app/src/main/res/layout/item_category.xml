@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_regular_400"
             android:text="카테고리 1"
             android:textColor="@color/mainRed"
             android:textSize="15sp"

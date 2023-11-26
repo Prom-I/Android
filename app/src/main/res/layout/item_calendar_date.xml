@@ -10,7 +10,7 @@
         android:id="@+id/item_calendar_date_text"
         android:layout_width="40dp"
         android:layout_height="32dp"
-        android:fontFamily="@font/pretendard_regular"
+        android:fontFamily="@font/pretendard_regular_400"
         android:gravity="bottom|center"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"

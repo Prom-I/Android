@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginTop="15dp"
-        android:fontFamily="@font/pretendard_regular"
+        android:fontFamily="@font/pretendard_regular_400"
         android:text="@string/group_name_example"
         android:textColor="@color/mainGray"
         android:textSize="12sp"
