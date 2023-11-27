@@ -39,7 +39,7 @@
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/cardview"
         app:layout_constraintTop_toTopOf="@+id/cardview"
-        tools:text="프로미 팀 그룹에 초대되었습니다 :D" />
+        tools:text="이자민님이 친구 신청을 보냈습니다." />
 
     <TextView
         android:id="@+id/tv_notification_time"
@@ -51,6 +51,18 @@
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="@+id/tv_notification_content"
         app:layout_constraintTop_toBottomOf="@+id/tv_notification_content"
-        tools:text="어제" />
+        tools:text="1분 전" />
+
+    <Button
+        android:id="@+id/btn_notification_confirm"
+        android:layout_width="70dp"
+        android:layout_height="38dp"
+        android:layout_marginEnd="23dp"
+        android:text=" 확인"
+        android:textSize="12sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
