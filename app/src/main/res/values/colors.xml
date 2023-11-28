@@ -30,4 +30,25 @@
     <color name="categoryColor8">#9E9EA3</color>
     <color name="categoryColor9">#B5E1B2</color>
     <color name="categoryColor10">#FFB877</color>
+
+    <!-- 앱 색상들-->
+    <color name="MainFontColor">#00C1C1</color>
+    <color name="PrimaryColor">#00D6D6</color>
+    <color name="SubColor1">#E1FFFD</color>
+    <color name="Black">#191919</color>
+    <color name="Gray6">#323232</color>
+    <color name="Gray5">#4B4B4A</color>
+    <color name="Gray4">#646463</color>
+    <color name="Gray3">#979795</color>
+    <color name="Gray2">#C9C9C6</color>
+    <color name="Gray1">#E2D2DF</color>
+    <color name="White">#FAF9F6</color>
+
+    <!--Green-->
+    <color name="Green5">#007077</color>
+    <color name="Green4">#00A6A6</color>
+    <color name="Green3">#00D6D6</color>
+    <color name="Green2">#7DEAEA</color>
+    <color name="Green1">#CBFFFF</color>
+
 </resources>

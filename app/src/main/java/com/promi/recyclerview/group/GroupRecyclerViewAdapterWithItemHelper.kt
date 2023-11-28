@@ -1,11 +1,13 @@
 package com.promi.recyclerview.group
 
 import android.content.Context
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
@@ -48,7 +50,10 @@ class GroupRecyclerViewAdapterWithItemHelper(
         //아이템 클릭 이벤트 작성
         holder.itemView.setOnClickListener {
             // 그룹 화면으로 이동
-            navController.navigate(R.id.action_navigation_promise_to_groupFragment)
+            // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?)
+            val bundle = Bundle()
+            bundle.putString("groupName", holder.tv_group_name.text as String)
+            navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
         }
     }
 
