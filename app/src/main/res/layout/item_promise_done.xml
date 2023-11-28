@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_promise_round"
+        android:background="@drawable/shape_promise_done_round"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,11 +19,11 @@
             android:id="@+id/textview_promise_period"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="13"
+            android:maxEms="13"
             android:layout_marginLeft="25dp"
             android:layout_marginTop="20dp"
-            android:text="2023.08.24~2023.08.28"
-            android:textColor="@color/black"
+            android:text="2023/08/28 (월) 09:30"
+            android:textColor="@color/Gray3"
             android:textSize="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -36,12 +36,41 @@
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
             android:text="1차 회의"
-            android:ems="13"
+            android:maxEms="13"
             android:textSize="15sp"
-            android:textColor="@color/black"
+            android:textColor="@color/Gray3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_promise_period"
             app:layout_constraintTop_toBottomOf="@id/textview_promise_period" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_dday"
+            android:layout_width="32dp"
+            android:layout_height="18dp"
+            android:background="@drawable/shape_promise_dday_round"
+            android:backgroundTint="@color/Gray2"
+            app:layout_constraintTop_toTopOf="@id/textview_promise_name"
+            app:layout_constraintBottom_toBottomOf="@id/textview_promise_name"
+            app:layout_constraintStart_toEndOf="@id/textview_promise_name"
+            android:layout_marginTop="2dp"
+            android:layout_marginStart="10dp">
+
+            <TextView
+                android:id="@+id/tv_dday_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="완료"
+                android:textColor="@color/white"
+                android:textSize="9dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <ImageView
             android:id="@+id/imageView_right_arrow"
