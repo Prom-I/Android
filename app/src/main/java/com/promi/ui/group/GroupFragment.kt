@@ -4,23 +4,27 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
+import com.promi.recyclerview.promise.PromiseRecyclerViewAdapter
 
 class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var promiseRecyclerview : RecyclerView
+    private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
+
+    private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +32,13 @@ class GroupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentGroupBinding.inflate(layoutInflater)
+
+        // 그룹이 소유하고 있는 약속에 대한 정보가 포함되어있음
+        groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
+
+        //init recyclerview
+        promiseRecyclerview = binding.recyclerviewPromise
+        setRecyclerViewAdapter()
 
         //뒤로가기
         binding.btnBack.setOnClickListener {
@@ -39,15 +50,22 @@ class GroupFragment : Fragment() {
             findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
         }
 
-        // 보유중인 그룹에 대한 리사이클러뷰 코드 필요
-
+        //promiseRecyclerviewAdapter.setList(groupViewModel.promises)
+        //현재 약속 목록 observe
+        groupViewModel.promises.observe(viewLifecycleOwner) { promise ->
+            promiseRecyclerviewAdapter.updateData(promise)
+        }
 
         setButtonStyle() // 버튼 색 변경
 
-
-        // 다른 코드 작성
-
         return binding.root
+    }
+
+
+    private fun setRecyclerViewAdapter(){
+        promiseRecyclerview.layoutManager = LinearLayoutManager(context)
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
+        promiseRecyclerview.adapter = promiseRecyclerviewAdapter
     }
 
     private fun setButtonStyle(){
