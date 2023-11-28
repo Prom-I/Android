@@ -51,11 +51,12 @@ class GroupFragment : Fragment() {
     }
 
     private fun setButtonStyle(){
-        // '약속' 글자만 색 변경
-        val spannable = SpannableString("3초만에 약속잡기")
-        val greenColorSpan = ForegroundColorSpan(resources.getColor(R.color.mainGreen, null))
-        val boldSpan = StyleSpan(Typeface.BOLD)
-        spannable.setSpan(greenColorSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val spannable = SpannableString("3초만에 약속잡기") // 원본 문자열
+        // 1. 일부 글자 색 변경
+        //val greenColorSpan = ForegroundColorSpan(resources.getColor(R.color.mainGreen, null))
+        //spannable.setSpan(greenColorSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // 2. 일부 글자만 굵게 설정
+        val boldSpan = StyleSpan(Typeface.BOLD) // BOLD 스타일 적용(글씨 굵게)
         spannable.setSpan(boldSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
         binding.btnCreateGroup.text = spannable
     }
