@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,12 +27,17 @@ class GroupFragment : Fragment() {
 
     private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentGroupBinding.inflate(layoutInflater)
+
+        // 번들로부터 그룹 이름 얻어오기
+        val groupName = arguments?.getString("groupName")
+        binding.tvGroupName.text = groupName
 
         // 그룹이 소유하고 있는 약속에 대한 정보가 포함되어있음
         groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
