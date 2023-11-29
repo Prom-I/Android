@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.ui.myInformation.MyInformationViewModel
@@ -55,8 +56,18 @@ class PaletteRecyclerViewAdapter(
         holder.tvPaletteTitle.text = palette.paletteTitle // 제목 지정
 
         // 선택하면 임시로 배열에 삽입해두고, 사용자가 확인 누를경우 즐겨찾기 배열에 통째로 추가
-        holder.btnPaletteSelect.setOnClickListener {
-            // 임시 배열에 삽입하는 로직 작성 필요
+        holder.btnPaletteSelect.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                // 체크 상태일 때의 배경
+                holder.itemView.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.shape_palette_selected)
+
+                // 임시 배열에 삽입하는 로직 작성 필요
+            } else {
+                // 체크 해제 상태일 때의 배경
+                holder.itemView.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.shape_palette_unselected)
+
+                // 임시 배열에서 삭제하는 로직 작성 필요
+            }
         }
     }
 
