@@ -30,6 +30,7 @@ class PaletteRecyclerViewAdapter(
 
     fun setPaletteList(paletteList : List<Palette>){
         this.paletteList = paletteList
+        notifyDataSetChanged()
     }
 
     inner class PaletteViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){

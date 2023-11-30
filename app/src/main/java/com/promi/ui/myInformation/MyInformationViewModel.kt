@@ -13,8 +13,8 @@ class MyInformationViewModel : ViewModel() {
     val myFriends: LiveData<List<Friend>> = _myFriends
 
     // 내가 보유중인 형관펜 목록
-    private val _myPalettes = MutableLiveData<List<Palette>>() //외부 수정 방지용
-    val myPalette: LiveData<List<Palette>> = _myPalettes
+    private val _palettes = MutableLiveData<List<Palette>>() //외부 수정 방지용
+    val myPalette: LiveData<List<Palette>> = _palettes
 
     // 즐겨찾기 파레트
     private val _myFavoritePalettes = MutableLiveData<List<Palette>>() //외부 수정 방지용
@@ -60,8 +60,7 @@ class MyInformationViewModel : ViewModel() {
 
         _myFriends.value = initialList //친구데이터의 MutableLiveData에 친구 정보 기입
 
-        _myPalettes.value =  paletteList // 더미데이터(파레트 목록들)
-
+        _palettes.value =  paletteList // 더미데이터(파레트 목록들)
 
         allMyFriendsList = _myFriends.value ?: listOf()
 
@@ -82,8 +81,9 @@ class MyInformationViewModel : ViewModel() {
     }
 
     // 즐겨찾기에 파레트 추가
-    fun addPaletteToFavorite(){
-        //myFavoritePalette.
+    fun addPaletteToFavorite(selectedPalettes: List<Palette>) {
+        val currentFavorites = _myFavoritePalettes.value ?: listOf()
+        _myFavoritePalettes.value = currentFavorites + selectedPalettes
     }
 
 
