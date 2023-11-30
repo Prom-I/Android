@@ -63,5 +63,18 @@
     <color name="palette_color9">#091F5B</color>
     <color name="palette_color10">#F7F4C7</color>
 
+    <!--Palette Colors 테스트용-->
+    <color name="palette_color11">#DE9BAC</color>
+    <color name="palette_color12">#A0A3F2</color>
+    <color name="palette_color13">#A7C9F7</color>
+    <color name="palette_color14">#F6D68C</color>
+    <color name="palette_color15">#E8C1C1</color>
+    <color name="palette_color16">#C9BAF3</color>
+    <color name="palette_color17">#CAD1E0</color>
+    <color name="palette_color18">#9E9EA3</color>
+    <color name="palette_color19">#B5E1B2</color>
+    <color name="palette_color20">#FFB877</color>
+
+
 
 </resources>

@@ -40,12 +40,22 @@ class MyInformationViewModel : ViewModel() {
             "palette_color9","palette_color10",
         )
 
+        // 테스트용 색상 더미데이터2
+        val colorList2 = listOf(
+            "palette_color11", "palette_color12",
+            "palette_color13", "palette_color14",
+            "palette_color15", "palette_color16",
+            "palette_color17", "palette_color18",
+            "palette_color19", "palette_color20"
+        )
+
+
         // 내 파레트(더미 데이터)
         val paletteList = listOf(
             Palette("나의 파레트 #1",colorList),
-            Palette("나의 파레트 #2",colorList),
+            Palette("나의 파레트 #2",colorList2),
             Palette("나의 파레트 #3",colorList),
-            Palette("나의 파레트 #4",colorList),
+            Palette("나의 파레트 #4",colorList2),
         )
 
         _myFriends.value = initialList //친구데이터의 MutableLiveData에 친구 정보 기입

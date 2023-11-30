@@ -1,5 +1,7 @@
 package com.promi.recyclerview.palette
 
+import android.content.res.ColorStateList
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +21,12 @@ class PaletteRecyclerViewAdapter(
     private var paletteList = emptyList<Palette>()
 
     // 사용자가 체크한 파레트 => 임시로 값을 넣어뒀다가 확인 누르면 통째로 값 넘기기
-    private var selectedPalette = emptyList<Palette>()
+    private var selectedPalette = mutableListOf<Palette>() // 수정가능
+
+    // 사용자가 지금까지 선택해둔 파레트들을 반환 => 'MY 형관펜'에 저장하기 위함
+    fun getSelectedPalette() : MutableList<Palette>{
+        return selectedPalette
+    }
 
     fun setPaletteList(paletteList : List<Palette>){
         this.paletteList = paletteList
@@ -27,19 +34,32 @@ class PaletteRecyclerViewAdapter(
 
     inner class PaletteViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         // 아이템의 색상 예시들(원)의 레이아웃들
-        var colorList = emptyList<CardView>()
-        val btnPaletteSelect = itemView.findViewById<CheckBox>(R.id.btn_palette_select)//btn_palette_select
-        val tvPaletteTitle = itemView.findViewById<TextView>(R.id.tv_palette_title)//tv_palette_title
-        val color1 = itemView.findViewById<CardView>(R.id.cardview_color_1)//cardview_color_1
-        val color2 = itemView.findViewById<CardView>(R.id.cardview_color_2)//cardview_color_2
-        val color3 = itemView.findViewById<CardView>(R.id.cardview_color_3)//cardview_color_3
-        val color4 = itemView.findViewById<CardView>(R.id.cardview_color_4)//cardview_color_4
-        val color5 = itemView.findViewById<CardView>(R.id.cardview_color_5)//cardview_color_5
-        val color6 = itemView.findViewById<CardView>(R.id.cardview_color_6)//cardview_color_6
-        val color7 = itemView.findViewById<CardView>(R.id.cardview_color_7)//cardview_color_7
-        val color8 = itemView.findViewById<CardView>(R.id.cardview_color_8)//cardview_color_8
-        val color9 = itemView.findViewById<CardView>(R.id.cardview_color_9)//cardview_color_9
-        val color10 = itemView.findViewById<CardView>(R.id.cardview_color_10)//cardview_color_10
+        var colorList = mutableListOf<CardView>()
+        val btnPaletteSelect: CheckBox = itemView.findViewById(R.id.btn_palette_select)//btn_palette_select
+        val tvPaletteTitle: TextView = itemView.findViewById(R.id.tv_palette_title)//tv_palette_title
+        private val color1: CardView = itemView.findViewById(R.id.cardview_color_1)//cardview_color_1
+        private val color2: CardView = itemView.findViewById(R.id.cardview_color_2)//cardview_color_2
+        private val color3: CardView = itemView.findViewById(R.id.cardview_color_3)//cardview_color_3
+        private val color4: CardView = itemView.findViewById(R.id.cardview_color_4)//cardview_color_4
+        private val color5: CardView = itemView.findViewById(R.id.cardview_color_5)//cardview_color_5
+        private val color6: CardView = itemView.findViewById(R.id.cardview_color_6)//cardview_color_6
+        private val color7: CardView = itemView.findViewById(R.id.cardview_color_7)//cardview_color_7
+        private val color8: CardView = itemView.findViewById(R.id.cardview_color_8)//cardview_color_8
+        private val color9: CardView = itemView.findViewById(R.id.cardview_color_9)//cardview_color_9
+        private val color10: CardView = itemView.findViewById(R.id.cardview_color_10)//cardview_color_10
+
+        init {
+            colorList.add(color1)
+            colorList.add(color2)
+            colorList.add(color3)
+            colorList.add(color4)
+            colorList.add(color5)
+            colorList.add(color6)
+            colorList.add(color7)
+            colorList.add(color8)
+            colorList.add(color9)
+            colorList.add(color10)
+        }
 
     }
 
@@ -55,18 +75,29 @@ class PaletteRecyclerViewAdapter(
 
         holder.tvPaletteTitle.text = palette.paletteTitle // 제목 지정
 
+        // 각 카드뷰에 색상 할당
+        val context = holder.itemView.context
+        palette.colorList.forEachIndexed { index, colorName ->
+            if (index < holder.colorList.size) {
+                val colorId = context.resources.getIdentifier(colorName, "color", context.packageName)
+                val color = ContextCompat.getColor(context, colorId)
+                val colorStateList = ColorStateList.valueOf(color)
+                holder.colorList[index].backgroundTintList = colorStateList
+            }
+        }
+
         // 선택하면 임시로 배열에 삽입해두고, 사용자가 확인 누를경우 즐겨찾기 배열에 통째로 추가
         holder.btnPaletteSelect.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 // 체크 상태일 때의 배경
                 holder.itemView.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.shape_palette_selected)
-
-                // 임시 배열에 삽입하는 로직 작성 필요
+                selectedPalette.add(palette) // 임시 배열에 삽입 => '추가하기'를 눌러서 'MY 형관펜'에 삽입
+                Log.d("Favorite Palette",selectedPalette.toString())
             } else {
                 // 체크 해제 상태일 때의 배경
                 holder.itemView.background = ContextCompat.getDrawable(holder.itemView.context, R.drawable.shape_palette_unselected)
-
-                // 임시 배열에서 삭제하는 로직 작성 필요
+                selectedPalette.remove(palette) // 즐겨찾기 목록에서 제거
+                Log.d("Favorite Palette",selectedPalette.toString())
             }
         }
     }
