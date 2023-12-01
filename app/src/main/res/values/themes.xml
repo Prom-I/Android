@@ -15,6 +15,9 @@
         <item name="android:windowLightStatusBar">true</item>
 
         <item name="colorPrimary">@color/mainGreen</item>
+
+        <item name="colorControlActivated">@color/mainGreen</item> <!-- 선택됐을 때의 색상 -->
+        <item name="colorControlNormal">@color/white</item> <!-- 기본 상태의 색상 -->
     </style>
 
     <style name="MyTimePickerTheme" parent="android:Widget.Material.Light.TimePicker">
