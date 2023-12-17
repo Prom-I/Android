@@ -46,7 +46,7 @@
             android:id="@+id/tv_friend_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_regular_400"
             android:textColor="@color/black"
             android:textSize="15sp"
             tools:text="이자민" />
@@ -55,7 +55,7 @@
             android:id="@+id/tv_friend_code"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/pretendard_regular"
+            android:fontFamily="@font/pretendard_regular_400"
             android:textColor="@color/black"
             android:textSize="10sp"
             tools:text="#1234" />
