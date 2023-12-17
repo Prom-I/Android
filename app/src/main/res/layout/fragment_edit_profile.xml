@@ -110,21 +110,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="26dp"
-            android:layout_marginBottom="4dp"
             android:text="현재 소속된 그룹"
-            app:layout_constraintBottom_toTopOf="@+id/recyclerView_group_included"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView_group_included"
+            android:id="@+id/list_group_included"
             android:layout_width="0dp"
             android:layout_height="380dp"
             android:layout_marginStart="19dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="26dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
             tools:listitem="@layout/item_group_included" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

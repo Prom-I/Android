@@ -18,6 +18,8 @@ class EditProfileFragment : Fragment() {
     private lateinit var tvNameCounter : TextView
     private lateinit var etEditName : EditText
 
+    private lateinit var includedGroupAdapter: IncludedGroupAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -56,5 +58,19 @@ class EditProfileFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        includedGroupAdapter = IncludedGroupAdapter()
+
+        binding.listGroupIncluded.adapter = includedGroupAdapter
+
+        includedGroupAdapter.setItemClickListener(object : IncludedGroupAdapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                SelectGroupScopeDialog().show(parentFragmentManager, "SelectGroupScopeDialog")
+            }
+        })
     }
 }
