@@ -5,5 +5,11 @@ import com.promi.base.BaseBottomSheetDialog
 import com.promi.databinding.DialogInformationTodoScopeBinding
 
 class MyInformationTodoScopeDialog:BaseBottomSheetDialog<DialogInformationTodoScopeBinding> (R.layout.dialog_information_todo_scope) {
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
+        binding.btnEditScope.setOnClickListener {
+            dismiss()
+        }
+    }
 }
