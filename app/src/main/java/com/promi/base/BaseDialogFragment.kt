@@ -34,7 +34,6 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
 
         // false : 화면 밖 터치 혹은 뒤로가기 버튼 누를 시 dismiss 안됨
         isCancelable = true
@@ -47,8 +46,8 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
 
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 둥근 모서리 적용
-        //dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE) //android version 4.4 이하에서 blue line 생기는거 방지
+        dialog!!.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 둥근 모서리 적용
+        dialog!!.window!!.setDimAmount(0.7F)
 
         return binding.root
     }
@@ -61,12 +60,6 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
         initStartView()
         initDataBinding()
         initAfterBinding()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        dialog?.window?.setDimAmount(0.7F)
     }
 
     // 다이얼로그 크기
