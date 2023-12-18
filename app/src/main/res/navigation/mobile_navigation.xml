@@ -42,6 +42,9 @@
         <action
             android:id="@+id/action_navigation_my_information_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_navigation_my_information_to_paletteListFragment"
+            app:destination="@id/paletteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_add_friends"
@@ -89,4 +92,9 @@
         android:name="com.promi.ui.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/paletteListFragment"
+        android:name="com.promi.ui.myInformation.PaletteListFragment"
+        android:label="fragment_palette_list"
+        tools:layout="@layout/fragment_palette_list" />
 </navigation>

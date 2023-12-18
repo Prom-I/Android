@@ -4,16 +4,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="104dp"
-        android:layout_height="104dp"
-        android:layout_marginTop="70dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_promise_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/shape_circle"
-        app:tint="@color/mainGreen" />
+        android:layout_marginTop="105dp"
+        android:backgroundTint="@color/mainGreen"
+        app:cardCornerRadius="40dp">
+
+        <ImageView
+            android:id="@+id/iv_promise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/promise_default_image"/>
+
+    </androidx.cardview.widget.CardView>
+
+
 
     <EditText
         android:id="@+id/etv_promise_name"
@@ -27,7 +39,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@id/cardview_promise_image" />
 
     <TextView
         android:id="@+id/tv_promise_name_example"
