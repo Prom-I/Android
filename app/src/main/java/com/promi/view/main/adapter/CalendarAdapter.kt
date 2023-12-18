@@ -17,14 +17,14 @@ import java.util.Date
 import java.util.Locale
 
 // 높이를 구하는데 필요한 LinearLayout과 DateCalendar를 사용할 때 필요한 date를 받는다.
-class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, val thisMonth:Int) :
+class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, val isThisMonth: Boolean) :
     RecyclerView.Adapter<CalendarAdapter.CalendarItemHolder>() {
     lateinit var context: Context
 
     // CalendarDate를 이용하여 날짜 리스트 세팅
     var dateCalendar: DateCalendar = DateCalendar(date)
-    lateinit var year: String
-    lateinit var month: String
+    var year: String
+    var month: String
     var dateData: ArrayList<Int> = arrayListOf()
 
     // 할 일 데이터
@@ -61,7 +61,7 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
             }
             else{
                 // 오늘 날짜 처리
-                if (thisMonth==1 && dateData[position] == dateInt) {
+                if (isThisMonth && dateData[position] == dateInt) {
                     itemCalendarDateText.setTextColor(ContextCompat.getColor(context!!,
                         R.color.mainGreen
                     ))
