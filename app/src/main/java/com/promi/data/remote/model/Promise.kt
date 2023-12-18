@@ -1,4 +1,4 @@
-package com.promi.recyclerview.promise
+package com.promi.data.remote.model
 
 data class Promise (
     var promiseName : String = "", // 약속 이름

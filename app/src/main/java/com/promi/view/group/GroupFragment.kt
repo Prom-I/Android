@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
-import com.promi.recyclerview.promise.PromiseRecyclerViewAdapter
+import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.ui.group.GroupViewModel
 
 class GroupFragment : Fragment() {

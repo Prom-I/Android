@@ -14,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.databinding.FragmentPaletteListBinding
-import com.promi.recyclerview.palette.PaletteRecyclerViewAdapter
+import com.promi.view.palette.PaletteRecyclerViewAdapter
 import com.promi.viewmodel.myinformation.MyInformationViewModel
 
 

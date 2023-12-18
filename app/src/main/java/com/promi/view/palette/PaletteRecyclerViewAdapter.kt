@@ -1,4 +1,4 @@
-package com.promi.recyclerview.palette
+package com.promi.view.palette
 
 import android.content.res.ColorStateList
 import android.util.Log
@@ -11,6 +11,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.data.remote.model.Palette
 import com.promi.viewmodel.myinformation.MyInformationViewModel
 
 // viewModel을 매개변수로 받아, 사용자가 즐겨찾기에 등록할경우 값 변경

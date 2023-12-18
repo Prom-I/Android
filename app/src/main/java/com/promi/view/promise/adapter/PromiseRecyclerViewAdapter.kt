@@ -1,4 +1,4 @@
-package com.promi.recyclerview.promise
+package com.promi.view.promise.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.data.remote.model.Promise
 
 // 그룹에 포함된 약속 목록들
 class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
