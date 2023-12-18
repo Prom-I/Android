@@ -42,6 +42,10 @@ android {
 }
 
 dependencies {
+    // retrofit2
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    // Gson 변환기
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
     //material-button
     implementation("com.google.android.material:material:1.10.0")

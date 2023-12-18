@@ -1,22 +1,13 @@
 package com.promi.view.notification.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.data.remote.model.Notification
-import com.promi.databinding.ItemNotificationBinding
 import com.promi.databinding.ItemNotificationFriendRequestBinding
-import com.promi.recyclerview.friend.Friend
-import com.promi.ui.group.FriendViewModel
-import com.promi.ui.notification.NotificationViewModel
 
 class NotificationAdapter(
     private val notificationDeleteEvent: (Notification) -> Unit
