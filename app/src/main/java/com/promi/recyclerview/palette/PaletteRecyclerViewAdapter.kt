@@ -11,11 +11,12 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
-import com.promi.ui.myInformation.MyInformationViewModel
+import com.promi.viewmodel.myinformation.MyInformationViewModel
 
 // viewModel을 매개변수로 받아, 사용자가 즐겨찾기에 등록할경우 값 변경
 class PaletteRecyclerViewAdapter(
-    private var viewModel : MyInformationViewModel)
+    private var viewModel : MyInformationViewModel
+)
     : RecyclerView.Adapter<PaletteRecyclerViewAdapter.PaletteViewHolder>(){
 
     private var paletteList = emptyList<Palette>()

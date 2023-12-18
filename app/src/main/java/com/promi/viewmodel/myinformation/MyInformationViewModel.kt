@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.promi.data.remote.model.Friend
-import com.promi.recyclerview.friend.Friend
 import com.promi.recyclerview.palette.Palette
 
 class MyInformationViewModel : ViewModel() {
