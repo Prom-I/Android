@@ -45,7 +45,7 @@
 
 
         <!--좋아요 버튼-->
-        <RadioButton
+        <CheckBox
             android:id="@+id/btn_great"
             android:layout_width="50dp"
             android:layout_height="26dp"
