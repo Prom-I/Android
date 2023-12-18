@@ -7,7 +7,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.friend.AddFriendsFragment">
+        tools:context=".view.friend.AddFriendsFragment">
 
         <TextView
             android:id="@+id/tv_title"

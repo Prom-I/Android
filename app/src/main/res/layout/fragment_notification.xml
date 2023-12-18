@@ -6,7 +6,7 @@
     android:id="@+id/notification_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.notification.NotificationFragment">
+    tools:context=".view.notification.NotificationFragment">
 
     <TextView
         android:id="@+id/tv_notification_title"

@@ -6,19 +6,17 @@ import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.os.Vibrator
-import android.speech.tts.TextToSpeech
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.promi.R
 
 abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val layoutResourceId: Int) :
     DialogFragment() {
@@ -72,7 +70,7 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
     }
 
     // 다이얼로그 크기
-    fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {
+    protected fun Context.dialogFragmentResize(dialogFragment: DialogFragment, width: Float, height: Float) {
         val windowManager = getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
         if (Build.VERSION.SDK_INT < 30) {
@@ -95,4 +93,10 @@ abstract class BaseDialogFragment <B: ViewDataBinding> (@LayoutRes private  val 
             window?.setLayout(x, y)
         }
     }
+
+    protected fun shortToast(msg: String) =
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+
+    protected fun longToast(msg: String) =
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show()
 }
