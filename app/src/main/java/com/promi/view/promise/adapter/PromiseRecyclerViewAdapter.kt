@@ -57,7 +57,7 @@ class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val context = parent.context
         val progressPromiseView = LayoutInflater.from(context).inflate(R.layout.item_promise,parent,false)
-        val endedPromiseView = LayoutInflater.from(context).inflate(R.layout.item_promise_done,parent,false)
+        val endedPromiseView = LayoutInflater.from(context).inflate(R.layout.item_recommend_time,parent,false)
 
         // 타입을 보고 리턴할 뷰홀더 결정
         return if(viewType == PROGRESS){ // 진행중이라면
