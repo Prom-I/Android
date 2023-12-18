@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="com.promi.ui.main.MainFragment"
+        android:name="com.promi.view.main.MainFragment"
         android:label="@string/calendar"
         tools:layout="@layout/fragment_main" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/navigation_promise"
-        android:name="com.promi.ui.promise.PromiseFragment"
+        android:name="com.promi.view.promise.PromiseFragment"
         android:label="@string/promise"
         tools:layout="@layout/fragment_promise" >
         <action
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/navigation_my_information"
-        android:name="com.promi.ui.myInformation.MyInformationFragment"
+        android:name="com.promi.view.myInformation.MyInformationFragment"
         android:label="@string/my_information"
         tools:layout="@layout/fragment_my_information" >
         <action
@@ -48,12 +48,12 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_add_friends"
-        android:name="com.promi.ui.friend.AddFriendsFragment"
+        android:name="com.promi.view.friend.AddFriendsFragment"
         android:label="fragment_add_friends"
         tools:layout="@layout/fragment_add_friends" />
     <fragment
         android:id="@+id/navigation_create_group"
-        android:name="com.promi.ui.group.CreateGroupFragment"
+        android:name="com.promi.view.group.CreateGroupFragment"
         android:label="CreateGroupFragment" >
         <action
             android:id="@+id/action_navigation_create_group_to_groupSettingFragment"
@@ -61,21 +61,21 @@
     </fragment>
     <fragment
         android:id="@+id/myFriendListFragment"
-        android:name="com.promi.ui.myInformation.MyFriendListFragment"
+        android:name="com.promi.view.myInformation.MyFriendListFragment"
         android:label="fragment_my_friend_list"
         tools:layout="@layout/fragment_my_friend_list" />
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.promi.ui.myInformation.EditProfileFragment"
+        android:name="com.promi.view.myInformation.EditProfileFragment"
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
         android:id="@+id/groupSettingFragment"
-        android:name="com.promi.ui.group.GroupSettingFragment"
+        android:name="com.promi.view.group.GroupSettingFragment"
         android:label="GroupSettingFragment" />
     <fragment
         android:id="@+id/groupFragment"
-        android:name="com.promi.ui.group.GroupFragment"
+        android:name="com.promi.view.group.GroupFragment"
         android:label="fragment_group"
         tools:layout="@layout/fragment_group" >
         <action
@@ -84,12 +84,12 @@
     </fragment>
     <fragment
         android:id="@+id/createPromiseFragment"
-        android:name="com.promi.ui.promise.CreatePromiseFragment"
+        android:name="com.promi.view.promise.CreatePromiseFragment"
         android:label="fragment_create_promise"
         tools:layout="@layout/fragment_create_promise" />
     <fragment
         android:id="@+id/navigation_notification"
-        android:name="com.promi.ui.notification.NotificationFragment"
+        android:name="com.promi.view.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment

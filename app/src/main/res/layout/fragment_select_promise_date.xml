@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainGreen"
-    tools:context=".ui.promise.SelectPromiseDateFragment">
+    tools:context=".view.promise.SelectPromiseDateFragment">
 
     <TextView
         android:layout_width="match_parent"
