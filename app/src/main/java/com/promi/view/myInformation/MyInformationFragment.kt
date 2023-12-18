@@ -36,6 +36,11 @@ class MyInformationFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_my_information_to_editProfileFragment)
         }
 
+        // 형관펜 목록 클릭시
+        binding.constraintBtnPaletteList.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_my_information_to_paletteListFragment)
+        }
+
 
 
         return binding.root

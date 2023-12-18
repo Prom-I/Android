@@ -1,19 +1,28 @@
 package com.promi.view.notification.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.data.remote.model.Notification
 import com.promi.databinding.ItemNotificationBinding
+import com.promi.databinding.ItemNotificationFriendRequestBinding
+import com.promi.recyclerview.friend.Friend
+import com.promi.ui.group.FriendViewModel
+import com.promi.ui.notification.NotificationViewModel
 
 class NotificationAdapter(
     private val notificationDeleteEvent: (Notification) -> Unit
 ): ListAdapter<Notification, NotificationAdapter.NotificationViewHolder>(NotificationDiffUtil) {
 
-    inner class NotificationViewHolder(private val binding: ItemNotificationBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class NotificationViewHolder(private val binding: ItemNotificationFriendRequestBinding) : RecyclerView.ViewHolder(binding.root) {
 
             fun bind(notification: Notification){
                 val deleteClickListener = View.OnClickListener { notificationDeleteEvent(notification) }
@@ -28,7 +37,7 @@ class NotificationAdapter(
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationViewHolder {
-            val binding = ItemNotificationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            val binding = ItemNotificationFriendRequestBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return NotificationViewHolder(binding)
         }
 
