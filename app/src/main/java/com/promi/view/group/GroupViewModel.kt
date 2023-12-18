@@ -3,7 +3,7 @@ package com.promi.ui.group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.promi.recyclerview.promise.Promise
+import com.promi.data.remote.model.Promise
 
 class GroupViewModel : ViewModel() {
     // promise

@@ -14,7 +14,7 @@ import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
 import com.promi.data.remote.model.Group
 import com.promi.view.group.adapter.GroupRecyclerViewAdapterWithItemHelper
-import com.promi.view.group.adapter.ItemTouchHelperCallback
+import com.promi.util.ItemTouchHelperCallback
 import com.promi.viewmodel.promise.PromiseViewModel
 
 class PromiseFragment : Fragment() {

@@ -1,4 +1,4 @@
-package com.promi.recyclerview.palette
+package com.promi.data.remote.model
 
 data class Palette(
     val paletteTitle : String = "",
