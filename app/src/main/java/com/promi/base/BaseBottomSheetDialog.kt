@@ -35,7 +35,9 @@ abstract class BaseBottomSheetDialog<B: ViewDataBinding> (@LayoutRes private  va
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, layoutResourceId, container, false)
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT)) // 둥근 모서리 적용
+        dialog!!.window!!.setDimAmount(0.7F)
 
         return binding.root
     }
