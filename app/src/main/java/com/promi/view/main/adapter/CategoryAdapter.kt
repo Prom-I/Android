@@ -40,7 +40,7 @@ class CategoryAdapter() :
     override fun getItemCount(): Int { return itemList.size}
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        if (position % 2 == 0)
+        if (position % 2 == 1)
             holder.dividerHorizontal.visibility = View.GONE
 
         // (1) 리스트 내 항목 클릭 시 onClick() 호출
