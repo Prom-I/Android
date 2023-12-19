@@ -23,7 +23,6 @@ abstract class BaseBottomSheetDialog<B: ViewDataBinding> (@LayoutRes private  va
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
 
         // false : 화면 밖 터치 혹은 뒤로가기 버튼 누를 시 dismiss 안됨
         isCancelable = true
