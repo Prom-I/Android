@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_calendar_date"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/shape_circle_stroke1">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/item_calendar_date_text"

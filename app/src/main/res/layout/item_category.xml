@@ -2,15 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layout_category"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
         android:background="@drawable/shape_radius8"
+        android:backgroundTint="@color/mainLightGray"
         android:padding="14dp"
+        app:layout_constraintBottom_toTopOf="@id/divider_vertical"
+        app:layout_constraintEnd_toStartOf="@+id/divider_horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:fontFamily="@font/pretendard_regular_400"
+            android:fontFamily="@font/pretendard_medium_500"
             android:text="카테고리 1"
             android:textColor="@color/mainRed"
             android:textSize="15sp"
@@ -43,16 +46,16 @@
         android:id="@+id/divider_vertical"
         android:layout_width="0dp"
         android:layout_height="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/layout_category"
-        app:layout_constraintStart_toStartOf="@+id/layout_category"
-        app:layout_constraintTop_toBottomOf="@+id/layout_category" />
+        app:layout_constraintStart_toStartOf="@+id/layout_category" />
 
     <View
         android:id="@+id/divider_horizontal"
         android:layout_width="8dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="@+id/layout_category"
-        app:layout_constraintStart_toEndOf="@+id/layout_category"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/layout_category" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

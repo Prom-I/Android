@@ -4,7 +4,7 @@ import com.promi.R
 import com.promi.base.BaseDialogFragment
 import com.promi.databinding.DialogTodoBinding
 
-class TodoDialog( private val month: String, private val date: String, private val day: String)
+class TodoDialog(private val month: String, private val date: String, private val day: String)
     :BaseDialogFragment<DialogTodoBinding> (R.layout.dialog_todo) {
 
     override fun initDataBinding() {
@@ -17,7 +17,7 @@ class TodoDialog( private val month: String, private val date: String, private v
         super.initAfterBinding()
 
         binding.btnAddTodo.setOnClickListener {
-            CategoryDialog().show(parentFragmentManager, "CategoryDialog")
+            CategoryDialog(month, date, day).show(parentFragmentManager, "CategoryDialog")
         }
     }
 }
