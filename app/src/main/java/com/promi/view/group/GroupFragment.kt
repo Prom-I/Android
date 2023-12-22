@@ -1,5 +1,7 @@
 package com.promi.view.group
 
+import android.content.Context
+import android.graphics.Canvas
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -11,13 +13,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.ui.group.GroupViewModel
+import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 
+
+// 그룹에 어떤 약속이 있는지 확인
 class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
@@ -26,7 +32,6 @@ class GroupFragment : Fragment() {
     private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
 
     private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +61,8 @@ class GroupFragment : Fragment() {
             findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
         }
 
-        //promiseRecyclerviewAdapter.setList(groupViewModel.promises)
-        //현재 약속 목록 observe
+        // promiseRecyclerviewAdapter.setList(groupViewModel.promises)
+        // 현재 약속 목록 observe
         groupViewModel.promises.observe(viewLifecycleOwner) { promise ->
             promiseRecyclerviewAdapter.updateData(promise)
         }
@@ -67,7 +72,7 @@ class GroupFragment : Fragment() {
         return binding.root
     }
 
-
+    // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
         promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
