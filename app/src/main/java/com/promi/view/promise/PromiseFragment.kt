@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
 import com.promi.data.remote.model.Group
-import com.promi.view.group.adapter.GroupRecyclerViewAdapterWithItemHelper
+import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.util.ItemTouchHelperCallback
 import com.promi.viewmodel.promise.PromiseViewModel
 
@@ -29,7 +29,7 @@ class PromiseFragment : Fragment() {
     lateinit var recyclerViewGroup : RecyclerView
 
     //recycler view adapter
-    lateinit var recyclerViewAdapterWithItemHelper: GroupRecyclerViewAdapterWithItemHelper
+    lateinit var recyclerViewAdapterWithItemHelper: GroupRecyclerViewAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,7 +70,7 @@ class PromiseFragment : Fragment() {
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
     fun setAdapter(groups: MutableList<Group>){
         recyclerViewGroup.layoutManager = LinearLayoutManager(this.context)
-        recyclerViewAdapterWithItemHelper = GroupRecyclerViewAdapterWithItemHelper(findNavController(),groups)
+        recyclerViewAdapterWithItemHelper = GroupRecyclerViewAdapter(findNavController(),groups)
         recyclerViewGroup.adapter = recyclerViewAdapterWithItemHelper
 
         // 리스너를 구현한 Adapter 클래스를 Callback 클래스의 생성자로 지정

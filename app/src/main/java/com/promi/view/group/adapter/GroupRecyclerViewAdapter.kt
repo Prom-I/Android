@@ -14,10 +14,10 @@ import com.promi.data.remote.model.Group
 import com.promi.util.ItemTouchHelperListener
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
-class GroupRecyclerViewAdapterWithItemHelper(
+class GroupRecyclerViewAdapter(
     private var navController: NavController,
     private var groups: MutableList<Group>):
-    RecyclerView.Adapter<GroupRecyclerViewAdapterWithItemHelper.ViewHolder>(),
+    RecyclerView.Adapter<GroupRecyclerViewAdapter.ViewHolder>(),
     ItemTouchHelperListener {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
