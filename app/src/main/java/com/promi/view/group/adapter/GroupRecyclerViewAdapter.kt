@@ -20,7 +20,7 @@ import com.promi.viewmodel.promise.PromiseViewModel
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
 class GroupRecyclerViewAdapter(
     private var navController: NavController,
-    viewModel : PromiseViewModel):
+    var viewModel : PromiseViewModel):
     RecyclerView.Adapter<GroupRecyclerViewAdapter.ViewHolder>(){
 
     private var groups = emptyList<Group>()
@@ -55,12 +55,13 @@ class GroupRecyclerViewAdapter(
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         //아이템 뷰 레이아웃 가져오기
         val view = inflater.inflate(R.layout.item_group, parent, false)
-
         return ViewHolder(view)
     }
 
     // 뷰 홀더에 위치한 뷰에 값 할당(항목 초기화)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.itemView.scrollTo(0, 0) // 스와이프 상태 초기화 (삭제 이후 뷰 아이템의 스와이프 메뉴 활성화를 초기화)
+
         val group: Group = groups[position]
         holder.tvGroupName.text = group.groupName
         holder.tvGroupMemberCount.text = group.groupMemberCount.toString()
@@ -84,6 +85,7 @@ class GroupRecyclerViewAdapter(
         holder.btnDelete.setOnClickListener {
             // 아이템 삭제 로직 작성 필요
             Log.d("Swipe Delete","$position")
+            viewModel.deleteGroup(group)
         }
     }
 
