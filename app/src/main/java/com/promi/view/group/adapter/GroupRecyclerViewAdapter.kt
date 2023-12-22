@@ -2,11 +2,13 @@ package com.promi.view.group.adapter
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
@@ -22,11 +24,14 @@ class GroupRecyclerViewAdapter(
         // var tvGroupImage : ImageView 그룹 이미지
         var tvGroupName: TextView // 그룹의 이름
         var tvGroupMemberCount: TextView // 전체 인원수
+        var constraintItemContainer : ConstraintLayout // 아이템이 존재하는 영역
         // 삭제 버튼
         var btnDelete : Button // 삭제 버튼
         init { //innerClass의 생성자에 해당 => 뷰의 레이아웃 가져오기 => 화면에 붙이기 위한 하나의 뷰를 만드는 과정에 해당
             tvGroupName = itemView.findViewById(R.id.tv_group_name)
             tvGroupMemberCount = itemView.findViewById(R.id.tv_group_count)
+            // 이 영역이 클릭된 경우에만 아이템 클릭 이벤트 활성화(삭제 메뉴 영역과 분리하기 위해)
+            constraintItemContainer = itemView.findViewById(R.id.constraint_item_container) // 아이템 영역
             btnDelete = itemView.findViewById(R.id.btn_delete)
         }
     }
@@ -49,23 +54,41 @@ class GroupRecyclerViewAdapter(
         holder.tvGroupName.text = group.groupName
         holder.tvGroupMemberCount.text = group.groupMemberCount.toString()
 
-        // 아이템 클릭 이벤트 작성
-        holder.itemView.setOnClickListener {
-            // 그룹 화면으로 이동
-            // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?)
-            val bundle = Bundle()
-            bundle.putString("groupName", holder.tvGroupName.text as String)
-            navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
+        // 아이템 클릭 이벤트 작성 => 아이템 영역이 클릭된 경우에 한해서
+        holder.constraintItemContainer.setOnClickListener {
+            Log.d("Swipe Delete","isSwipe is $isSwipe")
+            // 스와이프 된 상태에서 클릭 되는 경우는 제한해야함 => isSwipe가 false인 경우에만 터치 이벤트 허용
+            if (!isSwipe) {
+                // 그룹 화면으로 이동
+                // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?
+                val bundle = Bundle()
+                bundle.putString("groupName", holder.tvGroupName.text as String)
+                navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
+            } else {
+                Log.d("Swipe Delete","isSwipe is $isSwipe")
+            }
         }
 
         // 삭제 버튼 이벤트
         holder.btnDelete.setOnClickListener {
             // 아이템 삭제 로직 작성 필요
+            Log.d("Swipe Delete","$position")
         }
     }
 
     override fun getItemCount(): Int {
         return groups.size
+    }
+
+    // 모든 아이템들이 같은 값을 공유하도록 static으로 작성
+    companion object {
+        // 어떠한 아이템 중 하나라도 스와이프 된 상태라면 클릭 이벤트 허용 x
+        private var isSwipe : Boolean = false
+
+        // 현재 셀이 스와이프 상태인지 확인하기 위함
+        fun setSwipeState(state : Boolean){
+            this.isSwipe = state
+        }
     }
 
 }

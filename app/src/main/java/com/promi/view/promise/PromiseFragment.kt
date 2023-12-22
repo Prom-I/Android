@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
 import com.promi.data.remote.model.Group
+import com.promi.ui.group.GroupViewModel
 import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.viewmodel.promise.PromiseViewModel
 
@@ -37,8 +38,8 @@ class PromiseFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val promiseViewModel =
-            ViewModelProvider(this).get(PromiseViewModel::class.java)
+        val groupViewModel =
+            ViewModelProvider(this).get(GroupViewModel::class.java)
 
         _binding = FragmentPromiseBinding.inflate(inflater, container, false)
 
@@ -154,6 +155,8 @@ class PromiseFragment : Fragment() {
                 // 현재 엑션이 스와이프인지 확인(드래그인 경우에는 동작하지 않음)
                 // 스와이프 상태인 경우에 한해 아래 동작 수행
                 if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
+                    // 스와이프 상태임을 어뎁터에 알림
+                    GroupRecyclerViewAdapter.setSwipeState(true)
                     // 스와이프가 시작될 때 한 번만 실행됨
                     // 1. 스와이프 시작(손가락이 화면에 닿았음)
                     // 사용자가 항목을 선택하고 손을 댔을때 dx의 시점이 0이라면(리셋이후 스와이프 엑션을 시작한다면)
@@ -196,6 +199,11 @@ class PromiseFragment : Fragment() {
                             // 사용자가 손을 뗀 순간부터 항목이 어떻게 스크롤되어야 할지를 결정함.
                             // 스와이프 제한에 도달하지 않았다면, 계산된 비율에 따라 항목을 천천히 원래 위치로 되돌림
                             viewHolder.itemView.scrollTo((currentScrollXWhenInActive * dX/initXWhenInActive).toInt(),0)
+                        }
+
+                        // 완벽하게 초기 상태로 되돌아 온 경우에 스와이프 상태가 취소되었음을 어뎁터에 알림
+                        if(dX == 0f){
+                            GroupRecyclerViewAdapter.setSwipeState(false)
                         }
                     }
                 }
