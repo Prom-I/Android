@@ -25,6 +25,7 @@ class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     // 가져온 뷰에서 사용되는 레이아웃 정의
+    // 진행중인 약속
     inner class ProgressPomiseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvPromisePeriod: TextView = itemView.findViewById(R.id.tv_promise_period) // tv_promise_period
         val tvPromiseName : TextView = itemView.findViewById(R.id.tv_promise_name) // tv_promise_name
@@ -32,6 +33,7 @@ class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
         val tvDdayCount : TextView = itemView.findViewById(R.id.tv_dday_count) // tv_dday_count => d-day가 실질적으로 표시되는 부분
     }
 
+    // 끝난 약속
     inner class EndedPromiseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         val tvPromisePeriod: TextView = itemView.findViewById(R.id.tv_promise_period) // tv_promise_period
         val tvPromiseName : TextView = itemView.findViewById(R.id.tv_promise_name) // tv_promise_name
@@ -57,7 +59,7 @@ class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val context = parent.context
         val progressPromiseView = LayoutInflater.from(context).inflate(R.layout.item_promise,parent,false)
-        val endedPromiseView = LayoutInflater.from(context).inflate(R.layout.item_recommend_time,parent,false)
+        val endedPromiseView = LayoutInflater.from(context).inflate(R.layout.item_promise_done,parent,false)
 
         // 타입을 보고 리턴할 뷰홀더 결정
         return if(viewType == PROGRESS){ // 진행중이라면

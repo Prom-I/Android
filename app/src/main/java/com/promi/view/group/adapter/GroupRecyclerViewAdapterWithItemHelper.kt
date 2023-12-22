@@ -15,8 +15,8 @@ import com.promi.util.ItemTouchHelperListener
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
 class GroupRecyclerViewAdapterWithItemHelper(
-    var navController: NavController,
-    var groups: MutableList<Group>):
+    private var navController: NavController,
+    private var groups: MutableList<Group>):
     RecyclerView.Adapter<GroupRecyclerViewAdapterWithItemHelper.ViewHolder>(),
     ItemTouchHelperListener {
 

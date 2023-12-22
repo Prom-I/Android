@@ -18,6 +18,8 @@ import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.ui.group.GroupViewModel
 
+
+// 그룹에 어떤 약속이 있는지 확인
 class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
