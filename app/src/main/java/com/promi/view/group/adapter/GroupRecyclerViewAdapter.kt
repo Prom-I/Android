@@ -13,12 +13,23 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.data.remote.model.Group
+import com.promi.data.remote.model.Palette
+import com.promi.ui.group.GroupViewModel
+import com.promi.viewmodel.promise.PromiseViewModel
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
 class GroupRecyclerViewAdapter(
     private var navController: NavController,
-    private var groups: MutableList<Group>):
+    viewModel : PromiseViewModel):
     RecyclerView.Adapter<GroupRecyclerViewAdapter.ViewHolder>(){
+
+    private var groups = emptyList<Group>()
+
+    // 어뎁터에서 사용할 리스트 값 할당
+    fun setGroupList(groups : List<Group>){
+        this.groups = groups
+        notifyDataSetChanged()
+    }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // var tvGroupImage : ImageView 그룹 이미지

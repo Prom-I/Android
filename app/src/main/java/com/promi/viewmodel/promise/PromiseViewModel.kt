@@ -9,8 +9,7 @@ import com.promi.data.remote.model.Notification
 class PromiseViewModel : ViewModel() {
     private val groupList = mutableListOf<Group>()
     private val _groupLiveData: MutableLiveData<List<Group>> = MutableLiveData()
-    val groupLiveData: LiveData<List<Group>>
-        get() = _groupLiveData
+    val groupLiveData: LiveData<List<Group>> = _groupLiveData
 
 
     init {

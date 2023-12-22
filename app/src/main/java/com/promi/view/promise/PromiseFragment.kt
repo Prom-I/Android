@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -14,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentPromiseBinding
-import com.promi.data.remote.model.Group
-import com.promi.ui.group.GroupViewModel
 import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.viewmodel.promise.PromiseViewModel
 
@@ -39,18 +38,23 @@ class PromiseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val groupViewModel =
-            ViewModelProvider(this).get(GroupViewModel::class.java)
+            ViewModelProvider(this)[PromiseViewModel::class.java] // Promise Fragment에 대한 뷰 모델
 
         _binding = FragmentPromiseBinding.inflate(inflater, container, false)
 
         groupRecyclerView = binding.recyclerviewGroup //그룹 리사이클러뷰에 대한 참조
-        var groups = initGroupDTOArray() //더미데이터 생성
-        setAdapter(groups) //어댑터 붙이기
+
+        setAdapter(groupViewModel) //어댑터 붙이기
 
         setItemTouchHelper() // 리사이클러뷰에 아이템터치헬퍼 부착 => 스와이프 메뉴 기능
 
+        // LiveData Observer 설정 => 변화 발생시 반영
+        groupViewModel.groupLiveData.observe(viewLifecycleOwner, Observer {groups ->
+            groupRecyclerViewAdapter.setGroupList(groups)
+        })
 
-        //그룹 생성
+
+        // 그룹 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
         }
@@ -59,22 +63,10 @@ class PromiseFragment : Fragment() {
         return binding.root
     }
 
-    fun initGroupDTOArray(): MutableList<Group> {
-        return mutableListOf(
-            Group("투밋투미",9),
-            Group("공학경진대회",4),
-            Group("캡스톤 디자인",4),
-            Group("안드로이드 스터디",3),
-            Group("코딩테스트 스터디",2),
-            Group("iOS 스터디",4),
-        )
-
-    }
-
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
-    fun setAdapter(groups: MutableList<Group>){
+    fun setAdapter(viewModel: PromiseViewModel){
         groupRecyclerView.layoutManager = LinearLayoutManager(this.context)
-        groupRecyclerViewAdapter = GroupRecyclerViewAdapter(findNavController(),groups)
+        groupRecyclerViewAdapter = GroupRecyclerViewAdapter(findNavController(),viewModel)
         groupRecyclerView.adapter = groupRecyclerViewAdapter
     }
 
