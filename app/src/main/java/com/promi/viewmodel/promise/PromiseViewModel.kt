@@ -11,6 +11,8 @@ class PromiseViewModel : ViewModel() {
     private val _groupLiveData: MutableLiveData<List<Group>> = MutableLiveData()
     val groupLiveData: LiveData<List<Group>> = _groupLiveData
 
+    // 아이템 중 하나가 스와이프된 상태라면, 다른 아이템은 스와이프 할 수 없어야하므로
+    private var itemSwipeState : Boolean = false
 
     init {
         // 그룹 더미 데이터
@@ -22,6 +24,16 @@ class PromiseViewModel : ViewModel() {
 
 
         _groupLiveData.value = groupList
+    }
+
+    // 아이템 스와이프 상태 반환
+    fun getItemSwipeState() : Boolean{
+        return this.itemSwipeState
+    }
+
+    // 아이템 스와이프 상태 활성화/비활성화
+    fun setItemSwipeState(state : Boolean){
+        this.itemSwipeState = state
     }
 
     // 그룹 삭제 이벤트

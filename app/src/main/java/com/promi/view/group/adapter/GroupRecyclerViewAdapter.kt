@@ -68,16 +68,16 @@ class GroupRecyclerViewAdapter(
 
         // 아이템 클릭 이벤트 작성 => 아이템 영역이 클릭된 경우에 한해서
         holder.constraintItemContainer.setOnClickListener {
-            Log.d("Swipe Delete","isSwipe is $isSwipe")
+
             // 스와이프 된 상태에서 클릭 되는 경우는 제한해야함 => isSwipe가 false인 경우에만 터치 이벤트 허용
-            if (!isSwipe) {
+            if (!viewModel.getItemSwipeState()) {
                 // 그룹 화면으로 이동
                 // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?
                 val bundle = Bundle()
                 bundle.putString("groupName", holder.tvGroupName.text as String)
                 navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
             } else {
-                Log.d("Swipe Delete","isSwipe is $isSwipe")
+                Log.d("Swipe State", "${viewModel.getItemSwipeState()}")
             }
         }
 
@@ -91,17 +91,6 @@ class GroupRecyclerViewAdapter(
 
     override fun getItemCount(): Int {
         return groups.size
-    }
-
-    // 모든 아이템들이 같은 값을 공유하도록 static으로 작성
-    companion object {
-        // 어떠한 아이템 중 하나라도 스와이프 된 상태라면 클릭 이벤트 허용 x
-        private var isSwipe : Boolean = false
-
-        // 현재 셀이 스와이프 상태인지 확인하기 위함
-        fun setSwipeState(state : Boolean){
-            this.isSwipe = state
-        }
     }
 
 }

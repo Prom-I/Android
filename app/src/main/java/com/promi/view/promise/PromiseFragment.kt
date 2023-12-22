@@ -32,12 +32,13 @@ class PromiseFragment : Fragment() {
     //recycler view adapter
     private lateinit var groupRecyclerViewAdapter: GroupRecyclerViewAdapter
 
+    private lateinit var groupViewModel: PromiseViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val groupViewModel =
+        groupViewModel =
             ViewModelProvider(this)[PromiseViewModel::class.java] // Promise Fragment에 대한 뷰 모델
 
         _binding = FragmentPromiseBinding.inflate(inflater, container, false)
@@ -147,8 +148,8 @@ class PromiseFragment : Fragment() {
                 // 현재 엑션이 스와이프인지 확인(드래그인 경우에는 동작하지 않음)
                 // 스와이프 상태인 경우에 한해 아래 동작 수행
                 if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-                    // 스와이프 상태임을 어뎁터에 알림
-                    GroupRecyclerViewAdapter.setSwipeState(true)
+                    // 스와이프 상태를 뷰 모델에 저장
+                    groupViewModel.setItemSwipeState(true)
                     // 스와이프가 시작될 때 한 번만 실행됨
                     // 1. 스와이프 시작(손가락이 화면에 닿았음)
                     // 사용자가 항목을 선택하고 손을 댔을때 dx의 시점이 0이라면(리셋이후 스와이프 엑션을 시작한다면)
@@ -193,9 +194,9 @@ class PromiseFragment : Fragment() {
                             viewHolder.itemView.scrollTo((currentScrollXWhenInActive * dX/initXWhenInActive).toInt(),0)
                         }
 
-                        // 완벽하게 초기 상태로 되돌아 온 경우에 스와이프 상태가 취소되었음을 어뎁터에 알림
+                        // 완벽하게 초기 상태로 되돌아 온 경우에 스와이프 상태가 취소되었음을 뷰모델에 알림
                         if(dX == 0f){
-                            GroupRecyclerViewAdapter.setSwipeState(false)
+                            groupViewModel.setItemSwipeState(false)
                         }
                     }
                 }
