@@ -54,29 +54,41 @@ class PromiseFragment : Fragment() {
             groupRecyclerViewAdapter.setGroupList(groups)
         })
 
-
         // 그룹 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
         }
 
 
+        // 약속 버튼, 그룹 버튼 클릭 여부에 따라 보여줄 항목을 다르게 지정
+
+        // 약속 보여 주기
+        binding.btnShowPromise.setOnClickListener {
+
+        }
+
+        // 그룹 보여 주기
+        binding.btnShowGroup.setOnClickListener {
+
+        }
+
         return binding.root
     }
 
     //리사이클러뷰에 리사이클러뷰 어댑터 부착
-    fun setAdapter(viewModel: PromiseViewModel){
+    private fun setAdapter(viewModel: PromiseViewModel){
         groupRecyclerView.layoutManager = LinearLayoutManager(this.context)
         groupRecyclerViewAdapter = GroupRecyclerViewAdapter(findNavController(),viewModel)
         groupRecyclerView.adapter = groupRecyclerViewAdapter
     }
 
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
+
+
 
     // 리사이클러뷰에 적용할 스와이프 이벤트 정의
     private fun setItemTouchHelper(){

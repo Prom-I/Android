@@ -1,7 +1,5 @@
 package com.promi.view.group
 
-import android.content.Context
-import android.graphics.Canvas
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.Spannable
@@ -13,14 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
-import com.promi.ui.group.GroupViewModel
-import com.promi.view.group.adapter.GroupRecyclerViewAdapter
+import com.promi.viewmodel.group.GroupViewModel
 
 
 // 그룹에 어떤 약속이 있는지 확인

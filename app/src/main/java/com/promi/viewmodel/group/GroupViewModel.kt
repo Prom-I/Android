@@ -1,4 +1,4 @@
-package com.promi.ui.group
+package com.promi.viewmodel.group
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

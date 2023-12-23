@@ -13,8 +13,6 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.data.remote.model.Group
-import com.promi.data.remote.model.Palette
-import com.promi.ui.group.GroupViewModel
 import com.promi.viewmodel.promise.PromiseViewModel
 
 //삽입과 삭제, 수정이 필요하므로 전달받는 데이터 리스트를 MutableList타입으로 받아야함
