@@ -7,7 +7,7 @@
         android:title="@string/calendar" />
 
     <item
-        android:id="@+id/navigation_promise"
+        android:id="@+id/navigation_all_promises_and_groups"
         android:icon="@drawable/ic_promise"
         android:title="@string/promise" />
 

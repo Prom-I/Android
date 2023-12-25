@@ -19,10 +19,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_promise"
-        android:name="com.promi.view.promise.PromiseFragment"
+        android:id="@+id/navigation_all_promises_and_groups"
+        android:name="com.promi.view.promise.AllPromisesAndGroupsFragment"
         android:label="@string/promise"
-        tools:layout="@layout/fragment_promise" >
+        tools:layout="@layout/fragment_all_promises_and_groups" >
         <action
             android:id="@+id/action_navigation_promise_to_navigation_create_group"
             app:destination="@id/navigation_create_group" />

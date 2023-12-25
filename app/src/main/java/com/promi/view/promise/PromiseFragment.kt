@@ -63,14 +63,14 @@ class PromiseFragment : Fragment() {
         // 약속 버튼, 그룹 버튼 클릭 여부에 따라 보여줄 항목을 다르게 지정
 
         // 약속 보여 주기
-        binding.btnShowPromise.setOnClickListener {
-
-        }
-
-        // 그룹 보여 주기
-        binding.btnShowGroup.setOnClickListener {
-
-        }
+//        binding.btnShowPromise.setOnClickListener {
+//
+//        }
+//
+//        // 그룹 보여 주기
+//        binding.btnShowGroup.setOnClickListener {
+//
+//        }
 
         return binding.root
     }
