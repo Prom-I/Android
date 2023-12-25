@@ -1,4 +1,4 @@
-package com.promi.view.group
+package com.promi.view.promise
 
 import android.graphics.Typeface
 import android.os.Bundle
@@ -14,48 +14,37 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
-import com.promi.databinding.FragmentGroupBinding
+import com.promi.databinding.FragmentAllPromiseBinding
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
 
+class AllPromiseFragment : Fragment() {
 
-// 그룹에 어떤 약속이 있는지 확인
-class GroupFragment : Fragment() {
 
-    private lateinit var binding : FragmentGroupBinding
-
+    private var _binding: FragmentAllPromiseBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var promiseRecyclerview : RecyclerView
     private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
 
-    private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
+    private lateinit var groupViewModel: GroupViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentGroupBinding.inflate(layoutInflater)
+        _binding = FragmentAllPromiseBinding.inflate(inflater, container, false)
 
-        // 번들로부터 그룹 이름 얻어오기
-        val groupName = arguments?.getString("groupName")
-        binding.tvGroupName.text = groupName
-
-        // 그룹이 소유하고 있는 약속에 대한 정보가 포함되어있음
         groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
 
         //init recyclerview
         promiseRecyclerview = binding.recyclerviewPromise
         setRecyclerViewAdapter()
 
-        //뒤로가기
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
+            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
         }
 
         // promiseRecyclerviewAdapter.setList(groupViewModel.promises)
@@ -64,7 +53,6 @@ class GroupFragment : Fragment() {
             promiseRecyclerviewAdapter.updateData(promise)
         }
 
-        setButtonStyle() // 버튼 색 변경
 
         return binding.root
     }
@@ -76,15 +64,10 @@ class GroupFragment : Fragment() {
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
     }
 
-    private fun setButtonStyle(){
-        val spannable = SpannableString("3초만에 약속잡기") // 원본 문자열
-        // 1. 일부 글자 색 변경
-        //val greenColorSpan = ForegroundColorSpan(resources.getColor(R.color.mainGreen, null))
-        //spannable.setSpan(greenColorSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        // 2. 일부 글자만 굵게 설정
-        val boldSpan = StyleSpan(Typeface.BOLD) // BOLD 스타일 적용(글씨 굵게)
-        spannable.setSpan(boldSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        binding.btnCreateGroup.text = spannable
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

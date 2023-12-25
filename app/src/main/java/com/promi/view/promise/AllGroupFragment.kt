@@ -3,10 +3,10 @@ package com.promi.view.promise
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,17 +14,17 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
+import com.promi.databinding.FragmentAllGroupBinding
 import com.promi.databinding.FragmentPromiseBinding
 import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.viewmodel.promise.PromiseViewModel
 
-class PromiseFragment : Fragment() {
+class AllGroupFragment : Fragment() {
 
-    private var _binding: FragmentPromiseBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    private var _binding: FragmentAllGroupBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var groupViewModel: PromiseViewModel
 
     //recycler view layout
     private lateinit var groupRecyclerView : RecyclerView
@@ -32,16 +32,16 @@ class PromiseFragment : Fragment() {
     //recycler view adapter
     private lateinit var groupRecyclerViewAdapter: GroupRecyclerViewAdapter
 
-    private lateinit var groupViewModel: PromiseViewModel
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        // Inflate the layout for this fragment
+        _binding = FragmentAllGroupBinding.inflate(inflater, container, false)
+
         groupViewModel =
             ViewModelProvider(this)[PromiseViewModel::class.java] // Promise Fragment에 대한 뷰 모델
-
-        _binding = FragmentPromiseBinding.inflate(inflater, container, false)
 
         groupRecyclerView = binding.recyclerviewGroup //그룹 리사이클러뷰에 대한 참조
 
@@ -50,7 +50,7 @@ class PromiseFragment : Fragment() {
         setItemTouchHelper() // 리사이클러뷰에 아이템터치헬퍼 부착 => 스와이프 메뉴 기능
 
         // LiveData Observer 설정 => 변화 발생시 반영
-        groupViewModel.groupLiveData.observe(viewLifecycleOwner, Observer {groups ->
+        groupViewModel.groupLiveData.observe(viewLifecycleOwner, Observer { groups ->
             groupRecyclerViewAdapter.setGroupList(groups)
         })
 
@@ -58,6 +58,7 @@ class PromiseFragment : Fragment() {
         binding.btnCreateGroup.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
         }
+
 
         return binding.root
     }
@@ -74,8 +75,6 @@ class PromiseFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
-
-
 
     // 리사이클러뷰에 적용할 스와이프 이벤트 정의
     private fun setItemTouchHelper(){
@@ -229,4 +228,5 @@ class PromiseFragment : Fragment() {
     private fun dipToPx(dipValue: Float, context: Context): Int{
         return (dipValue * context.resources.displayMetrics.density).toInt()
     }
+
 }
