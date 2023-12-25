@@ -1,27 +1,84 @@
 package com.promi.view.promise
 
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentAllPromiseBinding
-import com.promi.databinding.FragmentAllPromisesAndGroupsBinding
+import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
+import com.promi.viewmodel.group.GroupViewModel
 
 class AllPromiseFragment : Fragment() {
 
-    private lateinit var binding: FragmentAllPromiseBinding
+
+    private var _binding: FragmentAllPromiseBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var promiseRecyclerview : RecyclerView
+    private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
+
+    private lateinit var groupViewModel: GroupViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAllPromiseBinding.inflate(layoutInflater)
+        _binding = FragmentAllPromiseBinding.inflate(inflater, container, false)
 
+        groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
+
+        //init recyclerview
+        promiseRecyclerview = binding.recyclerviewPromise
+        setRecyclerViewAdapter()
+
+        //약속 생성 버튼 클릭시
+        binding.btnCreateGroup.setOnClickListener {
+            findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
+        }
+
+        // promiseRecyclerviewAdapter.setList(groupViewModel.promises)
+        // 현재 약속 목록 observe
+        groupViewModel.promises.observe(viewLifecycleOwner) { promise ->
+            promiseRecyclerviewAdapter.updateData(promise)
+        }
+
+        setButtonStyle() // 버튼 색 변경
 
         return binding.root
+    }
+
+    // init Group RecyclerView
+    private fun setRecyclerViewAdapter(){
+        promiseRecyclerview.layoutManager = LinearLayoutManager(context)
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
+        promiseRecyclerview.adapter = promiseRecyclerviewAdapter
+    }
+
+    private fun setButtonStyle(){
+        val spannable = SpannableString("3초만에 약속잡기") // 원본 문자열
+        // 1. 일부 글자 색 변경
+        //val greenColorSpan = ForegroundColorSpan(resources.getColor(R.color.mainGreen, null))
+        //spannable.setSpan(greenColorSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        // 2. 일부 글자만 굵게 설정
+        val boldSpan = StyleSpan(Typeface.BOLD) // BOLD 스타일 적용(글씨 굵게)
+        spannable.setSpan(boldSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        binding.btnCreateGroup.text = spannable
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

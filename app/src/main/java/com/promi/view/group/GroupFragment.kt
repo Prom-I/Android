@@ -24,6 +24,7 @@ class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
 
+
     private lateinit var promiseRecyclerview : RecyclerView
     private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
 

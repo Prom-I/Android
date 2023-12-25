@@ -10,46 +10,59 @@ import com.promi.databinding.FragmentAllPromisesAndGroupsBinding
 
 class AllPromisesAndGroupsFragment : Fragment() {
 
-    private lateinit var binding : FragmentAllPromisesAndGroupsBinding
+    private var _binding: FragmentAllPromisesAndGroupsBinding? = null
+    private val binding get() = _binding!!
+
+    // 현재 활성화된 하위 프래그먼트 추적
+    private var currentFragment: Fragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentAllPromisesAndGroupsBinding.inflate(layoutInflater)
+        _binding = FragmentAllPromisesAndGroupsBinding.inflate(inflater, container, false)
 
-
-        // 디폴트 화면은 약속 목록을 보여주는 화면
-        childFragmentManager.beginTransaction().apply {
-            add(R.id.frameLayout_all_promises_and_groups, AllPromiseFragment())
-            commit()
+        // 초기 프래그먼트 설정 또는 이전 상태 복원
+        if (savedInstanceState == null) {
+            showFragment(AllPromiseFragment(), "PromiseFragment")
         }
 
-
-        // 버튼을 여러번 누를 수 있으므로, 라디오버튼으로 변경 필요 => 혹은 여러번 선택 불가능 하도록 필요
-
-        // 그룹 버튼 누르면 전체 그룹 목록 화면으로 이동
+        // 그룹 버튼 클릭 이벤트
         binding.btnShowGroup.setOnClickListener {
-            childFragmentManager.beginTransaction().apply {
-                replace(R.id.frameLayout_all_promises_and_groups, AllGroupFragment())
-                addToBackStack(null) // 스택에 추가 (뒤로가기 구현을 위해서)
-                commit()
-            }
+            showFragment(AllGroupFragment(), "GroupFragment")
         }
 
-        // 약속 버튼 누르면 전체 약속 목록 화면으로 변경
+        // 약속 버튼 클릭 이벤트
         binding.btnShowPromise.setOnClickListener {
-            childFragmentManager.beginTransaction().apply {
-                replace(R.id.frameLayout_all_promises_and_groups, AllPromiseFragment())
-                addToBackStack(null) // 스택에 추가 (뒤로가기 구현을 위해서)
-                commit()
-            }
+            showFragment(AllPromiseFragment(), "PromiseFragment")
         }
-
-
 
         return binding.root
     }
 
+    // 하위 프래그먼트 보여주는 함수
+    private fun showFragment(fragment: Fragment, tag: String) {
+        childFragmentManager.beginTransaction().apply {
+            // 모든 프래그먼트 숨기기
+            childFragmentManager.fragments.forEach { hide(it) }
+
+            // 프래그먼트 찾기 또는 추가
+            var frag = childFragmentManager.findFragmentByTag(tag)
+            if (frag == null) {
+                frag = fragment
+                add(R.id.frameLayout_all_promises_and_groups, frag, tag)
+            } else {
+                show(frag)
+            }
+
+            commit()
+        }
+        currentFragment = fragment
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }
