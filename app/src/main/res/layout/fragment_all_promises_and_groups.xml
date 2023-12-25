@@ -43,7 +43,6 @@
         android:id="@+id/frameLayout_all_promises_and_groups"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toBottomOf="@id/linearLayout_button_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
