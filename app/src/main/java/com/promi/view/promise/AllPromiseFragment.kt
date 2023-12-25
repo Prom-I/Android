@@ -44,7 +44,7 @@ class AllPromiseFragment : Fragment() {
 
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
+            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
         }
 
         // promiseRecyclerviewAdapter.setList(groupViewModel.promises)
@@ -53,7 +53,6 @@ class AllPromiseFragment : Fragment() {
             promiseRecyclerviewAdapter.updateData(promise)
         }
 
-        setButtonStyle() // 버튼 색 변경
 
         return binding.root
     }
@@ -65,16 +64,6 @@ class AllPromiseFragment : Fragment() {
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
     }
 
-    private fun setButtonStyle(){
-        val spannable = SpannableString("3초만에 약속잡기") // 원본 문자열
-        // 1. 일부 글자 색 변경
-        //val greenColorSpan = ForegroundColorSpan(resources.getColor(R.color.mainGreen, null))
-        //spannable.setSpan(greenColorSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        // 2. 일부 글자만 굵게 설정
-        val boldSpan = StyleSpan(Typeface.BOLD) // BOLD 스타일 적용(글씨 굵게)
-        spannable.setSpan(boldSpan, 0, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-        binding.btnCreateGroup.text = spannable
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

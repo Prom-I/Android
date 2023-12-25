@@ -19,13 +19,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_create_group"
-        android:layout_width="170dp"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_radius30"
         app:backgroundTint="@color/mainGreen"
         android:textColor="@color/white"
         android:fontFamily="@font/pretendard_regular_400"
-        android:text="3초만에 약속잡기"
+        android:text="약속 생성"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
