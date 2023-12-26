@@ -37,6 +37,28 @@ class AllPromisesAndGroupsFragment : Fragment() {
             showFragment(AllPromiseFragment(), "PromiseFragment")
         }
 
+        /*
+         *  binding.allPost.setOnClickListener(){
+            binding.allPost.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            binding.allPost.setBackgroundResource(R.drawable.item_bg_on)
+            binding.isSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.isSale.setBackgroundResource(0)
+            binding.isNotSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.isNotSale.setBackgroundResource(0)
+            homeViewModel.updatePostList()
+        }
+        binding.isSale.setOnClickListener(){
+            binding.allPost.setBackgroundResource(0)
+            binding.allPost.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            binding.isSale.setBackgroundResource(R.drawable.item_bg_on)
+            binding.isSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
+            binding.isNotSale.setBackgroundResource(0)
+            binding.isNotSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+            homeViewModel.updateIsSalePostList(true)
+        }
+        * */
+
+
         return binding.root
     }
 
