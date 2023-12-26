@@ -1,10 +1,14 @@
 package com.promi.view.promise
 
+import android.content.res.ColorStateList
+import android.graphics.Typeface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.promi.R
 import com.promi.databinding.FragmentAllPromisesAndGroupsBinding
 
@@ -12,6 +16,12 @@ class AllPromisesAndGroupsFragment : Fragment() {
 
     private var _binding: FragmentAllPromisesAndGroupsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var btnShowPromises : TextView
+    private lateinit var btnShowGroups : TextView
+
+    // 현재 선택된 탭의 상태 추적
+    private var selectedTab: TextView? = null
 
     // 현재 활성화된 하위 프래그먼트 추적
     private var currentFragment: Fragment? = null
@@ -27,37 +37,28 @@ class AllPromisesAndGroupsFragment : Fragment() {
             showFragment(AllPromiseFragment(), "PromiseFragment")
         }
 
-        // 그룹 버튼 클릭 이벤트
-        binding.btnShowGroup.setOnClickListener {
-            showFragment(AllGroupFragment(), "GroupFragment")
-        }
+        btnShowGroups = binding.btnShowGroup
+        btnShowPromises = binding.btnShowPromise
+
+
 
         // 약속 버튼 클릭 이벤트
-        binding.btnShowPromise.setOnClickListener {
-            showFragment(AllPromiseFragment(), "PromiseFragment")
+        btnShowPromises.setOnClickListener {
+            if (selectedTab != btnShowPromises) {
+                selectTab(btnShowPromises)
+                showFragment(AllPromiseFragment(), "PromiseFragment")
+            }
         }
 
-        /*
-         *  binding.allPost.setOnClickListener(){
-            binding.allPost.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            binding.allPost.setBackgroundResource(R.drawable.item_bg_on)
-            binding.isSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.isSale.setBackgroundResource(0)
-            binding.isNotSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.isNotSale.setBackgroundResource(0)
-            homeViewModel.updatePostList()
+        // 그룹 버튼 클릭 이벤트
+        btnShowGroups.setOnClickListener {
+            if (selectedTab != btnShowGroups) {
+                selectTab(btnShowGroups)
+                showFragment(AllGroupFragment(), "GroupFragment")
+            }
         }
-        binding.isSale.setOnClickListener(){
-            binding.allPost.setBackgroundResource(0)
-            binding.allPost.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            binding.isSale.setBackgroundResource(R.drawable.item_bg_on)
-            binding.isSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-            binding.isNotSale.setBackgroundResource(0)
-            binding.isNotSale.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
-            homeViewModel.updateIsSalePostList(true)
-        }
-        * */
 
+        selectTab(btnShowPromises) // 초기 상태는 약속 버튼
 
         return binding.root
     }
@@ -80,6 +81,30 @@ class AllPromisesAndGroupsFragment : Fragment() {
             commit()
         }
         currentFragment = fragment
+    }
+
+
+    // 상단 탭 선택 함수
+    private fun selectTab(selectedTextView: TextView) {
+        // 선택되지 않은 탭의 스타일 초기화(선택 안된 상태로 변경)
+        val nonSelectedTextView = if (selectedTextView == btnShowPromises) btnShowGroups else btnShowPromises
+        nonSelectedTextView.apply {
+            setBackgroundResource(R.drawable.shape_radius10)
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.mainLightGray))
+            setTypeface(null, Typeface.NORMAL)
+            setTextColor(ContextCompat.getColor(context, R.color.black))
+        }
+
+        // 선택된 탭의 스타일 변경
+        selectedTextView.apply {
+            setBackgroundResource(R.drawable.shape_radius10)
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+            setTypeface(null, Typeface.BOLD)
+            setTextColor(ContextCompat.getColor(context, R.color.black))
+        }
+
+        // 선택된 탭을 현재 상태로 업데이트
+        selectedTab = selectedTextView
     }
 
 
