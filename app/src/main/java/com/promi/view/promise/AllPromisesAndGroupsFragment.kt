@@ -23,7 +23,7 @@ class AllPromisesAndGroupsFragment : Fragment() {
     // 현재 선택된 탭의 상태 추적
     private var selectedTab: TextView? = null
 
-    // 현재 활성화된 하위 프래그먼트 추적
+    // 현재 활성화된 하위 프래그먼트
     private var currentFragment: Fragment? = null
 
     override fun onCreateView(
@@ -58,7 +58,18 @@ class AllPromisesAndGroupsFragment : Fragment() {
             }
         }
 
-        selectTab(btnShowPromises) // 초기 상태는 약속 버튼
+        // 기본 상태 또는 복원된 상태 설정 (상단 탭 부분)
+        savedInstanceState?.getString("SELECTED_TAB")?.let {
+            if (it == "Group") {
+                selectTab(btnShowGroups)
+                showFragment(AllGroupFragment(), "GroupFragment")
+            } else {
+                selectTab(btnShowPromises)
+                showFragment(AllPromiseFragment(), "PromiseFragment")
+            }
+        } ?: run {
+            selectTab(btnShowPromises)
+        }
 
         return binding.root
     }
@@ -90,7 +101,7 @@ class AllPromisesAndGroupsFragment : Fragment() {
         val nonSelectedTextView = if (selectedTextView == btnShowPromises) btnShowGroups else btnShowPromises
         nonSelectedTextView.apply {
             setBackgroundResource(R.drawable.shape_radius10)
-            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.mainLightGray))
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.mainLightGray))
             setTypeface(null, Typeface.NORMAL)
             setTextColor(ContextCompat.getColor(context, R.color.black))
         }
@@ -98,7 +109,7 @@ class AllPromisesAndGroupsFragment : Fragment() {
         // 선택된 탭의 스타일 변경
         selectedTextView.apply {
             setBackgroundResource(R.drawable.shape_radius10)
-            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))
+            backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(requireContext(), R.color.white))
             setTypeface(null, Typeface.BOLD)
             setTextColor(ContextCompat.getColor(context, R.color.black))
         }
@@ -107,9 +118,19 @@ class AllPromisesAndGroupsFragment : Fragment() {
         selectedTab = selectedTextView
     }
 
+    // 현재 선택된 탭 상태를 저장
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString("SELECTED_TAB", if (selectedTab == btnShowPromises) "Promise" else "Group")
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        // 현재 활성화된 프래그먼트와 선택된 탭 상태를 초기화
+        currentFragment = null
+        selectedTab = null
     }
+
 }
