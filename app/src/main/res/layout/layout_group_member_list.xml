@@ -5,8 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="100"
-    android:background="@color/Gray1">
+    android:weightSum="100">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/constraint_bottom"
         android:paddingTop="20dp"
-        android:paddingHorizontal="20dp"
+        android:paddingStart="20dp"
         android:background="@color/white">
 
         <TextView
@@ -29,18 +28,50 @@
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:textSize="20dp"/>
+            android:textSize="16sp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_add_group_member"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="2dp"
+            app:cardCornerRadius="27dp">
+
+            <ImageView
+                android:id="@+id/iv_add_group_member"
+                android:layout_width="54dp"
+                android:layout_height="54dp"
+                app:srcCompat="@drawable/img_add_friend" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="그룹 멤버 추가"
+            android:textColor="@color/mainGreen"
+            app:layout_constraintTop_toTopOf="@id/cardview_add_group_member"
+            app:layout_constraintBottom_toBottomOf="@id/cardview_add_group_member"
+            app:layout_constraintStart_toEndOf="@id/cardview_add_group_member"
+            android:layout_marginStart="16sp"
+            android:textSize="17sp"/>
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_group_members"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:listitem="@layout/item_group_member_list"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cardview_add_group_member"
+            app:layout_constraintVertical_bias="0.0"
+            tools:listitem="@layout/item_group_member_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -51,13 +82,14 @@
         android:layout_height="60dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/mainLightGray">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="그룹 나가기"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textColor="@color/mainRed"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
