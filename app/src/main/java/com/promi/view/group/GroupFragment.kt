@@ -23,14 +23,16 @@ import com.promi.viewmodel.group.GroupViewModel
 
 // 특정 그룹에 대한 상세 페이지
 // 그 그룹에 어떤 약속이 포함 되어 있는지, 그룹에 소속된 멤버는 누구 인지 등
+// Data Source : GroupViewModel
+// RecyclerView : PromiseRecyclerView (약속 목록 보여주기), GroupMemeberRecyclerView (소속 멤버 보여주기)
 class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
 
-
     private lateinit var promiseRecyclerview : RecyclerView
     private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
 
+    // Data-Source
     private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
 
     override fun onCreateView(
