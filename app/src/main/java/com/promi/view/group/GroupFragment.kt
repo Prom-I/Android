@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,8 +21,8 @@ import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
 
-
-// 그룹에 어떤 약속이 있는지 확인
+// 특정 그룹에 대한 상세 페이지
+// 그 그룹에 어떤 약속이 포함 되어 있는지, 그룹에 소속된 멤버는 누구 인지 등
 class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
@@ -41,7 +44,7 @@ class GroupFragment : Fragment() {
         val groupName = arguments?.getString("groupName")
         binding.tvGroupName.text = groupName
 
-        // 그룹이 소유하고 있는 약속에 대한 정보가 포함되어있음
+        // 그룹이 소유하고 있는 약속과 그룹 멤버에 대한 정보가 포함되어있음
         groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
 
         //init recyclerview
@@ -65,6 +68,52 @@ class GroupFragment : Fragment() {
         }
 
         setButtonStyle() // 버튼 색 변경
+
+        // 참여자 명단 보기
+        val drawer = binding.drawer
+        binding.btnGroupOptionMenu.setOnClickListener {
+            drawer.openDrawer(Gravity.RIGHT)
+        }
+
+        // DrawerListener를 추가하여 드로어의 상태를 감지 => 특정 상황에서만 스와이프 허용
+        drawer.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerOpened(drawerView: View) {
+                // 드로어가 열린 상태에서는 스와이프를 통해 닫을 수 있도록 잠금 해제
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED, Gravity.RIGHT)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                // 드로어가 닫힌 상태에서는 다시 스와이프 잠금
+                drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED, Gravity.RIGHT)
+            }
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                // 슬라이드 중에는 특별한 동작 없음
+            }
+
+            override fun onDrawerStateChanged(newState: Int) {
+                // 드로어 상태가 변경될 때 특별한 동작 없음
+            }
+        })
+
+        // 뒤로가기 버튼 콜백 설정 => 상위 엑티비티에게 콜백 전달
+        val callback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                // 드로어가 열려있는지 확인
+                if (drawer.isDrawerOpen(Gravity.RIGHT)) {
+                    // 드로어가 열려있다면 닫기
+                    drawer.closeDrawer(Gravity.RIGHT)
+                } else {
+                    // 드로어가 닫혀있다면 기존 뒤로가기 동작 수행
+                    isEnabled = false
+                    requireActivity().onBackPressed()
+                    isEnabled = true
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+
+
 
         return binding.root
     }
