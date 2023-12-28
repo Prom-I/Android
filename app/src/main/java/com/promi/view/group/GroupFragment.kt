@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
+import com.promi.view.group.adapter.GroupMemberRecyclerViewAdapter
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
 
@@ -29,8 +30,13 @@ class GroupFragment : Fragment() {
 
     private lateinit var binding : FragmentGroupBinding
 
+    // 약속 목록
     private lateinit var promiseRecyclerview : RecyclerView
     private lateinit var promiseRecyclerviewAdapter : PromiseRecyclerViewAdapter
+
+    // 그룹 소속 멤버 목록
+    private lateinit var groupMemberRecyclerView: RecyclerView
+    private lateinit var groupMemberRecyclerViewAdapter: GroupMemberRecyclerViewAdapter
 
     // Data-Source
     private lateinit var groupViewModel: GroupViewModel //그룹에 포함된 약속 목록들이 정의되어 있음
@@ -51,6 +57,10 @@ class GroupFragment : Fragment() {
 
         //init recyclerview
         promiseRecyclerview = binding.recyclerviewPromise
+
+        val drawerLayout = binding.drawerMenu
+        groupMemberRecyclerView = drawerLayout.recyclerviewGroupMembers
+
         setRecyclerViewAdapter()
 
         //뒤로가기
@@ -68,6 +78,12 @@ class GroupFragment : Fragment() {
         groupViewModel.promises.observe(viewLifecycleOwner) { promise ->
             promiseRecyclerviewAdapter.updateData(promise)
         }
+
+        // 그룹 멤버 목록 observe
+        groupViewModel.groupMembers.observe(viewLifecycleOwner) { groupMembers ->
+            groupMemberRecyclerViewAdapter.updateData(groupMembers)
+        }
+
 
         setButtonStyle() // 버튼 색 변경
 
@@ -125,6 +141,10 @@ class GroupFragment : Fragment() {
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
         promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
+
+        groupMemberRecyclerView.layoutManager = LinearLayoutManager(context)
+        groupMemberRecyclerViewAdapter = GroupMemberRecyclerViewAdapter()
+        groupMemberRecyclerView.adapter = groupMemberRecyclerViewAdapter
     }
 
     private fun setButtonStyle(){

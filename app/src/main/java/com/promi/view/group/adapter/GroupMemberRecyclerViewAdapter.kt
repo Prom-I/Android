@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.data.remote.model.GroupMember
+import com.promi.data.remote.model.Promise
 
 // 그룹에 소속된 사용자 목록을 보여주기 위힘
 class GroupMemberRecyclerViewAdapter
@@ -22,7 +23,7 @@ class GroupMemberRecyclerViewAdapter
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         // 아이템 뷰의 레이아웃 지정
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_group_member_list,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_group_member_list,parent,false)
         return ItemViewHolder(view)
     }
 
@@ -36,5 +37,9 @@ class GroupMemberRecyclerViewAdapter
 
     override fun getItemCount(): Int {
         return groupMemberList.size
+    }
+
+    fun updateData(groupMemberList: List<GroupMember>) {
+        this.groupMemberList = groupMemberList
     }
 }

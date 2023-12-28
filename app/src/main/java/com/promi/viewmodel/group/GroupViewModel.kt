@@ -3,6 +3,7 @@ package com.promi.viewmodel.group
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.promi.data.remote.model.GroupMember
 import com.promi.data.remote.model.Promise
 
 class GroupViewModel : ViewModel() {
@@ -10,11 +11,9 @@ class GroupViewModel : ViewModel() {
     private val _promise = MutableLiveData<List<Promise>>()
     val promises: LiveData<List<Promise>> = _promise
 
-    /*
-    var promiseName : String = "",
-    var promiseDate : String = "",
-    var promiseDday : Int = 100,
-    * */
+    // group member list
+    private val _groupMember = MutableLiveData<List<GroupMember>>()
+    val groupMembers: LiveData<List<GroupMember>> = _groupMember
 
     init {
         // 초기 친구 목록 설정(더미 데이터)
@@ -27,5 +26,14 @@ class GroupViewModel : ViewModel() {
         )
 
         _promise.value = initialList //친구데이터의 MutableLiveData에 친구 정보 기입
+
+        val groupMemberDummyList = listOf(
+            GroupMember("최강",111),
+            GroupMember("김지원",222),
+            GroupMember("남윤형",333)
+        )
+
+        _groupMember.value = groupMemberDummyList
+
     }
 }
