@@ -1,10 +1,6 @@
 package com.promi.view.promise
 
-import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
-import android.text.style.StyleSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentAllPromiseBinding
+import com.promi.view.promise.adapter.PromiseItemClickListener
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
 
-class AllPromiseFragment : Fragment() {
+class AllPromiseFragment : Fragment(),PromiseItemClickListener {
+
 
 
     private var _binding: FragmentAllPromiseBinding? = null
@@ -57,10 +55,15 @@ class AllPromiseFragment : Fragment() {
         return binding.root
     }
 
+    // Promise Item Click Event Delegate
+    override fun onPromiseItemClicked(positio: Int) {
+        findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_promiseDetailFragment)
+    }
+
     // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
-        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this)
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
     }
 

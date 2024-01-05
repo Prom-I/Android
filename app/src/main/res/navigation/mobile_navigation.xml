@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_navigation_promise_to_groupFragment"
             app:destination="@id/groupFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_promiseDetailFragment"
+            app:destination="@id/promiseDetailFragment" />
     </fragment>
 
     <fragment
@@ -79,6 +82,9 @@
         android:label="fragment_group"
         tools:layout="@layout/fragment_group" >
         <action
+            android:id="@+id/action_groupFragment_to_promiseDetailFragment"
+            app:destination="@id/promiseDetailFragment" />
+        <action
             android:id="@+id/action_groupFragment_to_createPromiseFragment"
             app:destination="@id/createPromiseFragment" />
     </fragment>
@@ -97,4 +103,12 @@
         android:name="com.promi.ui.myInformation.PaletteListFragment"
         android:label="fragment_palette_list"
         tools:layout="@layout/fragment_palette_list" />
+    <fragment
+        android:id="@+id/allPromiseFragment"
+        android:name="com.promi.view.promise.AllPromiseFragment"
+        android:label="AllPromiseFragment" />
+    <fragment
+        android:id="@+id/promiseDetailFragment"
+        android:name="com.promi.view.promise.PromiseDetailFragment"
+        android:label="PromiseDetailFragment" />
 </navigation>
