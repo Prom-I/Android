@@ -1,10 +1,10 @@
 package com.promi.view.promise
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +42,8 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
 
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
+            // findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectPromiseDateFragment)
         }
 
         // promiseRecyclerviewAdapter.setList(groupViewModel.promises)
