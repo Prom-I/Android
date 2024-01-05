@@ -1,6 +1,7 @@
 package com.promi.view.main.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -56,27 +57,31 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
 
             // 현재 월의 1일 이전, 현재 월의 마지막일 이후 값의 텍스트를 회색처리
             if (position < firstDateIndex || position > lastDateIndex) {
-                itemCalendarDateText.setTextColor(ContextCompat.getColor(context!!, R.color.white))
+                itemCalendarDateText.setTextColor(ContextCompat.getColor(context, R.color.white))
                 // itemCalendarDateText.setTextAppearance(R.style.notThisMonth)
             }
             else{
                 // 오늘 날짜 처리
                 if (isThisMonth && dateData[position] == dateInt) {
-                    itemCalendarDateText.setTextColor(ContextCompat.getColor(context!!,
+                    Log.d("isThiss", dateData[position].toString())
+                    itemCalendarDateText.setTextColor(ContextCompat.getColor(
+                        context,
                         R.color.mainGreen
                     ))
                 }
                 // 토, 일 색상 변경
-                if((position%7) == 0){
-                    itemCalendarDateText.setTextColor(ContextCompat.getColor(context!!,
-                        R.color.black
-                    ))
-                }
-                else if((position%7) == 6){
-                    itemCalendarDateText.setTextColor(ContextCompat.getColor(context!!,
-                        R.color.black
-                    ))
-                }
+//                if((position%7) == 0){
+//                    itemCalendarDateText.setTextColor(ContextCompat.getColor(
+//                        context,
+//                        R.color.black
+//                    ))
+//                }
+//                else if((position%7) == 6){
+//                    itemCalendarDateText.setTextColor(ContextCompat.getColor(
+//                        context,
+//                        R.color.black
+//                    ))
+//                }
             }
         }
     }
@@ -106,10 +111,12 @@ class CalendarAdapter(private val calendarLayout: LinearLayout, val date: Date, 
             itemClickListener?.onClick(it, position)
         }
     }
+
     // (2) 리스너 인터페이스
     interface OnItemClickListener {
         fun onClick(v: View, position: Int)
     }
+
     // (3) 외부에서 클릭 시 이벤트 설정
     fun setItemClickListener(onItemClickListener: OnItemClickListener) {
         this.itemClickListener = onItemClickListener

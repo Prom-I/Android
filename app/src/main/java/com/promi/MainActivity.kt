@@ -1,12 +1,11 @@
 package com.promi
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.promi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -35,5 +34,16 @@ class MainActivity : AppCompatActivity() {
 
 
         navView.setupWithNavController(navController)
+    }
+
+    fun setToolbar(isVisible: Boolean, name: String?) {
+        if (isVisible)
+            binding.toolbar.visibility = View.VISIBLE
+        else
+            binding.toolbar.visibility = View.GONE
+
+        binding.btnBack.setOnClickListener { onBackPressed() }
+
+        binding.tvToolbarName.text = name
     }
 }

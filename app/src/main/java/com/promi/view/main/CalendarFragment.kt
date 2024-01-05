@@ -11,6 +11,7 @@ import com.promi.view.main.dialog.TodoDialog
 import com.promi.viewmodel.main.CalendarViewModel
 import java.util.Calendar
 import java.util.Date
+import kotlin.properties.Delegates
 
 class CalendarFragment(index: Int): BaseFragment<FragmentCalendarBinding>(R.layout.fragment_calendar){
     private val viewModel by lazy {
@@ -19,7 +20,7 @@ class CalendarFragment(index: Int): BaseFragment<FragmentCalendarBinding>(R.layo
 
     private lateinit var currentDate: Date
     private var pageIndex = index
-    private var isThisMonth = false
+    private var isThisMonth by Delegates.notNull<Boolean>()
 
     override fun initDataBinding() {
         super.initDataBinding()
