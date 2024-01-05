@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_all_promises_and_groups_to_promiseDetailFragment"
             app:destination="@id/promiseDetailFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_selectPromiseDateFragment"
+            app:destination="@id/selectPromiseDateFragment" />
     </fragment>
 
     <fragment
@@ -57,7 +60,8 @@
     <fragment
         android:id="@+id/navigation_create_group"
         android:name="com.promi.view.group.CreateGroupFragment"
-        android:label="CreateGroupFragment" >
+        android:label="CreateGroupFragment"
+        tools:layout="@layout/fragment_create_group" >
         <action
             android:id="@+id/action_navigation_create_group_to_groupSettingFragment"
             app:destination="@id/groupSettingFragment" />
@@ -75,7 +79,8 @@
     <fragment
         android:id="@+id/groupSettingFragment"
         android:name="com.promi.view.group.GroupSettingFragment"
-        android:label="GroupSettingFragment" />
+        android:label="GroupSettingFragment"
+        tools:layout="@layout/fragment_group_setting"/>
     <fragment
         android:id="@+id/groupFragment"
         android:name="com.promi.view.group.GroupFragment"
@@ -106,9 +111,16 @@
     <fragment
         android:id="@+id/allPromiseFragment"
         android:name="com.promi.view.promise.AllPromiseFragment"
-        android:label="AllPromiseFragment" />
+        android:label="AllPromiseFragment"
+        tools:layout="@layout/fragment_all_promise"/>
     <fragment
         android:id="@+id/promiseDetailFragment"
         android:name="com.promi.view.promise.PromiseDetailFragment"
-        android:label="PromiseDetailFragment" />
+        android:label="PromiseDetailFragment"
+        tools:layout="@layout/fragment_promise_detail"/>
+    <fragment
+        android:id="@+id/selectPromiseDateFragment"
+        android:name="com.promi.view.promise.SelectPromiseDateFragment"
+        android:label="SelectPromiseDateFragment"
+        tools:layout="@layout/fragment_select_promise_date"/>
 </navigation>
