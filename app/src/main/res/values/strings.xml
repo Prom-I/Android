@@ -33,6 +33,10 @@
     <string name="exit_yes">나가기</string>
     <string name="exit_no">취소</string>
 
+    <!-- fragment_select_promise_date -->
+    <string name="info_select_promise_date">약속을 생성할 기간을\n선택해주세요 :)</string>
+    <string name="select_promise_date">일정을 취합할 시간대를 선택해주세요!</string>
+
     <!-- fragment_promise_name -->
     <string name="what_promise_name">약속 이름은 뭘로 할까요?</string>
     <string name="promise_name_example">ex) 프롬이 생일파티, 1차 회의</string>
