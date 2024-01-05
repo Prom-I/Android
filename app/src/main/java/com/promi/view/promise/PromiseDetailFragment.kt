@@ -15,7 +15,9 @@ class PromiseDetailFragment : Fragment() {
 
     private lateinit var participantsRecyclerViewAdapter: PromiseParticipantsRecyclerViewAdapter
 
-    private val participants = listOf("이자민","이자민","이자민","이자민","이자민","이자민","이자민","이자민")
+    private val participants = listOf(
+        "이자민","이자민","이자미니","이자민","이자민",
+        "이자민","이자민","이자민","다섯글자","다섯글자이상")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -226,8 +226,9 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_promise_member"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="7dp"
                     android:layout_marginTop="11dp"
                     android:layout_marginBottom="2dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -244,13 +245,15 @@
                 android:layout_height="46dp"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="40dp"
-                android:background="@drawable/shape_radius10"
+                android:layout_marginBottom="15dp"
+                android:background="@drawable/shape_round_btn_radius10"
                 android:text="목록에서 삭제하기"
                 android:textColor="@color/mainRed"
                 app:backgroundTint="@color/mainLightGray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/constraint_promise_member_info" />
+                app:layout_constraintTop_toBottomOf="@id/constraint_promise_member_info"
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
