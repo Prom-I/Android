@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.promi.databinding.FragmentPromiseDetailBinding
 import com.promi.view.promise.adapter.PromiseParticipantsRecyclerViewAdapter
@@ -17,7 +18,7 @@ class PromiseDetailFragment : Fragment() {
 
     private val participants = listOf(
         "이자민","이자민","이자미니","이자민","이자민",
-        "이자민","이자민","이자민","다섯글자","다섯글자이상")
+        "다섯글자","다섯글자이상")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,6 +28,10 @@ class PromiseDetailFragment : Fragment() {
         binding = FragmentPromiseDetailBinding.inflate(layoutInflater)
 
         setupRecyclerView()
+
+        binding.btnBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         return binding.root
     }
