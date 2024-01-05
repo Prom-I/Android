@@ -26,17 +26,37 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/ic_back"/>
 
-        <TextView
-            android:id="@+id/tv_promise_name"
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1차 회의"
-            android:textColor="@color/black"
-            android:textSize="17sp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent">
+
+            <TextView
+                android:id="@+id/tv_promise_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1차 회의"
+                android:textColor="@color/black"
+                android:textSize="17sp"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/iv_promise_state"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_promise_uncheck"
+                android:layout_marginLeft="8dp"/>
+
+        </LinearLayout>
+
+
+
 
         <ImageView
             android:id="@+id/iv_group_setting"
