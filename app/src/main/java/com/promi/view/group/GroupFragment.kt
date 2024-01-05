@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.group.adapter.GroupMemberRecyclerViewAdapter
+import com.promi.view.promise.adapter.PromiseItemClickListener
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
 
@@ -26,7 +27,7 @@ import com.promi.viewmodel.group.GroupViewModel
 // 그 그룹에 어떤 약속이 포함 되어 있는지, 그룹에 소속된 멤버는 누구 인지 등
 // Data Source : GroupViewModel
 // RecyclerView : PromiseRecyclerView (약속 목록 보여주기), GroupMemeberRecyclerView (소속 멤버 보여주기)
-class GroupFragment : Fragment() {
+class GroupFragment : Fragment(),PromiseItemClickListener {
 
     private lateinit var binding : FragmentGroupBinding
 
@@ -136,10 +137,14 @@ class GroupFragment : Fragment() {
         return binding.root
     }
 
+    override fun onPromiseItemClicked(positio: Int) {
+        findNavController().navigate(R.id.action_groupFragment_to_promiseDetailFragment)
+    }
+
     // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
-        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter()
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this)
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
 
         groupMemberRecyclerView.layoutManager = LinearLayoutManager(context)

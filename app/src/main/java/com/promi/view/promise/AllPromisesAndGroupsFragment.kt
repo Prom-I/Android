@@ -40,8 +40,6 @@ class AllPromisesAndGroupsFragment : Fragment() {
         btnShowGroups = binding.btnShowGroup
         btnShowPromises = binding.btnShowPromise
 
-
-
         // 약속 버튼 클릭 이벤트
         btnShowPromises.setOnClickListener {
             if (selectedTab != btnShowPromises) {
@@ -132,5 +130,7 @@ class AllPromisesAndGroupsFragment : Fragment() {
         currentFragment = null
         selectedTab = null
     }
+
+
 
 }

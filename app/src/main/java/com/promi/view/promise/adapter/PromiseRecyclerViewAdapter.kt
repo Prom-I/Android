@@ -11,7 +11,9 @@ import com.promi.R
 import com.promi.data.remote.model.Promise
 
 // 그룹에 포함된 약속 목록들
-class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class PromiseRecyclerViewAdapter(
+    private val listener : PromiseItemClickListener)
+    : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var promiseList : List<Promise> = emptyList()
 
@@ -94,6 +96,12 @@ class PromiseRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>
                 tvDdayCount.text = "완료"
             }
         }
+
+        // 아이템 클릭 이벤트 정의
+        holder.itemView.setOnClickListener {
+            listener.onPromiseItemClicked(position) // itemClickEventDelegate
+        }
+
     }
 
     override fun getItemCount(): Int {
