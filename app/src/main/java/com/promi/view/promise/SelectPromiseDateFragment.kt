@@ -1,30 +1,78 @@
 package com.promi.view.promise
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.icu.text.SimpleDateFormat
+import android.icu.util.Calendar
 import android.view.View
-import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import com.promi.MainActivity
+import com.promi.R
+import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentSelectPromiseDateBinding
+import com.promi.view.main.adapter.FragmentStateAdapter
+import java.util.Locale
 
+class SelectPromiseDateFragment : BaseFragment<FragmentSelectPromiseDateBinding> (R.layout.fragment_select_promise_date) {
+    private var pageIndex = 0
 
-// 사용자에게 달력을 보여주고, 사용자로부터 원하는 기간의 날짜를 선택받는 로직 작성 필요
-class SelectPromiseDateFragment : Fragment() {
+    override fun initStartView() {
+        super.initStartView()
 
-    private lateinit var binding: FragmentSelectPromiseDateBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        (activity as MainActivity).setToolbar(true, "그룹 이름")
+        setCalendar()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentSelectPromiseDateBinding.inflate(layoutInflater)
-        // Inflate the layout for this fragment
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
-
-        return binding.root
+        binding.switchIsAllDay.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                binding.ConstraintSelectPromiseDate.visibility = View.GONE
+            } else {
+                binding.ConstraintSelectPromiseDate.visibility = View.VISIBLE
+            }
+        }
     }
 
+    private fun setCalendar(){
+        val calendarViewPager = binding.viewPager
+        val fragmentStateAdapter = FragmentStateAdapter(requireActivity())
+        calendarViewPager.adapter = fragmentStateAdapter
+        calendarViewPager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+
+        fragmentStateAdapter.apply {
+            // 처음 나타나는 페이지 위치 설정. true시 이동 애니메이션 보임. fasle시 안보임
+            calendarViewPager.setCurrentItem(this.calendarPosition, false)
+        }
+
+        // 페이지 변경시 콜백함수 호출
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+
+                setMonth(position)
+            }
+        })
+    }
+
+    fun setMonth(pos:Int){
+        // 이번달 pageIndex는 0
+        pageIndex = pos-(Int.MAX_VALUE/2)
+
+        val date = Calendar.getInstance().run {
+            add(Calendar.MONTH, pageIndex)
+            time
+        }
+
+        // 포맷 적용
+        val dateTime: String = SimpleDateFormat(
+            requireContext().getString(R.string.calendar_year_month_format),
+            Locale.KOREA
+        ).format(date.time)
+
+        binding.tvYearMonth.text = dateTime
+    }
 }
