@@ -5,7 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.promi.view.main.CalendarFragment
 
-class FragmentStateAdapter(fragmentActivity: FragmentActivity)
+class CalendarFragmentStateAdapter(fragmentActivity: FragmentActivity)
     :FragmentStateAdapter(fragmentActivity){
     private val pageCount = Int.MAX_VALUE
     val calendarPosition = (Int.MAX_VALUE/2)
