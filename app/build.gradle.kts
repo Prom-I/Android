@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -42,6 +43,12 @@ android {
 }
 
 dependencies {
+    val material_version = "1.11.0"
+    val nav_version = "2.5.3"
+
+    // material designs
+    implementation("com.google.android.material:material:${material_version}")
+
     // retrofit2
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     // Gson 변환기
@@ -57,6 +64,10 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     // LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+
+    // NavGraph - Kotlin
+    implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
+    implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
     // 원형 이미지
     implementation("de.hdodenhof:circleimageview:3.1.0")
