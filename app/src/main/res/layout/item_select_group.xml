@@ -61,32 +61,18 @@
             android:text="9"/>
 
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--Swipe Delete Menu : Scroll limit = 60dp-->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="60dp"
-        android:layout_height="match_parent"
-        app:layout_constraintStart_toEndOf="@id/constraint_item_container">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_delete"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+        <CheckBox
+            android:id="@+id/btn_check"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_select_group"
+            android:button="@null"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@drawable/shape_radius15"
-            app:backgroundTint="@color/mainRed"
-            app:icon="@drawable/ic_delete"
-            app:iconGravity="top"
-            android:paddingTop="6dp"/>
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

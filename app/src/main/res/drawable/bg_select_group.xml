@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- UNSELECTED -->
+    <item android:state_checked="false">
+        <shape
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="oval">
+            <stroke android:color="@color/gray" android:width="1dp" />
+            <solid android:color="#fff" />
+        </shape>
+    </item>
+    <!-- SELECTED -->
+    <item android:state_checked="true">
+        <layer-list>
+            <!-- 이미지 영역, 중앙에 오도록 변경 -->
+            <item
+                android:drawable="@drawable/ic_check"
+                android:gravity="center"
+                android:width="23dp"
+                android:height="23dp"/>
+        </layer-list>
+    </item>
+</selector>
