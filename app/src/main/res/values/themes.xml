@@ -32,4 +32,28 @@
         parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@drawable/shape_top_radius30</item>
     </style>
+
+    <!-- customize date range picker -->
+    <style name="Widget.MaterialComponents.MaterialCalendar.HeaderLayout" parent="android:Widget">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.MaterialCalendar.DayOfWeekLabel" parent="">
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Widget.MaterialComponents.MaterialCalendar.Day.Today">
+        <item name="itemTextColor">?attr/colorPrimary</item>
+    </style>
+
+    <style name="Base.Widget.MaterialComponents.MaterialCalendar.NavigationButton" parent="Widget.MaterialComponents.Button.TextButton.Dialog.Flush">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/mainBlack</item>
+        <item name="iconTint">@color/material_on_surface_emphasis_medium</item>
+        <item name="android:layout_marginBottom">21dp</item>
+    </style>
 </resources>
