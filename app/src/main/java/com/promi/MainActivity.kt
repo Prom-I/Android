@@ -36,14 +36,13 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
     }
 
-    fun setToolbar(isVisible: Boolean, name: String?) {
-        if (isVisible)
+    fun setToolbar(isVisible: Boolean, name: String = "") {
+        if (isVisible) {
+            binding.btnBack.setOnClickListener { onBackPressed() }
+            binding.tvToolbarName.text = name
             binding.toolbar.visibility = View.VISIBLE
+        }
         else
             binding.toolbar.visibility = View.GONE
-
-        binding.btnBack.setOnClickListener { onBackPressed() }
-
-        binding.tvToolbarName.text = name
     }
 }
