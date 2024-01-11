@@ -43,7 +43,8 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
             // findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
-            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectPromiseDateFragment)
+            //findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectPromiseDateFragment)
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectGroupFragment)
         }
 
         // promiseRecyclerviewAdapter.setList(groupViewModel.promises)

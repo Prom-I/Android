@@ -18,6 +18,7 @@ class SelectPromiseDateFragment : BaseFragment<FragmentSelectPromiseDateBinding>
         super.initStartView()
 
         (activity as MainActivity).setToolbar(true, "그룹 이름")
+
         setCalendar()
     }
 

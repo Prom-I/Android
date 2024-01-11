@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_navigation_all_promises_and_groups_to_selectPromiseDateFragment"
             app:destination="@id/selectPromiseDateFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_selectGroupFragment"
+            app:destination="@id/selectGroupFragment" />
     </fragment>
 
     <fragment
@@ -123,4 +126,12 @@
         android:name="com.promi.view.promise.SelectPromiseDateFragment"
         android:label="SelectPromiseDateFragment"
         tools:layout="@layout/fragment_select_promise_date"/>
+    <fragment
+        android:id="@+id/selectGroupFragment"
+        android:name="com.promi.view.group.SelectGroupFragment"
+        android:label="SelectGroupFragment" >
+        <action
+            android:id="@+id/action_selectGroupFragment_to_selectPromiseDateFragment"
+            app:destination="@id/selectPromiseDateFragment" />
+    </fragment>
 </navigation>
