@@ -23,6 +23,9 @@ class GroupRecyclerViewAdapter(
 
     private var groups = emptyList<Group>()
 
+    // 현재 스와이프된 아이템의 위치 => 하나의 아이템만 스와이프 될 수 있도록
+    private var currentlySwipedPosition: Int = -1
+
     // 어뎁터에서 사용할 리스트 값 할당
     fun setGroupList(groups : List<Group>){
         this.groups = groups
@@ -67,12 +70,13 @@ class GroupRecyclerViewAdapter(
         // 아이템 클릭 이벤트 작성 => 아이템 영역이 클릭된 경우에 한해서
         holder.constraintItemContainer.setOnClickListener {
 
-            // 스와이프 된 상태에서 클릭 되는 경우는 제한해야함 => isSwipe가 false인 경우에만 터치 이벤트 허용
-            if (!viewModel.getItemSwipeState()) {
+            // 현재 위치가 스와이프된 위치와 같지 않을 경우에만 네비게이션 이벤트 허용
+            if (currentlySwipedPosition != position) {
                 // 그룹 화면으로 이동
                 // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?
-                val bundle = Bundle()
-                bundle.putString("groupName", holder.tvGroupName.text as String)
+                val bundle = Bundle().apply {
+                    putString("groupName", holder.tvGroupName.text as String)
+                }
                 navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
             } else {
                 Log.d("Swipe State", "${viewModel.getItemSwipeState()}")
@@ -89,6 +93,17 @@ class GroupRecyclerViewAdapter(
 
     override fun getItemCount(): Int {
         return groups.size
+    }
+
+    // 스와이프 상태 업데이트 메소드
+    fun updateSwipedPosition(newPosition: Int) {
+        val previousPosition = currentlySwipedPosition
+        currentlySwipedPosition = newPosition
+
+        // 이전에 스와이프된 아이템의 상태를 원래대로 복구
+        if (previousPosition != -1 && previousPosition != newPosition) {
+            notifyItemChanged(previousPosition)
+        }
     }
 
 }
