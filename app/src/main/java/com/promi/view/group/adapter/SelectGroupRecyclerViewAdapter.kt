@@ -1,6 +1,7 @@
 package com.promi.view.group.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.data.remote.model.Group
-import com.promi.viewmodel.promise.PromiseViewModel
+import com.promi.viewmodel.group.GroupViewModel
 
 class SelectGroupRecyclerViewAdapter(
-    var viewModel : PromiseViewModel):
+    var viewModel : GroupViewModel):
     RecyclerView.Adapter<SelectGroupRecyclerViewAdapter.ViewHolder>(){
 
-    private var groups = emptyList<Group>()
+    private var groups : List<Group> = emptyList()
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // var tvGroupImage : ImageView 그룹 이미지
@@ -30,6 +31,7 @@ class SelectGroupRecyclerViewAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Log.d("SelectGroupFragment Error #4","${groups}")
         val context = parent.context
         //화면에 뷰를 붙이기 위해 inflater가 필요
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -39,6 +41,7 @@ class SelectGroupRecyclerViewAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        Log.d("SelectGroupFragment Error #4","${groups}")
         val group: Group = groups[position]
         holder.tvGroupName.text = group.groupName
         holder.tvGroupMemberCount.text = group.groupMemberCount.toString()
@@ -47,13 +50,14 @@ class SelectGroupRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
+        Log.d("SelectGroupFragment Error #3","${groups.size}")
         return groups.size
     }
 
-    // 어뎁터에서 사용할 리스트 값 할당
-    fun setGroupList(groups : List<Group>){
+    fun updateData(groups: List<Group>) {
+        //Log.d("SelectGroupFragment Error #2","${groups}")
         this.groups = groups
-        notifyDataSetChanged()
+        Log.d("SelectGroupFragment Error #2","${this.groups}")
     }
 
 
