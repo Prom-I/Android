@@ -14,10 +14,10 @@
         <layer-list>
             <!-- 이미지 영역, 중앙에 오도록 변경 -->
             <item
-                android:drawable="@drawable/ic_check"
+                android:drawable="@drawable/ic_select_group"
                 android:gravity="center"
-                android:width="23dp"
-                android:height="23dp"/>
+                android:width="20dp"
+                android:height="20dp"/>
         </layer-list>
     </item>
 </selector>
