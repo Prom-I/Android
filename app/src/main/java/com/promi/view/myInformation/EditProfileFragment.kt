@@ -3,46 +3,21 @@ package com.promi.view.myInformation
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.TextView
-import androidx.navigation.fragment.findNavController
+import com.promi.R
+import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentEditProfileBinding
 import com.promi.view.myInformation.adapter.IncludedGroupAdapter
 import com.promi.view.myInformation.dialog.SelectGroupScopeDialog
 
-class EditProfileFragment : Fragment() {
-
-    private lateinit var binding : FragmentEditProfileBinding
-    private lateinit var tvNameCounter : TextView
-    private lateinit var etEditName : EditText
-
+class EditProfileFragment : BaseFragment<FragmentEditProfileBinding> (R.layout.fragment_edit_profile) {
     private lateinit var includedGroupAdapter: IncludedGroupAdapter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = FragmentEditProfileBinding.inflate(layoutInflater)
-
-        etEditName = binding.etEditName
-        tvNameCounter = binding.tvNameCounter
-
-        // if Back Button Clicked
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
         // EditText change Event
-        etEditName.addTextChangedListener(object:TextWatcher{
+        binding.etEditName.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
@@ -52,14 +27,12 @@ class EditProfileFragment : Fragment() {
                 if(p0.toString().isNotEmpty()){
                     nameSize = p0.toString().length
                 }
-                tvNameCounter.text = "${nameSize}/10" // Change name counter
+                binding.tvNameCounter.text = "${nameSize}/10" // Change name counter
             }
 
             override fun afterTextChanged(p0: Editable?) {
             }
         })
-
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
