@@ -1,48 +1,28 @@
 package com.promi.view.myInformation
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.promi.R
+import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentMyFriendListBinding
 import com.promi.view.friend.adapter.MyFriendListRecyclerViewAdapter
 import com.promi.viewmodel.myinformation.MyInformationViewModel
 
-class MyFriendListFragment : Fragment() {
-
-    private lateinit var binding : FragmentMyFriendListBinding
-
+class MyFriendListFragment : BaseFragment<FragmentMyFriendListBinding>(R.layout.fragment_my_friend_list) {
     private lateinit var myFriendRecyclerViewAdapter : MyFriendListRecyclerViewAdapter
     private lateinit var myFriendRecyclerView : RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentMyFriendListBinding.inflate(layoutInflater)
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
         myFriendRecyclerView = binding.recyclerviewMyFriendList
 
         val myInformationViewModel =
             ViewModelProvider(this)[MyInformationViewModel::class.java]
-
-        // 뒤로 가기
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
 
         // 친구 리스트 리사이클러뷰 설정
         myFriendRecyclerView.layoutManager = LinearLayoutManager(this.context)
@@ -78,11 +58,6 @@ class MyFriendListFragment : Fragment() {
 
             }
         })
-
-
-
-
-        return binding.root
     }
 
 }
