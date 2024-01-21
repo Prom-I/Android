@@ -35,7 +35,7 @@ class CreatePromiseFragment : Fragment() {
 
         //Fragment의 초기 설정 화면은 달력 화면
         childFragmentManager.beginTransaction().apply {
-            add(R.id.frameLayout_create_promise, SelectPromiseDateFragment())
+            add(R.id.frameLayout_create_promise, SettingPromiseDateFragment())
             commit()
         }
 
@@ -47,7 +47,7 @@ class CreatePromiseFragment : Fragment() {
             //스택에 쌓여있는게 없다면 달력 화면에 있는 것이므로, 상세 설정 화면으로 이동
             if(childFragmentManager.backStackEntryCount <= 0){
                 childFragmentManager.beginTransaction().apply {
-                    replace(R.id.frameLayout_create_promise, PromiseSettingFragment())
+                    replace(R.id.frameLayout_create_promise, SettingPromiseTimeFragment())
                     addToBackStack(null) // 스택에 추가 (뒤로가기 구현을 위해서)
                     commit()
                 }
