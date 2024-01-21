@@ -2,19 +2,18 @@ package com.promi.ui.myInformation
 
 import android.app.AlertDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.databinding.FragmentPaletteListBinding
-import com.promi.view.palette.PaletteRecyclerViewAdapter
+import com.promi.view.myInformation.adapter.PaletteRecyclerViewAdapter
 import com.promi.viewmodel.myinformation.MyInformationViewModel
 
 
@@ -51,11 +50,6 @@ class PaletteListFragment : Fragment() {
         myInformationViewModel.myPalette.observe(viewLifecycleOwner, Observer { items ->
             paletteRecyclerViewAdapter.setPaletteList(items)
         })
-
-        // 뒤로가기
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         tvPenList = binding.tvPenList
         tvMyPenList = binding.tvMyPenList
