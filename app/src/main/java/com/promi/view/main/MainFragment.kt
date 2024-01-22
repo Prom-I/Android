@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
+import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentMainBinding
@@ -35,7 +36,7 @@ class MainFragment : BaseFragment<FragmentMainBinding> (R.layout.fragment_main) 
     override fun initStartView() {
         super.initStartView()
 
-        //(activity as MainActivity).setToolbar(false, "")
+        (activity as MainActivity).setToolbar(false, "")
 
         myFriendListMiniProfileAdapter = MyFriendListMiniProfileAdapter()
         with(binding.recyclerviewMyFriendListMiniProfile){ // 메인 화면의 친구 목록 어댑터
