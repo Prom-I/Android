@@ -9,63 +9,15 @@
         tools:context=".view.group.SelectGroupFragment">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintlayout_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="20dp"
-                android:background="@android:color/transparent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:src="@drawable/ic_back"/>
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="그룹 선택"
-                android:textColor="@color/black"
-                android:textSize="17sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-            <TextView
-                android:id="@+id/btn_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="27dp"
-                android:text="@string/confirm"
-                android:textSize="17sp"
-                android:fontFamily="@font/pretendard_regular_400"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                tools:textColor="@color/black"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_select_group"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintlayout_toolbar"
-            app:layout_constraintVertical_bias="0.0"
+            app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_select_group" />
 
 
