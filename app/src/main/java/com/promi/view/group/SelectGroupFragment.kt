@@ -1,8 +1,11 @@
 package com.promi.view.group
 
 import android.util.Log
+import android.widget.Button
+import android.widget.LinearLayout
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.MainActivity
@@ -21,7 +24,8 @@ class SelectGroupFragment : BaseFragment<FragmentSelectGroupBinding>(R.layout.fr
 
     // * 레이아웃을 띄운 직후 호출. * 뷰나 액티비티의 속성 등을 초기화. * ex) 리사이클러뷰, 툴바, 드로어뷰..
     override fun initStartView() {
-        (activity as MainActivity).setToolbar(false)
+        (activity as MainActivity).setToolbar(true, "그룹 선")
+        addToToolbar()
 
         // 뷰 모델 가져오기
         groupViewModel = ViewModelProvider(requireActivity())[GroupViewModel::class.java]
@@ -47,16 +51,6 @@ class SelectGroupFragment : BaseFragment<FragmentSelectGroupBinding>(R.layout.fr
     // * 바인딩 이후에 할 일을 여기에 구현. * 그 외에 설정할 것이 있으면 이곳에서 설정. * 클릭 리스너도 이곳에서 설정.
     override fun initAfterBinding() {
 
-        // 뒤로가기
-        binding.btnBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        // 확인 -> 상세 날짜 선택
-        binding.btnConfirm.setOnClickListener {
-            findNavController().navigate(R.id.action_selectGroupFragment_to_selectPromiseDateFragment)
-        }
-
     }
     private fun initRecyclerView(){
         selectGroupRecyclerView = binding.recyclerviewSelectGroup
@@ -66,5 +60,29 @@ class SelectGroupFragment : BaseFragment<FragmentSelectGroupBinding>(R.layout.fr
         selectGroupRecyclerView.layoutManager = LinearLayoutManager(context)
     }
 
+    private fun addToToolbar() {
+        // 툴바 찾기
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        val layout: LinearLayout = toolbar.findViewById(R.id.layout_toolbar_btn)
+
+        val customButton = Button(requireContext())
+
+        // 버튼 생성
+        customButton.apply{
+            text = "확인"
+            textSize = 17f
+            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+            setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        }
+
+        // 툴바에 버튼 추가
+        layout.removeAllViews()
+        layout.addView(customButton)
+
+        // 버튼에 클릭 이벤트 추가
+        customButton.setOnClickListener {
+            navController.navigate(R.id.action_selectGroupFragment_to_selectPromiseDateFragment)
+        }
+    }
 }
 
