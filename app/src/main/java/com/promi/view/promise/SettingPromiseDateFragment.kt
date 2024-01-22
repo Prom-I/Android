@@ -187,7 +187,7 @@ class SettingPromiseDateFragment : BaseFragment<FragmentSettingPromiseDateBindin
 
         // 버튼에 클릭 이벤트 추가
         customButton.setOnClickListener {
-            navController.navigate(R.id.action_selectPromiseDateFragment_to_settingPromiseTimeFragment)
+            navController.navigate(R.id.action_settingPromiseDateFragment_to_settingPromiseTimeFragment)
         }
     }
 

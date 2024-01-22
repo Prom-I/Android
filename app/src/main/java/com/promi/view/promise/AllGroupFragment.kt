@@ -144,8 +144,10 @@ class AllGroupFragment : Fragment() {
                 // 현재 엑션이 스와이프인지 확인(드래그인 경우에는 동작하지 않음)
                 // 스와이프 상태인 경우에 한해 아래 동작 수행
                 if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-                    // 스와이프 상태를 뷰 모델에 저장
-                    groupViewModel.setItemSwipeState(true)
+                    // 스와이프 상태를 어댑터에 업데이트
+                    if (isCurrentlyActive) {
+                        groupRecyclerViewAdapter.updateSwipedPosition(viewHolder.adapterPosition)
+                    }
                     // 스와이프가 시작될 때 한 번만 실행됨
                     // 1. 스와이프 시작(손가락이 화면에 닿았음)
                     // 사용자가 항목을 선택하고 손을 댔을때 dx의 시점이 0이라면(리셋이후 스와이프 엑션을 시작한다면)
