@@ -3,11 +3,10 @@ package com.promi.view.promise
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentAllGroupBinding
-import com.promi.databinding.FragmentPromiseBinding
 import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.viewmodel.promise.PromiseViewModel
 
@@ -56,7 +54,7 @@ class AllGroupFragment : Fragment() {
 
         // 그룹 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_settingGroupMemberFragment)
         }
 
 
@@ -146,10 +144,8 @@ class AllGroupFragment : Fragment() {
                 // 현재 엑션이 스와이프인지 확인(드래그인 경우에는 동작하지 않음)
                 // 스와이프 상태인 경우에 한해 아래 동작 수행
                 if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-                    // 스와이프 상태를 어댑터에 업데이트
-                    if (isCurrentlyActive) {
-                        groupRecyclerViewAdapter.updateSwipedPosition(viewHolder.adapterPosition)
-                    }
+                    // 스와이프 상태를 뷰 모델에 저장
+                    groupViewModel.setItemSwipeState(true)
                     // 스와이프가 시작될 때 한 번만 실행됨
                     // 1. 스와이프 시작(손가락이 화면에 닿았음)
                     // 사용자가 항목을 선택하고 손을 댔을때 dx의 시점이 0이라면(리셋이후 스와이프 엑션을 시작한다면)

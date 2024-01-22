@@ -1,17 +1,13 @@
 package com.promi.view.group
 
-import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.promi.R
-import com.promi.databinding.FragmentCreateGroupBinding
+import com.promi.base.BaseFragment
+import com.promi.databinding.FragmentSettingGroupMemberBinding
 import com.promi.view.friend.adapter.FriendRecyclerViewAdapter
 import com.promi.view.main.adapter.MiniProfileRecyclerViewAdapter
 import com.promi.viewmodel.friend.FriendViewModel
@@ -19,24 +15,22 @@ import com.promi.viewmodel.friend.FriendViewModel
 
 //그룹 생성과 관련된 프래그먼트
 //사용자로부터 그룹에 추가할 친구를 선택받고, 그 친구들을 바탕으로 그룹을 만든다.
-class CreateGroupFragment : Fragment(){
-    private var _binding: FragmentCreateGroupBinding? = null
-    private val binding get() = _binding!!
-
+class SettingGroupMemberFragment : BaseFragment<FragmentSettingGroupMemberBinding> (R.layout.fragment_setting_group_member){
     private lateinit var friendViewModel: FriendViewModel // 친구, 선택된 친구를 관리하기 위한 뷰모델
+    private lateinit var friendsAdapter: FriendRecyclerViewAdapter
+    private lateinit var selectedFriendsAdapter: MiniProfileRecyclerViewAdapter
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentCreateGroupBinding.inflate(inflater, container, false)
+    var sizeGroupMember: Int = 0
+
+    override fun initStartView() {
+        super.initStartView()
+
         //친구데이터에 대한 뷰 모델
         friendViewModel = ViewModelProvider(requireActivity()).get(FriendViewModel::class.java)
 
         // 빈 배열로 어댑터 초기화
-        val friendsAdapter = FriendRecyclerViewAdapter(emptyList(), friendViewModel)
-        val selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList(), friendViewModel,friendsAdapter)
+        friendsAdapter = FriendRecyclerViewAdapter(emptyList(), friendViewModel)
+        selectedFriendsAdapter = MiniProfileRecyclerViewAdapter(emptyList(), friendViewModel,friendsAdapter)
 
         binding.recyclerviewSearchUser.apply {
             layoutManager = LinearLayoutManager(context)
@@ -47,7 +41,12 @@ class CreateGroupFragment : Fragment(){
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = selectedFriendsAdapter
         }
+    }
 
+    override fun initDataBinding() {
+        super.initDataBinding()
+
+        binding.view = this
 
         //뷰 모델에서 변화 발생시 리사이클러뷰에 반영
         friendViewModel.friends.observe(viewLifecycleOwner) { friends ->
@@ -58,8 +57,14 @@ class CreateGroupFragment : Fragment(){
             selectedFriendsAdapter.updateData(selectedFriends)
             //친구 추가 선택시, 스크롤을 가장 왼쪽으로 이동
             binding.recyclerviewSelectedUser.scrollToPosition(selectedFriendsAdapter.itemCount - 1)
-            binding.tvGroupCount.text = selectedFriends.size.toString() //선택된 친구 수 만큼 화면에 보여주기 위함
+            sizeGroupMember = selectedFriends.size
+
+            binding.invalidateAll()
         }
+    }
+
+    override fun initAfterBinding() {
+        super.initAfterBinding()
 
         binding.btnClear.setOnClickListener {
             findNavController().popBackStack()
@@ -96,16 +101,7 @@ class CreateGroupFragment : Fragment(){
         // 필요한 로직 => 그룹에 포함된 친구가 한명도 없을 경우에도 그룹 생성 허용?
         binding.btnConfirm.setOnClickListener {
             //그룹 설정 화면으로 이동
-            findNavController().navigate(R.id.action_navigation_create_group_to_groupSettingFragment)
+            findNavController().navigate(R.id.action_settingGroupMemberFragment_to_settingGroupNameFragment)
         }
-
-
-        return binding.root
-    }
-
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }

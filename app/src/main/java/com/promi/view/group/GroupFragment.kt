@@ -6,12 +6,12 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.StyleSpan
 import android.view.Gravity
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -71,7 +71,7 @@ class GroupFragment : Fragment(),PromiseItemClickListener {
 
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_groupFragment_to_createPromiseFragment)
+            findNavController().navigate(R.id.action_groupFragment_to_selectPromiseDateFragment)
         }
 
         // promiseRecyclerviewAdapter.setList(groupViewModel.promises)

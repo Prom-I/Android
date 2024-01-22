@@ -39,6 +39,4 @@ class NotificationFragment:BaseFragment<FragmentNotificationBinding> (R.layout.f
         }
     }
 
-
-
 }

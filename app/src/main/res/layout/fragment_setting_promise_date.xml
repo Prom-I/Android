@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="test"
+            type="com.promi.view.promise.SettingPromiseDateFragment"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.promise.SettingPromiseDateFragment">
+
+        <TextView
+            android:id="@+id/tv_info_select_promise_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/pretendard_medium_500"
+            android:text="@string/info_select_promise_date"
+            android:textColor="@color/mainBlack"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_select_promise_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/shape_radius8"
+            android:backgroundTint="@{test.isDateRangePickerVisible == true ? @color/mainGray : @color/mainLightGray}"
+            android:fontFamily="400"
+            android:paddingStart="12dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="12dp"
+            android:paddingBottom="6dp"
+            android:textColor="@color/mainBlack"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="@+id/tv_info_select_promise_date"
+            app:layout_constraintTop_toBottomOf="@+id/tv_info_select_promise_date" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_promise_time_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_select_promise_date">
+
+            <TextView
+                android:id="@+id/tv_all_day"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:fontFamily="@font/pretendard_medium_500"
+                android:text="하루종일"
+                android:textColor="@color/mainBlack"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switch_is_all_day"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_all_day"
+                app:layout_constraintStart_toEndOf="@+id/tv_all_day"
+                app:layout_constraintTop_toTopOf="@+id/tv_all_day" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layout_select_promise_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_promise_time_switch"
+            android:visibility='@{test.isChecked == true ? View.GONE : View.VISIBLE}'>
+
+            <TextView
+                android:id="@+id/tv_info_select_promise_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:fontFamily="@font/pretendard_medium_500"
+                android:text="@string/select_promise_date"
+                android:textColor="@color/mainBlack"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_select_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/shape_radius8"
+                android:backgroundTint="@{test.selectedTime == test.SelectedTime.START &amp;&amp; test.isTimePickerVisible == true ? @color/mainGray : @color/mainLightGray}"
+                android:fontFamily="400"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/mainBlack"
+                android:textSize="17sp"
+                app:layout_constraintStart_toStartOf="@+id/tv_info_select_promise_time"
+                app:layout_constraintTop_toBottomOf="@id/tv_info_select_promise_time" />
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="~"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_select_start_time"
+                app:layout_constraintStart_toEndOf="@+id/tv_select_start_time"
+                app:layout_constraintTop_toTopOf="@+id/tv_select_start_time" />
+
+            <TextView
+                android:id="@+id/tv_select_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/shape_radius8"
+                android:backgroundTint="@{test.selectedTime == test.SelectedTime.END &amp;&amp; test.isTimePickerVisible == true ? @color/mainGray : @color/mainLightGray}"
+                android:fontFamily="400"
+                android:paddingStart="12dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="6dp"
+                android:textColor="@color/mainBlack"
+                android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_select_start_time"
+                app:layout_constraintStart_toEndOf="@+id/textView15"
+                app:layout_constraintTop_toTopOf="@+id/tv_select_start_time" />
+
+            <TimePicker
+                android:id="@+id/time_picker"
+                style="@style/MyTimePickerTheme"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:timePickerMode="spinner"
+                android:visibility='@{test.isTimePickerVisible == true ? View.VISIBLE : View.GONE}'
+                android:hour="@{test.selectedTime == test.SelectedTime.START ? test.startTime.hour : test.endTime.hour}"
+                android:minute="@{test.selectedTime == test.SelectedTime.START ? test.startTime.minute : test.endTime.minute}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_select_start_time"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

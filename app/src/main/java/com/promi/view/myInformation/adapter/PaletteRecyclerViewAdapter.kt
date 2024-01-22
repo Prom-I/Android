@@ -1,4 +1,4 @@
-package com.promi.view.palette
+package com.promi.view.myInformation.adapter
 
 import android.content.res.ColorStateList
 import android.util.Log
