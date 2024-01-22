@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.promi.MainActivity
 import com.promi.R
 import com.promi.databinding.FragmentGroupBinding
 import com.promi.view.group.adapter.GroupMemberRecyclerViewAdapter
@@ -48,6 +49,8 @@ class GroupFragment : Fragment(),PromiseItemClickListener {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentGroupBinding.inflate(layoutInflater)
+
+        (activity as MainActivity).setToolbar(false)
 
         // 번들로부터 그룹 이름 얻어오기
         val groupName = arguments?.getString("groupName")
