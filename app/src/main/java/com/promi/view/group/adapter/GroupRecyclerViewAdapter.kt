@@ -73,7 +73,7 @@ class GroupRecyclerViewAdapter(
                 // 번들에 그룹 이름 넘겨서 보냄(추후 그룹 아이디 등을 보내서 약속목록을 가져오는 로직 필요?
                 val bundle = Bundle()
                 bundle.putString("groupName", holder.tvGroupName.text as String)
-                navController.navigate(R.id.action_navigation_promise_to_groupFragment,bundle)
+                navController.navigate(R.id.action_navigation_all_promises_and_groups_to_groupFragment,bundle)
             } else {
                 Log.d("Swipe State", "${viewModel.getItemSwipeState()}")
             }

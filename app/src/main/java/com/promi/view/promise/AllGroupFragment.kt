@@ -3,10 +3,10 @@ package com.promi.view.promise
 import android.content.Context
 import android.graphics.Canvas
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentAllGroupBinding
-import com.promi.databinding.FragmentPromiseBinding
 import com.promi.view.group.adapter.GroupRecyclerViewAdapter
 import com.promi.viewmodel.promise.PromiseViewModel
 
@@ -56,7 +55,7 @@ class AllGroupFragment : Fragment() {
 
         // 그룹 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_settingGroupMemberFragment)
         }
 
 

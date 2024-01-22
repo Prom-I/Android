@@ -24,17 +24,17 @@
         android:label="@string/promise"
         tools:layout="@layout/fragment_all_promises_and_groups" >
         <action
-            android:id="@+id/action_navigation_promise_to_navigation_create_group"
-            app:destination="@id/navigation_create_group" />
-        <action
-            android:id="@+id/action_navigation_promise_to_groupFragment"
-            app:destination="@id/groupFragment" />
-        <action
             android:id="@+id/action_navigation_all_promises_and_groups_to_promiseDetailFragment"
             app:destination="@id/promiseDetailFragment" />
         <action
             android:id="@+id/action_navigation_all_promises_and_groups_to_selectPromiseDateFragment"
             app:destination="@id/selectPromiseDateFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_groupFragment"
+            app:destination="@id/groupFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_settingGroupMemberFragment"
+            app:destination="@id/settingGroupMemberFragment" />
     </fragment>
 
     <fragment
@@ -58,15 +58,6 @@
         android:label="fragment_add_friends"
         tools:layout="@layout/fragment_add_friends" />
     <fragment
-        android:id="@+id/navigation_create_group"
-        android:name="com.promi.view.group.CreateGroupFragment"
-        android:label="CreateGroupFragment"
-        tools:layout="@layout/fragment_create_group" >
-        <action
-            android:id="@+id/action_navigation_create_group_to_groupSettingFragment"
-            app:destination="@id/groupSettingFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/myFriendListFragment"
         android:name="com.promi.view.myInformation.MyFriendListFragment"
         android:label="fragment_my_friend_list"
@@ -77,10 +68,14 @@
         android:label="fragment_edit_profile"
         tools:layout="@layout/fragment_edit_profile" />
     <fragment
-        android:id="@+id/groupSettingFragment"
-        android:name="com.promi.view.group.GroupSettingFragment"
+        android:id="@+id/settingGroupNameFragment"
+        android:name="com.promi.view.group.SettingGroupNameFragment"
         android:label="GroupSettingFragment"
-        tools:layout="@layout/fragment_group_setting"/>
+        tools:layout="@layout/fragment_setting_group_name">
+        <action
+            android:id="@+id/action_settingGroupNameFragment_to_navigation_all_promises_and_groups"
+            app:destination="@id/navigation_all_promises_and_groups" />
+    </fragment>
     <fragment
         android:id="@+id/groupFragment"
         android:name="com.promi.view.group.GroupFragment"
@@ -90,14 +85,9 @@
             android:id="@+id/action_groupFragment_to_promiseDetailFragment"
             app:destination="@id/promiseDetailFragment" />
         <action
-            android:id="@+id/action_groupFragment_to_createPromiseFragment"
-            app:destination="@id/createPromiseFragment" />
+            android:id="@+id/action_groupFragment_to_selectPromiseDateFragment"
+            app:destination="@id/selectPromiseDateFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/createPromiseFragment"
-        android:name="com.promi.view.promise.CreatePromiseFragment"
-        android:label="fragment_create_promise"
-        tools:layout="@layout/fragment_create_promise" />
     <fragment
         android:id="@+id/navigation_notification"
         android:name="com.promi.view.notification.NotificationFragment"
@@ -120,7 +110,45 @@
         tools:layout="@layout/fragment_promise_detail"/>
     <fragment
         android:id="@+id/selectPromiseDateFragment"
-        android:name="com.promi.view.promise.SelectPromiseDateFragment"
+        android:name="com.promi.view.promise.SettingPromiseDateFragment"
         android:label="SelectPromiseDateFragment"
-        tools:layout="@layout/fragment_select_promise_date"/>
+        tools:layout="@layout/fragment_setting_promise_date">
+        <action
+            android:id="@+id/action_selectPromiseDateFragment_to_settingPromiseTimeFragment"
+            app:destination="@id/settingPromiseTimeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingPromiseTimeFragment"
+        android:name="com.promi.view.promise.SettingPromiseTimeFragment"
+        android:label="SettingPromiseTimeFragment"
+        tools:layout="@layout/fragment_setting_promise_time">
+        <action
+            android:id="@+id/action_settingPromiseTimeFragment_to_settingPromiseNameFragment"
+            app:destination="@id/settingPromiseNameFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingPromiseNameFragment"
+        android:name="com.promi.view.promise.SettingPromiseNameFragment"
+        android:label="SettingPromiseNameFragment"
+        tools:layout="@layout/fragment_setting_promise_name">
+        <action
+            android:id="@+id/action_settingPromiseNameFragment_to_groupFragment"
+            app:destination="@id/groupFragment"
+            app:popUpTo="@id/navigation_all_promises_and_groups"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/allGroupFragment"
+        android:name="com.promi.view.promise.AllGroupFragment"
+        android:label="AllGroupFragment"
+        tools:layout="@layout/fragment_all_group"/>
+    <fragment
+        android:id="@+id/settingGroupMemberFragment"
+        android:name="com.promi.view.group.SettingGroupMemberFragment"
+        android:label="SettingGroupMemberFragment"
+        tools:layout="@layout/fragment_setting_group_member">
+        <action
+            android:id="@+id/action_settingGroupMemberFragment_to_settingGroupNameFragment"
+            app:destination="@id/settingGroupNameFragment" />
+    </fragment>
 </navigation>
