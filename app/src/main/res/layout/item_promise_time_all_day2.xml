@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_time1"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+    <View
+        android:id="@+id/view_time2"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time3"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time4"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time5"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time6"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+    <View
+        android:id="@+id/view_time7"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time8"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time9"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time10"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time11"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+    <View
+        android:id="@+id/view_time12"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time13"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time14"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time15"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time16"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+    <View
+        android:id="@+id/view_time17"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time18"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time19"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time20"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time21"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+    <View
+        android:id="@+id/view_time22"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time23"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+    <View
+        android:id="@+id/view_time24"
+        android:layout_width="48dp"
+        android:layout_height="24dp"
+        android:background="@drawable/shape_promise_time"/>
+
+</LinearLayout>

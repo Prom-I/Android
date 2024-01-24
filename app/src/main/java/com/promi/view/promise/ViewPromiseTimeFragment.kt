@@ -1,6 +1,11 @@
 package com.promi.view.promise
 
+import android.content.Context
+import android.os.Build
+import android.util.DisplayMetrics
 import android.util.Log
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
@@ -84,7 +89,12 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initPromiseTimeRecyclerView(){
-        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize)
+
+        // 현재 뷰를 기준으로 그려줄 시간 셀 하나의 width, hegith 받아와 promiseTimeRecyclerViewAdapter로 넘겨주기
+        val width = requireContext().getScreenWidth()
+
+
+        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize,width/7)
         promiseTimeRecyclerView.adapter = promiseTimeRecyclerViewAdapter // 어뎁터 부착
         // 가로로 그려줘야함(날짜는 가로로)
         promiseTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
@@ -95,6 +105,38 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
         recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
+
+
+    // 현재 화면의 가로 길이 구하기
+    fun Context.getScreenWidth(): Int {
+        val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = wm.currentWindowMetrics
+            val insets = windowMetrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.width() - insets.left - insets.right
+        } else {
+            val displayMetrics = DisplayMetrics()
+            wm.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        }
+    }
+
+    // 현재 화면의 세로 길이 구하기
+    fun Context.getScreenHeight(): Int {
+        val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = wm.currentWindowMetrics
+            val insets = windowMetrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.height() - insets.bottom - insets.top
+        } else {
+            val displayMetrics = DisplayMetrics()
+            wm.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.heightPixels
+        }
+    }
+
 
 
     private fun addToToolbar() {
