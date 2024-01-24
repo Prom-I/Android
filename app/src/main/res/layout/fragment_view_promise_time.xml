@@ -17,7 +17,9 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="15dp"/>
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
+                tools:listitem="@layout/item_time_textview"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -27,7 +29,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/recyclerview_time_text"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/item_promise_time_all_day"/>
+                tools:listitem="@layout/item_promise_time_all_day"
+                android:layout_marginTop="19dp"
+                android:layout_marginStart="8dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_recommend_time"
