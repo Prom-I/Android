@@ -1,9 +1,11 @@
 package com.promi.view.promise
 
+import android.util.Log
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.MainActivity
@@ -11,9 +13,13 @@ import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
 import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
+import com.promi.view.promise.adapter.RecommendTimeItemClickListener
+import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
+import com.promi.viewmodel.group.GroupViewModel
+import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
-class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time) {
+class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
 
     // 시간 텍스트뷰 리사이클러뷰(왼쪽에 시간 보여주는 용도)
     private lateinit var timeTextViewRecyclerView : RecyclerView
@@ -23,17 +29,33 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private lateinit var promiseTimeRecyclerViewAdapter : PromiseTimeRecyclerViewAdapter
     // 추천 약속 시간
     private lateinit var recommendTimeRecyclerView : RecyclerView
+    private lateinit var recommendTimeRecyclerViewAdapter: RecommendTimeRecyclerViewAdapter
+
+    private lateinit var viewPromiseTimeViewModel : ViewPromiseTimeViewModel
 
     // 나중에 번들을 통해서 시간, 날짜 정보를 입력받아서 그만큼 그려주는 식으로
     // 디자인 수정해서 일주일로 고정될 경우, 7일씩 잘라서 데이터 불러오면 될듯
     private var timeSize : Int = 12 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
     private var daySize : Int = 7 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
 
+
+    // 화면 이동 로직 작성 필요
+    override fun onRecommendTimeItemClicked(position: Int) {
+        Log.d("onRecommendTimeItemClicked : ","$position")
+    }
+
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "1차 회의")
         addToToolbar()
 
         // 뷰 모델 가져오기
+        viewPromiseTimeViewModel = ViewModelProvider(requireActivity())[ViewPromiseTimeViewModel::class.java]
+
+        // 약속시간 관련 정보 리사이클러뷰에 바인딩
+        // observe data
+        viewPromiseTimeViewModel.recommendDate.observe(viewLifecycleOwner) { recommendDate ->
+            recommendTimeRecyclerViewAdapter.updateData(recommendDate)
+        }
     }
 
     // * 데이터 바인딩 설정.
@@ -69,7 +91,9 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initRecommendTimeRecyclerView() {
-
+        recommendTimeRecyclerViewAdapter = RecommendTimeRecyclerViewAdapter(this)
+        recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
+        recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
     }
 
 
