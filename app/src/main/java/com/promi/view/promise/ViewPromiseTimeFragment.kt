@@ -10,6 +10,7 @@ import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
+import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
 
 class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time) {
@@ -19,11 +20,14 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private lateinit var timeTextViewRecyclerViewAdapter : TimeTextViewRecyclerViewAdapter
     // 시간 리사이클러뷰(핵심 기능, 민트색으로 시간정보를 보여주는 부분)
     private lateinit var promiseTimeRecyclerView : RecyclerView
+    private lateinit var promiseTimeRecyclerViewAdapter : PromiseTimeRecyclerViewAdapter
     // 추천 약속 시간
     private lateinit var recommendTimeRecyclerView : RecyclerView
 
-    private var timeSize : Int = 10 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
-    private var daySize : Int = 0 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
+    // 나중에 번들을 통해서 시간, 날짜 정보를 입력받아서 그만큼 그려주는 식으로
+    // 디자인 수정해서 일주일로 고정될 경우, 7일씩 잘라서 데이터 불러오면 될듯
+    private var timeSize : Int = 12 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
+    private var daySize : Int = 7 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
 
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "1차 회의")
@@ -58,7 +62,10 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initPromiseTimeRecyclerView(){
-
+        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize)
+        promiseTimeRecyclerView.adapter = promiseTimeRecyclerViewAdapter // 어뎁터 부착
+        // 가로로 그려줘야함(날짜는 가로로)
+        promiseTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
     }
 
     private fun initRecommendTimeRecyclerView() {
