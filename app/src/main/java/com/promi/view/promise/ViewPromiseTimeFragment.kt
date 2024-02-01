@@ -16,6 +16,7 @@ import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.RecommendTimeItemClickListener
 import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
+import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
 import com.promi.viewmodel.group.GroupViewModel
 import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
@@ -37,6 +38,9 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     // 디자인 수정해서 일주일로 고정될 경우, 7일씩 잘라서 데이터 불러오면 될듯
     private var timeSize : Int = 12 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
     private var daySize : Int = 7 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
+
+    private var sWidthOneDP : Double = 0.0 // 스크린 1dp의 크기(디자인 기준으로 393이 가로의 크기임)
+    private var sHeightOneDP : Double = 0.0
 
 
     // 화면 이동 로직 작성 필요
@@ -81,11 +85,31 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(timeSize,"09:00")
         timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
         timeTextViewRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+
+
+        // 아이템 위아래 간격 설정
+
+        // 393 : 310 = width : x
+        // x = 310/393 * width
+        //val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+        val x = (310.0/393)*width
+        Log.d("heightLog","${x}")
+        // 310 : 277 = x : height
+        // height * 310 = 277x
+        // height = (277.0/310)*x
+        val height = (277.0/310)*x
+        Log.d("heightLog","${height}")
+
+        // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
+        val itemHeight = ((height)/(timeSize*2+1)).toInt()
+        timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
     }
 
     private fun initPromiseTimeRecyclerView(){
         val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-
+        sWidthOneDP = (width/393.0)
         // 393 : 310 = width : x
         // x = 310/393 * width
         // x = 7*time cell
@@ -103,6 +127,12 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         recommendTimeRecyclerViewAdapter = RecommendTimeRecyclerViewAdapter(this)
         recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
         recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+
+        // 위 아래 간격 지정
+        val space = dipToPx(16f,requireContext())
+        recommendTimeRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(space))
+
     }
 
 

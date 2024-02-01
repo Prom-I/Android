@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 // 전체 시간의 길이와, 시작 시간을 입력받아 1시간 단위로 시간 텍스트뷰를 그린다.
-class TimeTextViewRecyclerViewAdapter(private val timeSize : Int, private val startTime : String)
+class TimeTextViewRecyclerViewAdapter(
+    private val timeSize : Int,
+    private val startTime : String, )
     : RecyclerView.Adapter<TimeTextViewRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -22,6 +25,12 @@ class TimeTextViewRecyclerViewAdapter(private val timeSize : Int, private val st
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val context = parent.context
         val view = LayoutInflater.from(context).inflate(R.layout.item_time_textview,parent,false)
+
+//        // 셀 크기 동적 변환
+//        view.updateLayoutParams<RecyclerView.LayoutParams> {
+//            height = itemHeight // -> 세로 크기 지정
+//        }
+
         return ViewHolder(view)
     }
 
