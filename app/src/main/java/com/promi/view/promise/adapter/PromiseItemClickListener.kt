@@ -1,5 +1,5 @@
 package com.promi.view.promise.adapter
 
 interface PromiseItemClickListener {
-    fun onPromiseItemClicked(positio : Int)
+    fun onPromiseItemClicked(position : Int, type : Int)
 }

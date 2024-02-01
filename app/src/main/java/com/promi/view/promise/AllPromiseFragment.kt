@@ -17,7 +17,9 @@ import com.promi.viewmodel.group.GroupViewModel
 
 class AllPromiseFragment : Fragment(),PromiseItemClickListener {
 
-
+    // 약속 타입 정의
+    private val PROGRESS = 0 // 진행중인 약속
+    private val DONE = 1 // 끝난 약속
 
     private var _binding: FragmentAllPromiseBinding? = null
     private val binding get() = _binding!!
@@ -58,8 +60,13 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
     }
 
     // Promise Item Click Event Delegate
-    override fun onPromiseItemClicked(positio: Int) {
-        findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_promiseDetailFragment)
+    override fun onPromiseItemClicked(positio: Int,type : Int) {
+        if (type == PROGRESS) {
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_viewPromiseTimeFragment)
+        } else if (type == DONE){
+            findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_promiseDetailFragment)
+        }
+
     }
 
     // init Group RecyclerView

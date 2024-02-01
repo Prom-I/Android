@@ -24,7 +24,7 @@ class SelectGroupFragment : BaseFragment<FragmentSelectGroupBinding>(R.layout.fr
 
     // * 레이아웃을 띄운 직후 호출. * 뷰나 액티비티의 속성 등을 초기화. * ex) 리사이클러뷰, 툴바, 드로어뷰..
     override fun initStartView() {
-        (activity as MainActivity).setToolbar(true, "그룹 선")
+        (activity as MainActivity).setToolbar(true, "그룹 선택")
         addToToolbar()
 
         // 뷰 모델 가져오기
