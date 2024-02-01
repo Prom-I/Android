@@ -12,7 +12,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/red"
         android:text="09:00"
-        android:textSize="10dp"
-        android:layout_marginTop="12dp"/>
+        android:textSize="10dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

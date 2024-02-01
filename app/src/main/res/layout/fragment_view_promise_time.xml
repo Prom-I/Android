@@ -70,20 +70,20 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@id/btn_add_schedule"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="7dp"
                 tools:listitem="@layout/item_time_textview"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerview_view_promise_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/btn_add_schedule"
-                app:layout_constraintStart_toEndOf="@id/recyclerview_time_text"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="6dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                tools:listitem="@layout/item_promise_time_all_day"
-                android:layout_marginTop="22dp"
-                android:layout_marginStart="8dp"/>
+                app:layout_constraintStart_toStartOf="@id/recyclerview_time_text"
+                app:layout_constraintTop_toBottomOf="@id/btn_add_schedule"
+                tools:listitem="@layout/item_promise_time_all_day" />
 
             <View
                 android:id="@+id/view_divide_line"

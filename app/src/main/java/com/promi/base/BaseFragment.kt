@@ -1,9 +1,14 @@
 package com.promi.base
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -48,6 +53,38 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
         initDataBinding()
         initAfterBinding()
     }
+
+    // * 동적 화면 구성을 위한 확장 함수
+    // * 현재 화면의 가로 길이 반환
+    fun Context.getScreenWidth(): Int {
+        val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = wm.currentWindowMetrics
+            val insets = windowMetrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.width() - insets.left - insets.right
+        } else {
+            val displayMetrics = DisplayMetrics()
+            wm.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.widthPixels
+        }
+    }
+
+    // * 현재 화면의 세로 길이 반환
+    fun Context.getScreenHeight(): Int {
+        val wm = getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = wm.currentWindowMetrics
+            val insets = windowMetrics.windowInsets
+                .getInsetsIgnoringVisibility(WindowInsets.Type.systemBars())
+            windowMetrics.bounds.height() - insets.bottom - insets.top
+        } else {
+            val displayMetrics = DisplayMetrics()
+            wm.defaultDisplay.getMetrics(displayMetrics)
+            displayMetrics.heightPixels
+        }
+    }
+
 
     protected fun shortToast(msg: String) =
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

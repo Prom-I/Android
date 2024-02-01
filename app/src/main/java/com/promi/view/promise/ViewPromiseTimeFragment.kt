@@ -84,7 +84,16 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initPromiseTimeRecyclerView(){
-        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize)
+        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+
+        // 393 : 310 = width : x
+        // x = 310/393 * width
+        // x = 7*time cell
+        // time cell = x/7
+        // time cell = ((310/393)/7)*width
+        val timeItemSize = ((310.0/393)/7)*width
+
+        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize,timeItemSize)
         promiseTimeRecyclerView.adapter = promiseTimeRecyclerViewAdapter // 어뎁터 부착
         // 가로로 그려줘야함(날짜는 가로로)
         promiseTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
