@@ -35,7 +35,7 @@ class TimeTextViewRecyclerViewAdapter(
     }
 
     override fun getItemCount(): Int {
-        return timeSize
+        return timeSize+1
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

@@ -12,15 +12,20 @@ import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
+import com.promi.view.promise.adapter.DayTextViewRecyclerViewAdapter
+import com.promi.view.promise.adapter.HorizontalSpaceItemDecoration
 import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.RecommendTimeItemClickListener
 import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
 import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
-import com.promi.viewmodel.group.GroupViewModel
 import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
 class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
+
+    // 날짜 텍스트뷰 리사이클러뷰
+    private lateinit var dayTextViewRecyclerView : RecyclerView
+    private lateinit var dayTextViewRecyclerViewAdapter : DayTextViewRecyclerViewAdapter
 
     // 시간 텍스트뷰 리사이클러뷰(왼쪽에 시간 보여주는 용도)
     private lateinit var timeTextViewRecyclerView : RecyclerView
@@ -39,8 +44,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private var timeSize : Int = 12 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
     private var daySize : Int = 7 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
 
-    private var sWidthOneDP : Double = 0.0 // 스크린 1dp의 크기(디자인 기준으로 393이 가로의 크기임)
-    private var sHeightOneDP : Double = 0.0
+    private var timeItemHeight : Double = 0.0 // 아이템 셀 하나의 세로 크기
 
 
     // 화면 이동 로직 작성 필요
@@ -64,6 +68,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
     // * 데이터 바인딩 설정.
     override fun initDataBinding() {
+        dayTextViewRecyclerView = binding.recyclerviewDayTime
         timeTextViewRecyclerView = binding.recyclerviewTimeText
         promiseTimeRecyclerView = binding.recyclerviewViewPromiseTime
         recommendTimeRecyclerView = binding.recyclerviewRecommendTime
@@ -75,9 +80,10 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initRecyclerView(){
-        initTimeTextRecyclerView()
         initPromiseTimeRecyclerView()
+        initTimeTextRecyclerView()
         initRecommendTimeRecyclerView()
+        initDayTextRecyclerView()
     }
 
     private fun initTimeTextRecyclerView(){
@@ -102,14 +108,17 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         val height = (277.0/310)*x
         Log.d("heightLog","${height}")
 
+
+        //val itemHeight = (timeItemHeight + 20)/3
+
+
         // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
-        val itemHeight = ((height)/(timeSize*2+1)).toInt()
+        val itemHeight = ((height)/((timeSize+1)*2+1)).toInt()
         timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
     }
 
     private fun initPromiseTimeRecyclerView(){
         val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-        sWidthOneDP = (width/393.0)
         // 393 : 310 = width : x
         // x = 310/393 * width
         // x = 7*time cell
@@ -117,19 +126,37 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         // time cell = ((310/393)/7)*width
         val timeItemSize = ((310.0/393)/7)*width
 
+        // 44.143:24 = w : h
+        // h = 24w / 44.143
+        timeItemHeight = (24/44.143)*timeItemSize
+
         promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize,timeItemSize)
         promiseTimeRecyclerView.adapter = promiseTimeRecyclerViewAdapter // 어뎁터 부착
         // 가로로 그려줘야함(날짜는 가로로)
         promiseTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
     }
 
+
+    private fun initDayTextRecyclerView(){
+
+
+        // 올바른 날짜 형식으로 시작 날짜 지정
+        dayTextViewRecyclerViewAdapter = DayTextViewRecyclerViewAdapter("2024-08-28")
+        dayTextViewRecyclerView.adapter = dayTextViewRecyclerViewAdapter // 어댑터 부착
+        dayTextViewRecyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.HORIZONTAL, false)
+
+
+        val space = dipToPx(6f,requireContext())
+        dayTextViewRecyclerView.addItemDecoration(HorizontalSpaceItemDecoration(space))
+    }
+
+
     private fun initRecommendTimeRecyclerView() {
         recommendTimeRecyclerViewAdapter = RecommendTimeRecyclerViewAdapter(this)
         recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
         recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
 
-
-        // 위 아래 간격 지정
+        // 좌우 간격 지정
         val space = dipToPx(16f,requireContext())
         recommendTimeRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(space))
 
