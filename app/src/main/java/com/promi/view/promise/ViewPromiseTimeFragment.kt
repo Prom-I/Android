@@ -50,6 +50,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     // 화면 이동 로직 작성 필요
     override fun onRecommendTimeItemClicked(position: Int) {
         Log.d("onRecommendTimeItemClicked : ","$position")
+        navController.navigate(R.id.action_viewPromiseTimeFragment_to_recommendTimeDetailFragment)
     }
 
     override fun initStartView() {
@@ -184,7 +185,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
         // 버튼에 클릭 이벤트 추가
         customButton.setOnClickListener {
-            //navController.navigate(R.id.action_selectGroupFragment_to_selectPromiseDateFragment)
+            //
         }
     }
 
