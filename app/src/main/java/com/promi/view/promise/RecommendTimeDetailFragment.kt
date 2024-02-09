@@ -9,16 +9,11 @@ import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentRecommendTimeDetailBinding
-import com.promi.view.promise.adapter.RecommendTimeItemClickListener
 
-class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail),RecommendTimeItemClickListener {
+// 추천 날짜에 연관된 시간들 리스트 형식으로 제공
+// 약속에 참여 가능한 멤버들, 불가능한 멤버들 보여주기
 
-
-
-    // 화면 이동 로직 작성 필요
-    override fun onRecommendTimeItemClicked(position: Int) {
-        Log.d("onRecommendTimeItemClicked : ","$position")
-    }
+class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail) {
 
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "1차 회의")
@@ -41,8 +36,6 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
     }
 
 
-
-
     private fun addToToolbar() {
         // 툴바 찾기
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
@@ -58,7 +51,7 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
             setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
         }
 
-        // 툴바에 버튼 추가
+        // 툴바에 버튼 추가 -> 이미지 버튼으로 변경 필요
         layout.removeAllViews()
         layout.addView(customButton)
 
