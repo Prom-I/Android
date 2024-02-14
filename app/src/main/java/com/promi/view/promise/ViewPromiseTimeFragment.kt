@@ -151,7 +151,30 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private fun getResourceId(resourceName: String): Int {
         return resources.getIdentifier(resourceName, "id", requireActivity().packageName)
     }
+
+    private fun addToToolbar() {
+        // 툴바 찾기
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        val layout: LinearLayout = toolbar.findViewById(R.id.layout_toolbar_btn)
+
+        val customButton = Button(requireContext())
+
+        // 버튼 생성
+        customButton.apply{
+            text = "확인"
+            textSize = 17f
+            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+            setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        }
+
+        // 툴바에 버튼 추가
+        layout.removeAllViews()
+        layout.addView(customButton)
+
+        // 버튼에 클릭 이벤트 추가
+        customButton.setOnClickListener {
+            //navController.navigate(R.id.action_selectGroupFragment_to_selectPromiseDateFragment)
+        }
+    }
+
 }
-
-
-

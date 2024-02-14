@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_navigation_all_promises_and_groups_to_selectGroupFragment"
             app:destination="@id/selectGroupFragment" />
+        <action
+            android:id="@+id/action_navigation_all_promises_and_groups_to_viewPromiseTimeFragment"
+            app:destination="@id/viewPromiseTimeFragment" />
     </fragment>
 
     <fragment
@@ -87,6 +90,9 @@
         <action
             android:id="@+id/action_groupFragment_to_selectPromiseDateFragment"
             app:destination="@id/settingPromiseDateFragment" />
+        <action
+            android:id="@+id/action_groupFragment_to_viewPromiseTimeFragment"
+            app:destination="@id/viewPromiseTimeFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigation_notification"
@@ -160,4 +166,8 @@
             android:id="@+id/action_selectGroupFragment_to_selectPromiseDateFragment"
             app:destination="@id/settingPromiseDateFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/viewPromiseTimeFragment"
+        android:name="com.promi.view.promise.ViewPromiseTimeFragment"
+        android:label="ViewPromiseTimeFragment" />
 </navigation>

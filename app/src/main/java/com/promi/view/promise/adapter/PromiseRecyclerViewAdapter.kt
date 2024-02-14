@@ -99,7 +99,8 @@ class PromiseRecyclerViewAdapter(
 
         // 아이템 클릭 이벤트 정의
         holder.itemView.setOnClickListener {
-            listener.onPromiseItemClicked(position) // itemClickEventDelegate
+            listener.onPromiseItemClicked(position,holder.itemViewType) // itemClickEventDelegate
+            // => 진행중인 약속일 경우는 ViewPromise로, 끝난 약속은 PromiseDetail로
         }
 
     }
