@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+<!--            &lt;!&ndash; Row 1 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_1_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 2 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_2_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 3 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_3_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 4 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_4_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 5 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_5_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 6 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_6_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+<!--            &lt;!&ndash; Row 7 &ndash;&gt;-->
+<!--            <TableRow android:layout_weight="1">-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_1"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_2"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_3"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_4"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_5"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_6"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--                <View-->
+<!--                    android:id="@+id/cell_7_7"-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:background="@drawable/cell_selector" />-->
+
+<!--            </TableRow>-->
+
+        </TableLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
