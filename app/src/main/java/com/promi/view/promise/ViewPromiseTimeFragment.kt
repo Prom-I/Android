@@ -1,101 +1,156 @@
 package com.promi.view.promise
 
 import android.util.Log
-import android.widget.Button
-import android.widget.LinearLayout
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.promi.MainActivity
+import android.view.MotionEvent
+import android.view.View
+import android.widget.TableLayout
+import android.widget.TableRow
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
-import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
-import com.promi.view.promise.adapter.RecommendTimeItemClickListener
-import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
-import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
-import com.promi.viewmodel.group.GroupViewModel
-import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
-class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
+class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time) {
 
-    // 시간 텍스트뷰 리사이클러뷰(왼쪽에 시간 보여주는 용도)
-    private lateinit var timeTextViewRecyclerView : RecyclerView
-    private lateinit var timeTextViewRecyclerViewAdapter : TimeTextViewRecyclerViewAdapter
-    // 시간 리사이클러뷰(핵심 기능, 민트색으로 시간정보를 보여주는 부분)
-    private lateinit var promiseTimeRecyclerView : RecyclerView
-    private lateinit var promiseTimeRecyclerViewAdapter : PromiseTimeRecyclerViewAdapter
-    // 추천 약속 시간
-    private lateinit var recommendTimeRecyclerView : RecyclerView
-    private lateinit var recommendTimeRecyclerViewAdapter: RecommendTimeRecyclerViewAdapter
-
-    private lateinit var viewPromiseTimeViewModel : ViewPromiseTimeViewModel
-
-    // 나중에 번들을 통해서 시간, 날짜 정보를 입력받아서 그만큼 그려주는 식으로
-    // 디자인 수정해서 일주일로 고정될 경우, 7일씩 잘라서 데이터 불러오면 될듯
-    private var timeSize : Int = 12 // 시간 범위(2차원 배열의 높이, 몇시부터 몇시까지인지)
-    private var daySize : Int = 7 // 며칠을 보여줄 것인지(promiseTimeRecyclerView에서 사용, 2차원 배열의 가로)
-
-
-    // 화면 이동 로직 작성 필요
-    override fun onRecommendTimeItemClicked(position: Int) {
-        Log.d("onRecommendTimeItemClicked : ","$position")
-    }
+    private val COLUMN = 7 // 동적으로 설정할 행의 개수
+    private val ROW = 10 // 동적으로 설정할 열의 개수
+    private lateinit var cellMatrix: Array<Array<View>>
 
     override fun initStartView() {
-        (activity as MainActivity).setToolbar(true, "1차 회의")
-        addToToolbar()
+        super.initStartView()
 
-        // 뷰 모델 가져오기
-        viewPromiseTimeViewModel = ViewModelProvider(requireActivity())[ViewPromiseTimeViewModel::class.java]
+        cellMatrix = Array(ROW) { Array(COLUMN) { View(requireContext()) }}
 
-        // 약속시간 관련 정보 리사이클러뷰에 바인딩
-        // observe data
-        viewPromiseTimeViewModel.recommendDate.observe(viewLifecycleOwner) { recommendDate ->
-            recommendTimeRecyclerViewAdapter.updateData(recommendDate)
+        for (i in 0 until ROW) {
+            val tableRow = TableRow(requireContext())
+            val params = TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.MATCH_PARENT,
+                1f
+            )
+
+            tableRow.layoutParams = params
+
+            for (j in 0 until COLUMN) {
+                val cell = View(requireContext())
+                val cellId = getResourceId("cell_${i}_${j}")
+                cell.id = cellId
+                cell.layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    1f
+                )
+                cell.setBackgroundResource(R.drawable.cell_selector)
+                cellMatrix[i][j] = cell
+
+                tableRow.addView(cell)
+            }
+
+            binding.tableLayout.addView(tableRow)
+        }
+
+        // TableLayout에 OnTouchListener 설정
+        binding.tableLayout.setOnTouchListener(TableTouchListener())
+    }
+
+    inner class TableTouchListener : View.OnTouchListener {
+        private var startCellX: Int = -1
+        private var startCellY: Int = -1
+        private var endCellX: Int = -1
+        private var endCellY: Int = -1
+
+        override fun onTouch(view: View, event: MotionEvent): Boolean {
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    // 터치된 위치를 기준으로 셀의 행과 열 계산
+                    startCellX = calculateColumnIndex(event.x)
+                    startCellY = calculateRowIndex(event.y)
+                    endCellX = startCellX
+                    endCellY = startCellY
+
+                    handlePressed(startCellX, startCellY, endCellX, endCellY, true)
+
+                    return true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    // 터치된 위치를 기준으로 셀의 행과 열 계산
+                    endCellX = calculateColumnIndex(event.x)
+                    endCellY = calculateRowIndex(event.y)
+
+                    handlePressed(startCellX, startCellY, endCellX, endCellY, true)
+
+                    return true
+                }
+                MotionEvent.ACTION_UP -> {
+                    if (startCellX != endCellX || startCellY != endCellY) {
+                        val resultState = !cellMatrix[startCellY][startCellX].isSelected
+                        handleDrag(startCellX, startCellY, endCellX, endCellY, resultState)
+                        handlePressed(startCellX, startCellY, endCellX, endCellY, false)
+                    } else {
+                        handleTouch(startCellX, startCellY)
+                        handlePressed(startCellX, startCellY, endCellX, endCellY, false)
+                    }
+
+                    return true
+                }
+            }
+            return false
+        }
+
+        private fun handleTouch(cellX: Int, cellY: Int) {
+            // 터치한 셀을 토글
+            val view = cellMatrix[cellY][cellX]
+            view.isSelected = !view.isSelected
+            Log.d("DRAG_TOUCH", "($cellX, ${cellY})")
+        }
+
+        private fun handleDrag(startX: Int, startY: Int, endX: Int, endY: Int, resultState: Boolean) {
+            // 드래그 중인 영역의 시작 셀과 끝 셀을 기준으로 선택 처리
+            val minX = maxOf(minOf(startX, endX), 0)
+            val maxX = minOf(maxOf(startX, endX), COLUMN-1)
+            val minY = maxOf(minOf(startY, endY), 0)
+            val maxY = minOf(maxOf(startY, endY), ROW-1)
+
+            for (i in minX..maxX) {
+                for (j in minY..maxY) {
+                    cellMatrix[j][i].isSelected = resultState
+                }
+            }
+
+            Log.d("DRAG_DRAG", "[$resultState] start: ($startX, $startY), end: ($endX, $endY)")
+        }
+
+        private fun handlePressed(startX: Int, startY: Int, endX: Int, endY: Int, resultState: Boolean) {
+            // 드래그 중인 영역의 시작 셀과 끝 셀을 기준으로 선택 처리
+            val minX = maxOf(minOf(startX, endX), 0)
+            val maxX = minOf(maxOf(startX, endX), COLUMN-1)
+            val minY = maxOf(minOf(startY, endY), 0)
+            val maxY = minOf(maxOf(startY, endY), ROW-1)
+
+            for (i in minX..maxX) {
+                for (j in minY..maxY) {
+                    cellMatrix[j][i].isPressed = resultState
+                }
+            }
+
+            Log.d("DRAG_PRESSED", "[$resultState] start: ($startX, $startY), end: ($endX, $endY)")
+        }
+
+        private fun calculateRowIndex(y: Float): Int {
+            // Y 좌표를 통해 행을 계산
+            val cellHeight = binding.tableLayout.height / ROW
+            return (y / cellHeight).toInt()
+        }
+
+        private fun calculateColumnIndex(x: Float): Int {
+            // X 좌표를 통해 열을 계산
+            val cellWidth = binding.tableLayout.width / COLUMN
+            return (x / cellWidth).toInt()
         }
     }
 
-    // * 데이터 바인딩 설정.
-    override fun initDataBinding() {
-        timeTextViewRecyclerView = binding.recyclerviewTimeText
-        promiseTimeRecyclerView = binding.recyclerviewViewPromiseTime
-        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
+    private fun getResourceId(resourceName: String): Int {
+        return resources.getIdentifier(resourceName, "id", requireActivity().packageName)
     }
-
-    // * 바인딩 이후에 할 일을 여기에 구현. * 그 외에 설정할 것이 있으면 이곳에서 설정. * 클릭 리스너도 이곳에서 설정.
-    override fun initAfterBinding() {
-        initRecyclerView()
-    }
-
-    private fun initRecyclerView(){
-        initTimeTextRecyclerView()
-        initPromiseTimeRecyclerView()
-        initRecommendTimeRecyclerView()
-    }
-
-    private fun initTimeTextRecyclerView(){
-        // timeSize만큼 리사이클러뷰 그리기
-        timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(timeSize,"09:00")
-        timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
-        timeTextViewRecyclerView.layoutManager = LinearLayoutManager(this.context)
-    }
-
-    private fun initPromiseTimeRecyclerView(){
-        promiseTimeRecyclerViewAdapter = PromiseTimeRecyclerViewAdapter(timeSize,daySize)
-        promiseTimeRecyclerView.adapter = promiseTimeRecyclerViewAdapter // 어뎁터 부착
-        // 가로로 그려줘야함(날짜는 가로로)
-        promiseTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
-    }
-
-    private fun initRecommendTimeRecyclerView() {
-        recommendTimeRecyclerViewAdapter = RecommendTimeRecyclerViewAdapter(this)
-        recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
-        recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
-    }
-
 
     private fun addToToolbar() {
         // 툴바 찾기
