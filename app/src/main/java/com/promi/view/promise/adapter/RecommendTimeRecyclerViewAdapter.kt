@@ -7,12 +7,15 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
-import com.promi.data.remote.model.Group
 import com.promi.data.remote.model.RecommendDate
+import com.promi.view.promise.ViewPromiseTimeFragment
+import java.util.PrimitiveIterator
 
 // 그룹에 포함된 약속 목록들
 class RecommendTimeRecyclerViewAdapter(
-    private val listener : RecommendTimeItemClickListener)
+//    private val listener: ViewPromiseTimeFragment.TableTouchListener,
+    private val itemClickListener : RecommendTimeItemClickListener
+)
     : RecyclerView.Adapter<RecommendTimeRecyclerViewAdapter.ViewHolder>(){
 
     private var recommendDateList : List<RecommendDate> = emptyList()
@@ -36,7 +39,7 @@ class RecommendTimeRecyclerViewAdapter(
         holder.btnGreat.text = recommendDate.likeCount.toString()
 
         holder.itemView.setOnClickListener {
-            listener.onRecommendTimeItemClicked(position) // 약속 페이지로 넘어가는 로직 작성 필요
+            itemClickListener.onRecommendTimeItemClicked(position) // 약속 페이지로 넘어가는 로직 작성 필요
         }
     }
 
