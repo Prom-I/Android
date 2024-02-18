@@ -5,6 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="view"
+            type="com.promi.view.promise.ViewPromiseTimeFragment"/>
+    </data>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -63,7 +70,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/layout_date_navigation_bar">
 
                     <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_add_schedule"
+                        android:id="@+id/btn_toggle_promise_mode"
                         android:layout_width="wrap_content"
                         android:layout_height="24dp"
                         android:layout_marginTop="14dp"
@@ -77,6 +84,8 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+
+
                     <TableLayout
                         android:id="@+id/tablelayout_time"
                         android:layout_width="25dp"
@@ -84,12 +93,12 @@
                         android:layout_marginStart="14dp"
                         android:layout_marginTop="1dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/btn_add_schedule">
+                        app:layout_constraintTop_toBottomOf="@+id/btn_toggle_promise_mode">
 
                     </TableLayout>
 
                     <TableLayout
-                        android:id="@+id/tablelayout_promise"
+                        android:id="@+id/tablelayout_show_promise"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="8dp"
@@ -99,7 +108,24 @@
                         android:padding="0.5dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@id/tablelayout_time"
-                        app:layout_constraintTop_toTopOf="@+id/tablelayout_time">
+                        app:layout_constraintTop_toTopOf="@+id/tablelayout_time"
+                        android:visibility="@{view.isEditMode == false ? View.VISIBLE : View.GONE}">
+
+                    </TableLayout>
+
+                    <TableLayout
+                        android:id="@+id/tablelayout_select_promise"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="37dp"
+                        android:background="@drawable/shape_stroke05"
+                        android:padding="0.5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tablelayout_time"
+                        app:layout_constraintTop_toTopOf="@+id/tablelayout_time"
+                        android:visibility="@{view.isEditMode == true ? View.VISIBLE : View.GONE}">
 
                     </TableLayout>
 
