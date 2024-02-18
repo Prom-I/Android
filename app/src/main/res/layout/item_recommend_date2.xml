@@ -6,9 +6,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/shape_edit"
+        android:background="@drawable/shape_recommend_date_unselect"
         android:backgroundTint="@color/mainLightGray"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
