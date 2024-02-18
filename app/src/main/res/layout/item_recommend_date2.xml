@@ -27,7 +27,8 @@
             android:layout_marginHorizontal="29dp"
             android:text="추천1"
             android:textSize="11sp"
-            android:textColor="@color/mainGreen"/>
+            android:textColor="@color/mainGreen"
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tv_date"
@@ -40,7 +41,8 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="5dp"
             android:text="8/27(월)"
-            android:textSize="11sp"/>
+            android:textSize="11sp"
+            android:textStyle="bold"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

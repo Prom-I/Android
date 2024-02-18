@@ -14,7 +14,8 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginStart="24dp"
+            tools:listitem="@layout/item_recommend_date2"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_recommend_time_detail"

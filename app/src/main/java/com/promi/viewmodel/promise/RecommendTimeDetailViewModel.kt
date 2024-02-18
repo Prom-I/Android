@@ -46,7 +46,8 @@ class RecommendTimeDetailViewModel : ViewModel() {
             RecommendDateAndTime("8/27(월)",recommendDateDummyData1),
             RecommendDateAndTime("8/28(화)",recommendDateDummyData2),
             RecommendDateAndTime("8/29(목)",recommendDateDummyData1),
-            RecommendDateAndTime("8/30(금)",recommendDateDummyData2)
+            RecommendDateAndTime("8/30(금)",recommendDateDummyData2),
+            RecommendDateAndTime("8/31(목)",recommendDateDummyData1)
 
         )
 

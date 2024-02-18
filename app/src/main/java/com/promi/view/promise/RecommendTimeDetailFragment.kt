@@ -1,5 +1,6 @@
 package com.promi.view.promise
 
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
@@ -10,7 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
+import com.promi.data.remote.model.RecommendTimeDetail
 import com.promi.databinding.FragmentRecommendTimeDetailBinding
+import com.promi.view.promise.adapter.HorizontalSpaceItemDecoration
+import com.promi.view.promise.adapter.RecommendDateAndTimeItemClickListener
+import com.promi.view.promise.adapter.RecommendDateAndTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.RecommendTimeDetailRecyclerViewAdapter
 import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
 import com.promi.viewmodel.promise.RecommendTimeDetailViewModel
@@ -18,15 +23,21 @@ import com.promi.viewmodel.promise.RecommendTimeDetailViewModel
 // 추천 날짜에 연관된 시간들 리스트 형식으로 제공
 // 약속에 참여 가능한 멤버들, 불가능한 멤버들 보여주기
 
-class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail) {
+class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail)
+,RecommendDateAndTimeItemClickListener{
 
     private lateinit var recommendDateAndTimeRecyclerView : RecyclerView
-    private lateinit var recommendDateAndTimeRecyclerViewAdapter : RecommendTimeDetailRecyclerViewAdapter
+    private lateinit var recommendDateAndTimeRecyclerViewAdapter : RecommendDateAndTimeRecyclerViewAdapter
 
     private lateinit var recommendTimeDetailRecyclerView: RecyclerView
     private lateinit var recommendTimeDetailRecyclerViewAdapter: RecommendTimeDetailRecyclerViewAdapter
 
     private lateinit var recommendTimeDetailViewModel : RecommendTimeDetailViewModel
+
+    override fun onRecommendDateAndTimeItemClicked(recommendTimeDetail: List<RecommendTimeDetail>) {
+        recommendTimeDetailRecyclerViewAdapter.updateData(recommendTimeDetail)
+        recommendTimeDetailRecyclerViewAdapter.notifyDataSetChanged()
+    }
 
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "")
@@ -38,13 +49,17 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
         // observe data
         recommendTimeDetailViewModel.recommendTimeDetail.observe(viewLifecycleOwner) { recommendTime ->
             recommendTimeDetailRecyclerViewAdapter.updateData(recommendTime)
-        }
 
+        }
+        recommendTimeDetailViewModel.recommendDateAndTime.observe(viewLifecycleOwner) { recommendDateAndTime ->
+            recommendDateAndTimeRecyclerViewAdapter.updateData(recommendDateAndTime)
+        }
     }
 
     // * 데이터 바인딩 설정.
     override fun initDataBinding() {
         recommendTimeDetailRecyclerView = binding.recyclerviewRecommendTimeDetail
+        recommendDateAndTimeRecyclerView = binding.recyclerviewRecommendDate
     }
 
     // * 바인딩 이후에 할 일을 여기에 구현. * 그 외에 설정할 것이 있으면 이곳에서 설정. * 클릭 리스너도 이곳에서 설정.
@@ -53,10 +68,26 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
     }
 
     private fun initRecyclerView(){
+        initTimeDetailRecyclerView()
+        initDateDetailRecyclerView()
+    }
+
+    private fun initTimeDetailRecyclerView(){
         recommendTimeDetailRecyclerViewAdapter = RecommendTimeDetailRecyclerViewAdapter()
         recommendTimeDetailRecyclerView.adapter = recommendTimeDetailRecyclerViewAdapter // 어뎁터 부착
         recommendTimeDetailRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        // 세로 간격 조정
         recommendTimeDetailRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(dipToPx(20f,requireContext())))
+    }
+
+    private fun initDateDetailRecyclerView(){
+        recommendDateAndTimeRecyclerViewAdapter = RecommendDateAndTimeRecyclerViewAdapter(this)
+        recommendDateAndTimeRecyclerView.adapter = recommendDateAndTimeRecyclerViewAdapter // 어뎁터 부착
+        recommendDateAndTimeRecyclerView.layoutManager = LinearLayoutManager(this.context,RecyclerView.HORIZONTAL,false)
+        // 가로 간격 조정
+        var horizontalSpaceItemDecoration = HorizontalSpaceItemDecoration(dipToPx(8f,requireContext()))
+        horizontalSpaceItemDecoration.setOption(false)
+        recommendDateAndTimeRecyclerView.addItemDecoration(horizontalSpaceItemDecoration)
     }
 
     // 설정 버튼(이미지 버튼)을 포함한 툴바로 생성
