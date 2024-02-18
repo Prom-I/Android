@@ -20,6 +20,9 @@ import com.promi.viewmodel.promise.RecommendTimeDetailViewModel
 
 class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail) {
 
+    private lateinit var recommendDateAndTimeRecyclerView : RecyclerView
+    private lateinit var recommendDateAndTimeRecyclerViewAdapter : RecommendTimeDetailRecyclerViewAdapter
+
     private lateinit var recommendTimeDetailRecyclerView: RecyclerView
     private lateinit var recommendTimeDetailRecyclerViewAdapter: RecommendTimeDetailRecyclerViewAdapter
 
