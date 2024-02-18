@@ -1,12 +1,17 @@
 package com.promi.view.promise
 
 import android.util.Log
+import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
+import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import com.promi.MainActivity
 import android.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,6 +29,14 @@ import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
 class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
 
+    private val START_TIME = 9
+    private val END_TIME = 15  
+    private val COLUMN = 7 // 동적으로 설정할 행의 개수
+    private val ROW = END_TIME-START_TIME // 동적으로 설정할 열의 개수
+    private val CELL_HIEGHT = 24
+    private var CELL_HIEGHT_DP = 0
+    private lateinit var cellMatrix: Array<Array<View>>
+  
     // 날짜 텍스트뷰 리사이클러뷰
     private lateinit var dayTextViewRecyclerView : RecyclerView
     private lateinit var dayTextViewRecyclerViewAdapter : DayTextViewRecyclerViewAdapter
@@ -39,11 +52,6 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
     private var timeItemHeight : Double = 0.0 // 아이템 셀 하나의 세로 크기
   
-
-    private val COLUMN = 7 // 동적으로 설정할 행의 개수
-    private val ROW = 10 // 동적으로 설정할 열의 개수
-    private lateinit var cellMatrix: Array<Array<View>>
-  
     // 화면 이동 로직(추천 시간 클릭시)
     override fun onRecommendTimeItemClicked(position: Int) {
         Log.d("onRecommendTimeItemClicked : ","$position")
@@ -54,13 +62,53 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         super.initStartView()
         //addToToolbar()
 
-        cellMatrix = Array(ROW) { Array(COLUMN) { View(requireContext()) } }
+        (activity as MainActivity).setToolbar(true, "약속 이름")
+        addToToolbar()
+
+        CELL_HIEGHT_DP = pxToDp(CELL_HIEGHT)
+        setTimeTable()
+        setPromiseTable()
+    }
+
+    private fun setTimeTable() {
+        for (i in 0 .. END_TIME - START_TIME) {
+            val tableRow = TableRow(requireContext())
+            val params = TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                1f
+            )
+
+            tableRow.layoutParams = params
+
+            val cell = TextView(requireContext())
+            val cellId = getResourceId("cell_time_${i}")
+            cell.id = cellId
+            cell.layoutParams = TableRow.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT,
+                CELL_HIEGHT_DP,
+                pxToSp(10f)
+            )
+            cell.apply{
+                text = "${START_TIME + i}"
+                textSize = 10f
+                setTextColor(ContextCompat.getColor(requireContext(), R.color.Gray4))
+                gravity = Gravity.CENTER
+            }
+            tableRow.addView(cell)
+
+            binding.tablelayoutTime.addView(tableRow)
+        }
+    }
+
+    private fun setPromiseTable() {
+        cellMatrix = Array(ROW) { Array(COLUMN) { View(requireContext()) }}
 
         for (i in 0 until ROW) {
             val tableRow = TableRow(requireContext())
             val params = TableLayout.LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
-                TableLayout.LayoutParams.MATCH_PARENT,
+                CELL_HIEGHT_DP*ROW,
                 1f
             )
 
@@ -68,11 +116,11 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
             for (j in 0 until COLUMN) {
                 val cell = View(requireContext())
-                val cellId = getResourceId("cell_${i}_${j}")
+                val cellId = getResourceId("cell_promise_${i}_${j}")
                 cell.id = cellId
                 cell.layoutParams = TableRow.LayoutParams(
                     TableRow.LayoutParams.MATCH_PARENT,
-                    TableRow.LayoutParams.MATCH_PARENT,
+                    CELL_HIEGHT_DP,
                     1f
                 )
                 cell.setBackgroundResource(R.drawable.cell_selector)
@@ -81,10 +129,10 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
                 tableRow.addView(cell)
             }
 
-            binding.tableLayout.addView(tableRow)
+            binding.tablelayoutPromise.addView(tableRow)
         }
         // TableLayout에 OnTouchListener 설정
-        binding.tableLayout.setOnTouchListener(TableTouchListener())
+        binding.tablelayoutPromise.setOnTouchListener(TableTouchListener())
     }
 
     // * 데이터 바인딩 설정.
@@ -102,30 +150,6 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 //    }
 
 
-    private fun addToToolbar() {
-        // 툴바 찾기
-        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
-        val layout: LinearLayout = toolbar.findViewById(R.id.layout_toolbar_btn)
-
-        val customButton = Button(requireContext())
-
-        // 버튼 생성
-        customButton.apply {
-            text = "확인"
-            textSize = 17f
-            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
-            setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
-        }
-        ROW
-        // 툴바에 버튼 추가
-        layout.removeAllViews()
-        layout.addView(customButton)
-
-        // 버튼에 클릭 이벤트 추가
-        customButton.setOnClickListener {
-            //
-        }
-    }
     private fun initRecyclerView() {
         initTimeTextRecyclerView()
         initRecommendTimeRecyclerView()
@@ -286,13 +310,13 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
         private fun calculateRowIndex(y: Float): Int {
             // Y 좌표를 통해 행을 계산
-            val cellHeight = binding.tableLayout.height / ROW
+            val cellHeight = binding.tablelayoutPromise.height / ROW
             return (y / cellHeight).toInt()
         }
 
         private fun calculateColumnIndex(x: Float): Int {
             // X 좌표를 통해 열을 계산
-            val cellWidth = binding.tableLayout.width / COLUMN
+            val cellWidth = binding.tablelayoutPromise.width / COLUMN
             return (x / cellWidth).toInt()
         }
     }
@@ -300,6 +324,44 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private fun getResourceId(resourceName: String): Int {
         return resources.getIdentifier(resourceName, "id", requireActivity().packageName)
     }
+    
+    private fun addToToolbar() {
+        // 툴바 찾기
+        val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
+        val layout: LinearLayout = toolbar.findViewById(R.id.layout_toolbar_btn)
 
+        val menuButton = Button(requireContext())
+        val refreshButton = Button(requireContext())
+
+        // TODO 이미지 넣기
+        // 버튼 생성
+        menuButton.apply{
+            text = "..."
+            textSize = 17f
+            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+            setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        }
+
+        // 버튼 생성
+        refreshButton.apply{
+            text = "..."
+            textSize = 17f
+            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+            setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+        }
+
+        // 툴바에 버튼 추가
+        layout.removeAllViews()
+        layout.addView(menuButton)
+        layout.addView(refreshButton)
+
+        // 버튼에 클릭 이벤트 추가
+        menuButton.setOnClickListener {
+            // TODO 메뉴 추가
+        }
+        refreshButton.setOnClickListener {
+            // TODO 약속 갱신
+        }
+    }
 
 }
