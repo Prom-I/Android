@@ -1,35 +1,47 @@
 package com.promi.view.promise
 
-import android.util.Log
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentRecommendTimeDetailBinding
 import com.promi.view.promise.adapter.RecommendTimeDetailRecyclerViewAdapter
+import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
+import com.promi.viewmodel.promise.RecommendTimeDetailViewModel
 
 // 추천 날짜에 연관된 시간들 리스트 형식으로 제공
 // 약속에 참여 가능한 멤버들, 불가능한 멤버들 보여주기
 
 class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail) {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var recommendTimeDetailRecyclerView: RecyclerView
     private lateinit var recommendTimeDetailRecyclerViewAdapter: RecommendTimeDetailRecyclerViewAdapter
+
+    private lateinit var recommendTimeDetailViewModel : RecommendTimeDetailViewModel
 
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "")
         addToToolbar()
 
+        // 뷰 모델 가져오기
+        recommendTimeDetailViewModel = ViewModelProvider(requireActivity())[RecommendTimeDetailViewModel::class.java]
+
+        // observe data
+        recommendTimeDetailViewModel.recommendDate.observe(viewLifecycleOwner) { recommendTime ->
+            recommendTimeDetailRecyclerViewAdapter.updateData(recommendTime)
+        }
+
     }
 
     // * 데이터 바인딩 설정.
     override fun initDataBinding() {
-
+        recommendTimeDetailRecyclerView = binding.recyclerviewRecommendTimeDetail
     }
 
     // * 바인딩 이후에 할 일을 여기에 구현. * 그 외에 설정할 것이 있으면 이곳에서 설정. * 클릭 리스너도 이곳에서 설정.
@@ -38,7 +50,10 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
     }
 
     private fun initRecyclerView(){
-
+        recommendTimeDetailRecyclerViewAdapter = RecommendTimeDetailRecyclerViewAdapter()
+        recommendTimeDetailRecyclerView.adapter = recommendTimeDetailRecyclerViewAdapter // 어뎁터 부착
+        recommendTimeDetailRecyclerView.layoutManager = LinearLayoutManager(this.context)
+        recommendTimeDetailRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(dipToPx(20f,requireContext())))
     }
 
     // 설정 버튼(이미지 버튼)을 포함한 툴바로 생성
