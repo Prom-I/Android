@@ -6,15 +6,20 @@ import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.RecyclerView
 import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentRecommendTimeDetailBinding
+import com.promi.view.promise.adapter.RecommendTimeDetailRecyclerViewAdapter
 
 // 추천 날짜에 연관된 시간들 리스트 형식으로 제공
 // 약속에 참여 가능한 멤버들, 불가능한 멤버들 보여주기
 
 class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBinding>(R.layout.fragment_recommend_time_detail) {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var recommendTimeDetailRecyclerViewAdapter: RecommendTimeDetailRecyclerViewAdapter
 
     override fun initStartView() {
         (activity as MainActivity).setToolbar(true, "")
