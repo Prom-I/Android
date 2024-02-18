@@ -4,18 +4,16 @@ import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import com.promi.MainActivity
-import android.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
@@ -330,30 +328,44 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         val toolbar: Toolbar = requireActivity().findViewById(R.id.toolbar)
         val layout: LinearLayout = toolbar.findViewById(R.id.layout_toolbar_btn)
 
-        val menuButton = Button(requireContext())
-        val refreshButton = Button(requireContext())
+        val menuButton = ImageButton(requireContext())
+        val refreshButton = ImageButton(requireContext())
 
         // TODO 이미지 넣기
         // 버튼 생성
-        menuButton.apply{
-            text = "..."
-            textSize = 17f
-            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+        menuButton.apply {
+            setImageResource(R.drawable.baseline_more_horiz_24)
             setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+
+            // ImageButton에 LayoutParams 설정
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, // 너비
+                LinearLayout.LayoutParams.WRAP_CONTENT  // 높이
+            ).apply {
+                marginEnd = resources.getDimensionPixelSize(R.dimen.margin_btn_right) // 오른쪽 마진 설정
+            }
+            layoutParams = params
         }
 
         // 버튼 생성
-        refreshButton.apply{
-            text = "..."
-            textSize = 17f
-            setTextColor(ContextCompat.getColor(context, R.color.mainBlack))
+        refreshButton.apply {
+            setImageResource(R.drawable.img_refresh)
             setBackgroundColor(ContextCompat.getColor(context, R.color.transparent))
+
+            // ImageButton에 LayoutParams 설정
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, // 너비
+                LinearLayout.LayoutParams.WRAP_CONTENT  // 높이
+            ).apply {
+                marginEnd = resources.getDimensionPixelSize(R.dimen.margin_btn_right) // 오른쪽 마진 설정
+            }
+            layoutParams = params
         }
 
         // 툴바에 버튼 추가
         layout.removeAllViews()
-        layout.addView(menuButton)
         layout.addView(refreshButton)
+        layout.addView(menuButton)
 
         // 버튼에 클릭 이벤트 추가
         menuButton.setOnClickListener {
