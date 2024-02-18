@@ -1,9 +1,14 @@
 package com.promi.base
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -79,6 +84,15 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
             displayMetrics.heightPixels
         }
     }
+
+
+    // DP를 PX값으로 변환
+    // example
+    // private val limitScrollX = dipToPx(60f, context!!) // 60dp를 설정
+    protected fun dipToPx(dipValue: Float, context: Context): Int{
+        return (dipValue * context.resources.displayMetrics.density).toInt()
+    }
+
 
     protected fun shortToast(msg: String) =
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()

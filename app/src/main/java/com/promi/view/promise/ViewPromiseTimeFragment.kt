@@ -8,12 +8,42 @@ import android.widget.TableRow
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
+import com.promi.view.promise.adapter.DayTextViewRecyclerViewAdapter
+import com.promi.view.promise.adapter.HorizontalSpaceItemDecoration
+import com.promi.view.promise.adapter.PromiseTimeRecyclerViewAdapter
+import com.promi.view.promise.adapter.RecommendTimeItemClickListener
+import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
+import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
+import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
+import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
-class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time) {
+class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
+  
+    // 날짜 텍스트뷰 리사이클러뷰
+    private lateinit var dayTextViewRecyclerView : RecyclerView
+    private lateinit var dayTextViewRecyclerViewAdapter : DayTextViewRecyclerViewAdapter
+
+    // 시간 텍스트뷰 리사이클러뷰(왼쪽에 시간 보여주는 용도)
+    private lateinit var timeTextViewRecyclerView : RecyclerView
+    private lateinit var timeTextViewRecyclerViewAdapter : TimeTextViewRecyclerViewAdapter
+    // 추천 약속 시간
+    private lateinit var recommendTimeRecyclerView : RecyclerView
+    private lateinit var recommendTimeRecyclerViewAdapter: RecommendTimeRecyclerViewAdapter
+
+    private lateinit var viewPromiseTimeViewModel : ViewPromiseTimeViewModel
+
+    private var timeItemHeight : Double = 0.0 // 아이템 셀 하나의 세로 크기
+  
 
     private val COLUMN = 7 // 동적으로 설정할 행의 개수
     private val ROW = 10 // 동적으로 설정할 열의 개수
     private lateinit var cellMatrix: Array<Array<View>>
+  
+    // 화면 이동 로직(추천 시간 클릭시)
+    override fun onRecommendTimeItemClicked(position: Int) {
+        Log.d("onRecommendTimeItemClicked : ","$position")
+        navController.navigate(R.id.action_viewPromiseTimeFragment_to_recommendTimeDetailFragment)
+    }
 
     override fun initStartView() {
         super.initStartView()
@@ -48,6 +78,11 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
             binding.tableLayout.addView(tableRow)
         }
 
+    // * 데이터 바인딩 설정.
+    override fun initDataBinding() {
+        dayTextViewRecyclerView = binding.recyclerviewDayTime
+        timeTextViewRecyclerView = binding.recyclerviewTimeText
+        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
         // TableLayout에 OnTouchListener 설정
         binding.tableLayout.setOnTouchListener(TableTouchListener())
     }
@@ -96,6 +131,66 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
             return false
         }
 
+    private fun initRecyclerView(){
+        initTimeTextRecyclerView()
+        initRecommendTimeRecyclerView()
+        initDayTextRecyclerView()
+    }
+
+    private fun initTimeTextRecyclerView(){
+        // timeSize만큼 리사이클러뷰 그리기
+        timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(timeSize,"09:00")
+        timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
+        timeTextViewRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+
+
+        // 아이템 위아래 간격 설정
+
+        // 393 : 310 = width : x
+        // x = 310/393 * width
+        //val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+        val x = (310.0/393)*width
+        Log.d("heightLog","${x}")
+        // 310 : 277 = x : height
+        // height * 310 = 277x
+        // height = (277.0/310)*x
+        val height = (277.0/310)*x
+        Log.d("heightLog","${height}")
+
+
+        //val itemHeight = (timeItemHeight + 20)/3
+
+
+        // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
+        val itemHeight = ((height)/((timeSize+1)*2+1)).toInt()
+        timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
+    }
+
+    private fun initDayTextRecyclerView(){
+
+
+        // 올바른 날짜 형식으로 시작 날짜 지정
+        dayTextViewRecyclerViewAdapter = DayTextViewRecyclerViewAdapter("2024-08-28")
+        dayTextViewRecyclerView.adapter = dayTextViewRecyclerViewAdapter // 어댑터 부착
+        dayTextViewRecyclerView.layoutManager = LinearLayoutManager(this.context, RecyclerView.HORIZONTAL, false)
+
+
+        val space = dipToPx(6f,requireContext())
+        dayTextViewRecyclerView.addItemDecoration(HorizontalSpaceItemDecoration(space))
+    }
+
+
+    private fun initRecommendTimeRecyclerView() {
+        recommendTimeRecyclerViewAdapter = RecommendTimeRecyclerViewAdapter(this)
+        recommendTimeRecyclerView.adapter = recommendTimeRecyclerViewAdapter
+        recommendTimeRecyclerView.layoutManager = LinearLayoutManager(this.context)
+
+        // 좌우 간격 지정
+        val space = dipToPx(16f,requireContext())
+        recommendTimeRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(space))
+    }
         private fun handleTouch(cellX: Int, cellY: Int) {
             // 터치한 셀을 토글
             val view = cellMatrix[cellY][cellX]
@@ -173,7 +268,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
         // 버튼에 클릭 이벤트 추가
         customButton.setOnClickListener {
-            //navController.navigate(R.id.action_selectGroupFragment_to_selectPromiseDateFragment)
+            //
         }
     }
 

@@ -169,5 +169,13 @@
     <fragment
         android:id="@+id/viewPromiseTimeFragment"
         android:name="com.promi.view.promise.ViewPromiseTimeFragment"
-        android:label="ViewPromiseTimeFragment" />
+        android:label="ViewPromiseTimeFragment" >
+        <action
+            android:id="@+id/action_viewPromiseTimeFragment_to_recommendTimeDetailFragment"
+            app:destination="@id/recommendTimeDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/recommendTimeDetailFragment"
+        android:name="com.promi.view.promise.RecommendTimeDetailFragment"
+        android:label="RecommendTimeDetailFragment" />
 </navigation>

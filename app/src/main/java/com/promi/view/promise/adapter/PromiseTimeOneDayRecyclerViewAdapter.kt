@@ -3,11 +3,14 @@ package com.promi.view.promise.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 
 // 하루(세로로 긴 한개)에 대한 시간 리사이클러뷰
-class PromiseTimeOneDayRecyclerViewAdapter(private val timeSize : Int)
+class PromiseTimeOneDayRecyclerViewAdapter(
+    private val timeSize : Int,
+    private val tiemItemSize : Int)
     : RecyclerView.Adapter<PromiseTimeOneDayRecyclerViewAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
@@ -18,6 +21,12 @@ class PromiseTimeOneDayRecyclerViewAdapter(private val timeSize : Int)
         val context = parent.context
         // '시간 한개'에 해당
         val view = LayoutInflater.from(context).inflate(R.layout.item_promise_time, parent, false)
+
+        // 셀 크기 동적 변환
+        view.updateLayoutParams<RecyclerView.LayoutParams> {
+            width = tiemItemSize //-> 가로 크기 지정
+        }
+
         return ViewHolder(view)
     }
 
