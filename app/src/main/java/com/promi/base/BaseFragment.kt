@@ -85,7 +85,7 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
             displayMetrics.heightPixels
         }
     }
-
+    
     fun pxToDp(dp: Int): Int {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
@@ -100,6 +100,13 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
             sp,
             resources.displayMetrics
         )
+    }
+
+    // DP를 PX값으로 변환
+    // example
+    // private val limitScrollX = dipToPx(60f, context!!) // 60dp를 설정
+    protected fun dipToPx(dipValue: Float, context: Context): Int{
+        return (dipValue * context.resources.displayMetrics.density).toInt()
     }
 
     protected fun shortToast(msg: String) =
