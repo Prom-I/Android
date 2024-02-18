@@ -33,7 +33,7 @@ class RecommendTimeDetailFragment : BaseFragment<FragmentRecommendTimeDetailBind
         recommendTimeDetailViewModel = ViewModelProvider(requireActivity())[RecommendTimeDetailViewModel::class.java]
 
         // observe data
-        recommendTimeDetailViewModel.recommendDate.observe(viewLifecycleOwner) { recommendTime ->
+        recommendTimeDetailViewModel.recommendTimeDetail.observe(viewLifecycleOwner) { recommendTime ->
             recommendTimeDetailRecyclerViewAdapter.updateData(recommendTime)
         }
 
