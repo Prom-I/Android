@@ -77,6 +77,9 @@
     <color name="palette_color19">#B5E1B2</color>
     <color name="palette_color20">#FFB877</color>
 
-
+    <!-- Tablelayout Cell Colors -->
+    <color name="default_color">#FFFFFF</color>
+    <color name="selected_color">#00C1C1</color>
+    <color name="pressed_color">#005B5B</color>
 
 </resources>
