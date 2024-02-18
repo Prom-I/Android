@@ -34,6 +34,8 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private val CELL_HIEGHT = 24
     private var CELL_HIEGHT_DP = 0
     private lateinit var cellMatrix: Array<Array<View>>
+
+    var isEditMode: Boolean = false
   
     // 날짜 텍스트뷰 리사이클러뷰
     private lateinit var dayTextViewRecyclerView : RecyclerView
@@ -65,8 +67,28 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
         CELL_HIEGHT_DP = pxToDp(CELL_HIEGHT)
         setTimeTable()
-        setPromiseTable()
+        setShowPromiseTable()
+        setSelectPromiseTable()
     }
+
+    override fun initDataBinding() {
+//        dayTextViewRecyclerView = binding.recyclerviewDayTime
+//        timeTextViewRecyclerView = binding.recyclerviewTimeText
+//        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
+
+        binding.view = this
+
+        binding.btnTogglePromiseMode.setOnClickListener {
+            isEditMode = !isEditMode
+            Log.d("isEditModee", isEditMode.toString())
+            binding.invalidateAll()
+        }
+    }
+
+//    override fun initAfterBinding() {
+//        super.initAfterBinding()
+//        //initRecyclerView()
+//    }
 
     private fun setTimeTable() {
         for (i in 0 .. END_TIME - START_TIME) {
@@ -99,7 +121,40 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
         }
     }
 
-    private fun setPromiseTable() {
+    // TODO 참여도 별 색 변화
+    private fun setShowPromiseTable() {
+        cellMatrix = Array(ROW) { Array(COLUMN) { View(requireContext()) }}
+
+        for (i in 0 until ROW) {
+            val tableRow = TableRow(requireContext())
+            val params = TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                CELL_HIEGHT_DP*ROW,
+                1f
+            )
+
+            tableRow.layoutParams = params
+
+            for (j in 0 until COLUMN) {
+                val cell = View(requireContext())
+                val cellId = getResourceId("cell_show_promise_${i}_${j}")
+                cell.id = cellId
+                cell.layoutParams = TableRow.LayoutParams(
+                    TableRow.LayoutParams.MATCH_PARENT,
+                    CELL_HIEGHT_DP,
+                    1f
+                )
+                cell.setBackgroundResource(R.drawable.cell_selector)
+                cellMatrix[i][j] = cell
+
+                tableRow.addView(cell)
+            }
+
+            binding.tablelayoutShowPromise.addView(tableRow)
+        }
+    }
+    
+    private fun setSelectPromiseTable() {
         cellMatrix = Array(ROW) { Array(COLUMN) { View(requireContext()) }}
 
         for (i in 0 until ROW) {
@@ -127,63 +182,49 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
                 tableRow.addView(cell)
             }
 
-            binding.tablelayoutPromise.addView(tableRow)
+            binding.tablelayoutSelectPromise.addView(tableRow)
         }
         // TableLayout에 OnTouchListener 설정
-        binding.tablelayoutPromise.setOnTouchListener(TableTouchListener())
+        binding.tablelayoutSelectPromise.setOnTouchListener(TableTouchListener())
     }
 
-    // * 데이터 바인딩 설정.
-//    override fun initDataBinding() {
-////        dayTextViewRecyclerView = binding.recyclerviewDayTime
-////        timeTextViewRecyclerView = binding.recyclerviewTimeText
-////        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
-//        // TableLayout에 OnTouchListener 설정
-//        binding.tableLayout.setOnTouchListener(TableTouchListener())
-//    }
-
-//    override fun initAfterBinding() {
-//        super.initAfterBinding()
-//        //initRecyclerView()
-//    }
-
-
     private fun initRecyclerView() {
-        initTimeTextRecyclerView()
+        // initTimeTextRecyclerView()
         initRecommendTimeRecyclerView()
         initDayTextRecyclerView()
     }
 
-    private fun initTimeTextRecyclerView() {
-        // timeSize만큼 리사이클러뷰 그리기
-        timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(ROW, "09:00")
-        timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
-        timeTextViewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//    private fun initTimeTextRecyclerView() {
+//        // timeSize만큼 리사이클러뷰 그리기
+//        timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(ROW, "09:00")
+//        timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
+//        timeTextViewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+//
+//        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+//
+//
+//        // 아이템 위아래 간격 설정
+//
+//        // 393 : 310 = width : x
+//        // x = 310/393 * width
+//        //val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
+//        val x = (310.0 / 393) * width
+//        Log.d("heightLog", "${x}")
+//        // 310 : 277 = x : height
+//        // height * 310 = 277x
+//        // height = (277.0/310)*x
+//        val height = (277.0 / 310) * x
+//        Log.d("heightLog", "${height}")
+//
+//
+//        //val itemHeight = (timeItemHeight + 20)/3
+//
+//
+//        // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
+//        val itemHeight = ((height) / ((ROW + 1) * 2 + 1)).toInt()
+//        timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
+//    }
 
-        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-
-
-        // 아이템 위아래 간격 설정
-
-        // 393 : 310 = width : x
-        // x = 310/393 * width
-        //val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-        val x = (310.0 / 393) * width
-        Log.d("heightLog", "${x}")
-        // 310 : 277 = x : height
-        // height * 310 = 277x
-        // height = (277.0/310)*x
-        val height = (277.0 / 310) * x
-        Log.d("heightLog", "${height}")
-
-
-        //val itemHeight = (timeItemHeight + 20)/3
-
-
-        // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
-        val itemHeight = ((height) / ((ROW + 1) * 2 + 1)).toInt()
-        timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
-    }
     private fun initDayTextRecyclerView() {
 
         // 올바른 날짜 형식으로 시작 날짜 지정
@@ -243,7 +284,7 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
                         handlePressed(startCellX, startCellY, endCellX, endCellY, false)
                     } else {
                         handleTouch(startCellX, startCellY)
-                        handlePressed(startCellX, startCellY, endCellX, endCellY, false)
+                        handlePressed(startCellX, startCellY, startCellX, startCellY, false)
                     }
 
                     return true
@@ -256,7 +297,6 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
             // 터치한 셀을 토글
             val view = cellMatrix[cellY][cellX]
             view.isSelected = !view.isSelected
-            Log.d("DRAG_TOUCH", "($cellX, ${cellY})")
         }
 
         private fun handleDrag(
@@ -277,8 +317,6 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
                     cellMatrix[j][i].isSelected = resultState
                 }
             }
-
-            Log.d("DRAG_DRAG", "[$resultState] start: ($startX, $startY), end: ($endX, $endY)")
         }
 
         private fun handlePressed(
@@ -294,27 +332,32 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
             val minY = maxOf(minOf(startY, endY), 0)
             val maxY = minOf(maxOf(startY, endY), ROW - 1)
 
+            initPressed()
+
             for (i in minX..maxX) {
                 for (j in minY..maxY) {
                     cellMatrix[j][i].isPressed = resultState
                 }
             }
+        }
 
-            Log.d(
-                "DRAG_PRESSED",
-                "[$resultState] start: ($startX, $startY), end: ($endX, $endY)"
-            )
+        private fun initPressed() {
+            for (i in 0 until ROW) {
+                for (j in 0 until COLUMN) {
+                    cellMatrix[i][j].isPressed = false
+                }
+            }
         }
 
         private fun calculateRowIndex(y: Float): Int {
             // Y 좌표를 통해 행을 계산
-            val cellHeight = binding.tablelayoutPromise.height / ROW
+            val cellHeight = binding.tablelayoutSelectPromise.height / ROW
             return (y / cellHeight).toInt()
         }
 
         private fun calculateColumnIndex(x: Float): Int {
             // X 좌표를 통해 열을 계산
-            val cellWidth = binding.tablelayoutPromise.width / COLUMN
+            val cellWidth = binding.tablelayoutSelectPromise.width / COLUMN
             return (x / cellWidth).toInt()
         }
     }
