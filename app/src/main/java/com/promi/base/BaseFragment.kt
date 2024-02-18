@@ -1,9 +1,15 @@
 package com.promi.base
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -78,6 +84,22 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
             wm.defaultDisplay.getMetrics(displayMetrics)
             displayMetrics.heightPixels
         }
+    }
+
+    fun pxToDp(dp: Int): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dp.toFloat(),
+            resources.displayMetrics
+        ).toInt()
+    }
+
+    fun pxToSp(sp: Float): Float {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP,
+            sp,
+            resources.displayMetrics
+        )
     }
 
     protected fun shortToast(msg: String) =
