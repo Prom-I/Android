@@ -1,5 +1,6 @@
 package com.promi.view.promise
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.databinding.FragmentAllPromiseBinding
+import com.promi.util.VerticalSpaceItemDecoration
 import com.promi.view.promise.adapter.PromiseItemClickListener
 import com.promi.view.promise.adapter.PromiseRecyclerViewAdapter
 import com.promi.viewmodel.group.GroupViewModel
@@ -44,8 +46,6 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
 
         //약속 생성 버튼 클릭시
         binding.btnCreateGroup.setOnClickListener {
-            // findNavController().navigate(R.id.action_navigation_promise_to_navigation_create_group)
-            //findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectPromiseDateFragment)
             findNavController().navigate(R.id.action_navigation_all_promises_and_groups_to_selectGroupFragment)
         }
 
@@ -72,14 +72,20 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
     // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
-        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this)
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this,groupViewModel)
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
+        var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(dipToPx(16f,requireContext()))
+        verticalSpaceItemDecoration.setOption(true)
+        promiseRecyclerview.addItemDecoration(verticalSpaceItemDecoration)
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    fun dipToPx(dipValue: Float, context: Context): Int{
+        return (dipValue * context.resources.displayMetrics.density).toInt()
     }
 
 }
