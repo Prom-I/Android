@@ -6,6 +6,7 @@
     android:layout_height="85dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_item_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:background="@drawable/shape_promise_round"
@@ -71,6 +72,32 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/right_arrow" />
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--Swipe Delete Menu : Scroll limit = 64dp-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/constraint_item_container"
+        android:layout_width="64dp"
+        android:layout_height="0dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_delete"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/shape_radius15"
+            app:backgroundTint="@color/mainRed"
+            app:icon="@drawable/ic_delete"
+            app:iconGravity="top"
+            android:paddingTop="6dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
