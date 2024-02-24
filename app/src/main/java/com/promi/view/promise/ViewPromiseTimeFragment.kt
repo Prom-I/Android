@@ -22,10 +22,11 @@ import com.promi.util.VerticalSpaceItemDecoration
 import com.promi.view.promise.adapter.DayTextViewRecyclerViewAdapter
 import com.promi.view.promise.adapter.RecommendTimeItemClickListener
 import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
-import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
 import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
-class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {
+class ViewPromiseTimeFragment :
+    BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),
+    RecommendTimeItemClickListener {
 
     private val START_TIME = 9
     private val END_TIME = 15  
@@ -41,14 +42,9 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     private lateinit var dayTextViewRecyclerView : RecyclerView
     private lateinit var dayTextViewRecyclerViewAdapter : DayTextViewRecyclerViewAdapter
 
-    // 시간 텍스트뷰 리사이클러뷰(왼쪽에 시간 보여주는 용도)
-    private lateinit var timeTextViewRecyclerView : RecyclerView
-    private lateinit var timeTextViewRecyclerViewAdapter : TimeTextViewRecyclerViewAdapter
     // 추천 약속 시간
     private lateinit var recommendTimeRecyclerView : RecyclerView
     private lateinit var recommendTimeRecyclerViewAdapter: RecommendTimeRecyclerViewAdapter
-
-    private lateinit var viewPromiseTimeViewModel : ViewPromiseTimeViewModel
 
     private var timeItemHeight : Double = 0.0 // 아이템 셀 하나의 세로 크기
   
@@ -60,7 +56,6 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
 
     override fun initStartView() {
         super.initStartView()
-        //addToToolbar()
 
         (activity as MainActivity).setToolbar(true, "약속 이름")
         addToToolbar()
@@ -72,9 +67,8 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     override fun initDataBinding() {
-//        dayTextViewRecyclerView = binding.recyclerviewDayTime
-//        timeTextViewRecyclerView = binding.recyclerviewTimeText
-//        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
+        recommendTimeRecyclerView = binding.recyclerviewRecommendTime
+        dayTextViewRecyclerView = binding.recyclerviewDayText
 
         binding.view = this
 
@@ -83,6 +77,8 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
             Log.d("isEditModee", isEditMode.toString())
             binding.invalidateAll()
         }
+
+        initRecyclerView()
     }
 
 //    override fun initAfterBinding() {
@@ -189,41 +185,10 @@ class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.l
     }
 
     private fun initRecyclerView() {
-        // initTimeTextRecyclerView()
         initRecommendTimeRecyclerView()
-        initDayTextRecyclerView()
+        //initDayTextRecyclerView()
     }
 
-//    private fun initTimeTextRecyclerView() {
-//        // timeSize만큼 리사이클러뷰 그리기
-//        timeTextViewRecyclerViewAdapter = TimeTextViewRecyclerViewAdapter(ROW, "09:00")
-//        timeTextViewRecyclerView.adapter = timeTextViewRecyclerViewAdapter // 어뎁터 부착
-//        timeTextViewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//
-//        val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-//
-//
-//        // 아이템 위아래 간격 설정
-//
-//        // 393 : 310 = width : x
-//        // x = 310/393 * width
-//        //val width = requireContext().getScreenWidth() // 현재 프레임의 가로 길이
-//        val x = (310.0 / 393) * width
-//        Log.d("heightLog", "${x}")
-//        // 310 : 277 = x : height
-//        // height * 310 = 277x
-//        // height = (277.0/310)*x
-//        val height = (277.0 / 310) * x
-//        Log.d("heightLog", "${height}")
-//
-//
-//        //val itemHeight = (timeItemHeight + 20)/3
-//
-//
-//        // 시간 개수만큼 나눠서 한 칸 간격 구하기 (*2 +1공식)
-//        val itemHeight = ((height) / ((ROW + 1) * 2 + 1)).toInt()
-//        timeTextViewRecyclerView.addItemDecoration(VerticalSpaceItemDecoration(itemHeight.toInt()))
-//    }
 
     private fun initDayTextRecyclerView() {
 
