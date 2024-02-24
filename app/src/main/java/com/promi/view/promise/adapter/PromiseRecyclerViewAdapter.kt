@@ -1,21 +1,27 @@
 package com.promi.view.promise.adapter
 
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.promi.R
 import com.promi.data.remote.model.Promise
+import com.promi.viewmodel.group.GroupViewModel
 
 // 그룹에 포함된 약속 목록들
 class PromiseRecyclerViewAdapter(
-    private val listener : PromiseItemClickListener)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+    private val listener : PromiseItemClickListener,
+    var viewModel : GroupViewModel
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
     private var promiseList : List<Promise> = emptyList()
+
+    private var currentlySwipedPosition: Int = -1
 
     // 약속 타입 정의
     private val PROGRESS = 0 // 진행중인 약속
@@ -26,6 +32,10 @@ class PromiseRecyclerViewAdapter(
         this.promiseList = itemList
     }
 
+    fun swipedPositionInit(){
+        currentlySwipedPosition = -1
+    }
+
     // 가져온 뷰에서 사용되는 레이아웃 정의
     // 진행중인 약속
     inner class ProgressPomiseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -33,6 +43,8 @@ class PromiseRecyclerViewAdapter(
         val tvPromiseName : TextView = itemView.findViewById(R.id.tv_promise_name) // tv_promise_name
         val constraintDday : ConstraintLayout = itemView.findViewById(R.id.constraint_dday) // constraint_dday => d-day를 보여주기위한 뷰
         val tvDdayCount : TextView = itemView.findViewById(R.id.tv_dday_count) // tv_dday_count => d-day가 실질적으로 표시되는 부분
+        var constraintItemContainer : ConstraintLayout = itemView.findViewById(R.id.constraint_item_container) // 아이템이 존재하는 영역
+        var btnDelete : Button = itemView.findViewById(R.id.btn_delete) // 삭제 버튼
     }
 
     // 끝난 약속
@@ -41,6 +53,8 @@ class PromiseRecyclerViewAdapter(
         val tvPromiseName : TextView = itemView.findViewById(R.id.tv_promise_name) // tv_promise_name
         val constraintDday : ConstraintLayout = itemView.findViewById(R.id.constraint_dday) // constraint_dday => d-day를 보여주기위한 뷰
         val tvDdayCount : TextView = itemView.findViewById(R.id.tv_dday_count) // tv_dday_count => d-day가 실질적으로 표시되는 부분
+        var constraintItemContainer : ConstraintLayout = itemView.findViewById(R.id.constraint_item_container) // 아이템이 존재하는 영역
+        var btnDelete : Button = itemView.findViewById(R.id.btn_delete) // 삭제 버튼
     }
 
     // 남아있는 기간으로, 아이템 타입 정의(아직 진행중인 약속인지, 끝난 약속인지)
@@ -73,6 +87,7 @@ class PromiseRecyclerViewAdapter(
 
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        holder.itemView.scrollTo(0, 0) // 스와이프 상태 초기화 (삭제 이후 뷰 아이템의 스와이프 메뉴 활성화를 초기화)
         val promise = promiseList[position]
 
         // 타입을 보고 결정
@@ -88,6 +103,22 @@ class PromiseRecyclerViewAdapter(
                     constraintDday.visibility = View.GONE // 안보이게 설정
                 }
             }
+            // 삭제버튼을 제외한 영역을 클릭할때만 이벤트 동작
+            holder.constraintItemContainer.setOnClickListener {
+                Log.d("##PromiseItem", "$currentlySwipedPosition,$position")
+                // 현재 위치가 스와이프된 위치와 같지 않을 경우에만 네비게이션 이벤트 허용
+                if (currentlySwipedPosition != position) {
+                    listener.onPromiseItemClicked(position,holder.itemViewType) // itemClickEventDelegate
+                    // => 진행중인 약속일 경우는 ViewPromise로, 끝난 약속은 PromiseDetail로
+                }
+            }
+            // 삭제 버튼 이벤트
+            holder.btnDelete.setOnClickListener {
+                // 아이템 삭제 로직 작성 필요
+                Log.d("Swipe Delete","$position")
+                viewModel.deletePromise(promise)
+            }
+
         } else if(holder.itemViewType == DONE){ // 끝난 약속의 경우
             val endedPromiseViewHolder = holder as EndedPromiseViewHolder // DownCasting
             endedPromiseViewHolder.apply {
@@ -95,13 +126,22 @@ class PromiseRecyclerViewAdapter(
                 tvPromisePeriod.text = promise.promiseDate
                 tvDdayCount.text = "완료"
             }
+            // 삭제버튼을 제외한 영역을 클릭할때만 이벤트 동작
+            holder.constraintItemContainer.setOnClickListener {
+                // 현재 위치가 스와이프된 위치와 같지 않을 경우에만 네비게이션 이벤트 허용
+                Log.d("##PromiseItem", "$currentlySwipedPosition,$position")
+                if (currentlySwipedPosition != position) {
+                    listener.onPromiseItemClicked(position,holder.itemViewType) // itemClickEventDelegate
+                    // => 진행중인 약속일 경우는 ViewPromise로, 끝난 약속은 PromiseDetail로
+                }
+            }
+            holder.btnDelete.setOnClickListener {
+                // 아이템 삭제 로직 작성 필요
+                Log.d("Swipe Delete","$position")
+                viewModel.deletePromise(promise)
+            }
         }
 
-        // 아이템 클릭 이벤트 정의
-        holder.itemView.setOnClickListener {
-            listener.onPromiseItemClicked(position,holder.itemViewType) // itemClickEventDelegate
-            // => 진행중인 약속일 경우는 ViewPromise로, 끝난 약속은 PromiseDetail로
-        }
 
     }
 
@@ -111,6 +151,18 @@ class PromiseRecyclerViewAdapter(
 
     fun updateData(newPromises: List<Promise>) {
         promiseList = newPromises
+        notifyDataSetChanged()
+    }
+
+    // 스와이프 상태 업데이트 메소드
+    fun updateSwipedPosition(newPosition: Int) {
+        val previousPosition = currentlySwipedPosition
+        currentlySwipedPosition = newPosition
+
+        // 이전에 스와이프된 아이템의 상태를 원래대로 복구
+        if (previousPosition != -1 && previousPosition != newPosition) {
+            notifyItemChanged(previousPosition)
+        }
     }
 
 

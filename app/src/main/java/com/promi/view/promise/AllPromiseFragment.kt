@@ -72,7 +72,7 @@ class AllPromiseFragment : Fragment(),PromiseItemClickListener {
     // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
-        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this)
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this,groupViewModel)
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
         var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(dipToPx(16f,requireContext()))
         verticalSpaceItemDecoration.setOption(true)

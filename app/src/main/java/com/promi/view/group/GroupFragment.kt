@@ -166,7 +166,7 @@ class GroupFragment : Fragment(),PromiseItemClickListener {
     // init Group RecyclerView
     private fun setRecyclerViewAdapter(){
         promiseRecyclerview.layoutManager = LinearLayoutManager(context)
-        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this)
+        promiseRecyclerviewAdapter = PromiseRecyclerViewAdapter(this,groupViewModel)
         promiseRecyclerview.adapter = promiseRecyclerviewAdapter
         var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(dipToPx(16f,requireContext()))
         var horizontalSpaceItemDecoration = PromiseItemSpaceItemDecoration(dipToPx(24f,requireContext()))
@@ -250,9 +250,9 @@ class GroupFragment : Fragment(),PromiseItemClickListener {
                 // 현재 엑션이 스와이프인지 확인(드래그인 경우에는 동작하지 않음)
                 // 스와이프 상태인 경우에 한해 아래 동작 수행
                 if(actionState == ItemTouchHelper.ACTION_STATE_SWIPE){
-                    // 스와이프 상태를 어댑터에 업데이트
+                    // 스와이프 상태를 어댑터에 업데이트(하나만 스와이프 가능하도록)
                     if (isCurrentlyActive) {
-                        //groupRecyclerViewAdapter.updateSwipedPosition(viewHolder.adapterPosition)
+                        promiseRecyclerviewAdapter.updateSwipedPosition(viewHolder.adapterPosition)
                     }
                     if(dX == 0f){
                         currentScrollX = viewHolder.itemView.scrollX // 현재 뷰의 스크롤 위치 저장
@@ -287,6 +287,8 @@ class GroupFragment : Fragment(),PromiseItemClickListener {
                             // 사용자가 손을 뗀 순간부터 항목이 어떻게 스크롤되어야 할지를 결정함.
                             // 스와이프 제한에 도달하지 않았다면, 계산된 비율에 따라 항목을 천천히 원래 위치로 되돌림
                             viewHolder.itemView.scrollTo((currentScrollXWhenInActive * dX/initXWhenInActive).toInt(),0)
+                            // 되돌아간 이후 토글상태 -1로 다시 변환
+                            promiseRecyclerviewAdapter.swipedPositionInit()
                         }
                     }
                 }

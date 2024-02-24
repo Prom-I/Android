@@ -14,11 +14,6 @@ class PromiseViewModel : ViewModel() {
     private val _groupLiveData: MutableLiveData<List<Group>> = MutableLiveData()
     val groupLiveData: LiveData<List<Group>> = _groupLiveData
 
-    // 보유 중인 약속 목록
-//    private val promiseList = mutableListOf<Group>()
-//    private val _promiseLiveData: MutableLiveData<List<Group>> = MutableLiveData()
-//    val promiseLiveData: LiveData<List<Group>> = _promiseLiveData
-
     private val _promise = MutableLiveData<List<Promise>>()
     val promises: LiveData<List<Promise>> = _promise // 관측 가능
 
