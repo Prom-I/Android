@@ -17,12 +17,12 @@ import com.promi.MainActivity
 import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.databinding.FragmentViewPromiseTimeBinding
+import com.promi.util.HorizontalSpaceItemDecoration
+import com.promi.util.VerticalSpaceItemDecoration
 import com.promi.view.promise.adapter.DayTextViewRecyclerViewAdapter
-import com.promi.view.promise.adapter.HorizontalSpaceItemDecoration
 import com.promi.view.promise.adapter.RecommendTimeItemClickListener
 import com.promi.view.promise.adapter.RecommendTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.TimeTextViewRecyclerViewAdapter
-import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
 import com.promi.viewmodel.promise.ViewPromiseTimeViewModel
 
 class ViewPromiseTimeFragment : BaseFragment<FragmentViewPromiseTimeBinding>(R.layout.fragment_view_promise_time),RecommendTimeItemClickListener {

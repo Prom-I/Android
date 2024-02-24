@@ -1,6 +1,5 @@
 package com.promi.view.promise
 
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
@@ -13,11 +12,11 @@ import com.promi.R
 import com.promi.base.BaseFragment
 import com.promi.data.remote.model.RecommendTimeDetail
 import com.promi.databinding.FragmentRecommendTimeDetailBinding
-import com.promi.view.promise.adapter.HorizontalSpaceItemDecoration
+import com.promi.util.HorizontalSpaceItemDecoration
+import com.promi.util.VerticalSpaceItemDecoration
 import com.promi.view.promise.adapter.RecommendDateAndTimeItemClickListener
 import com.promi.view.promise.adapter.RecommendDateAndTimeRecyclerViewAdapter
 import com.promi.view.promise.adapter.RecommendTimeDetailRecyclerViewAdapter
-import com.promi.view.promise.adapter.VerticalSpaceItemDecoration
 import com.promi.viewmodel.promise.RecommendTimeDetailViewModel
 
 // 추천 날짜에 연관된 시간들 리스트 형식으로 제공
